@@ -4,18 +4,14 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Delight Services – Long Scroll Experience</title>
+    <title>Delight Services – Experience Excellence</title>
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Poppins:wght@400;500;600;700;800&amp;display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Poppins:wght@400;500;600;700;800&amp;family=Rozha+One&amp;display=swap"
         rel="stylesheet" />
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap"
-        rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&amp;display=swap"
         rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script>
@@ -24,43 +20,55 @@
                 extend: {
                     colors: {
                         cobalt: "#1E40AF",
+                        deepCobalt: "#172554",
+                        marigold: "#F59E0B",
+                        amberLight: "#FEF3C7",
+                        amberVibrant: "#FBBF24",
                         buttermilk: "#FEF08A",
                         surface: "#F8F9FA",
                         "deep-blue": "#0B1121",
-                        charcoal: "#212121",
-                        "rose-accent": "#E11D48",
-                        "slate-accent": "#475569",
-                        "emerald-accent": "#059669",
-                        "amber-accent": "#D97706",
-                        "amber-accent": "#D97706",
-                        "primary": "#2593f4",
-                        "background-light": "#f5f7f8",
-                        "background-dark": "#101a22",
+                        charcoal: "#111827",
+                        "health-rose": "#FFF1F2",
+                        "motor-slate": "#0F172A",
+                        "wealth-emerald": "#064E3B",
+                        "product-amber": "#FFFBEB"
                     },
                     fontFamily: {
                         display: ["Poppins", "sans-serif"],
+                        serif: ["Rozha One", "serif"],
                         body: ["Inter", "sans-serif"],
-                        spline: ["Spline Sans", "sans-serif"],
-                        noto: ["Noto Sans", "sans-serif"],
                     },
                     boxShadow: {
-                        'neo': '0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02), inset 0 0 0 1px rgba(0,0,0,0.03)',
-                        'neo-hover': '0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02), inset 0 0 0 1px rgba(0,0,0,0.05)',
-                        'float': '0 10px 30px -10px rgba(0,0,0,0.08)',
-                    },
-                    keyframes: {
-                        floatUp: {
-                            '0%': { transform: 'translateY(20px)', opacity: '0' },
-                            '100%': { transform: 'translateY(0)', opacity: '1' },
-                        },
-                        pulseSlow: {
-                            '0%, 100%': { opacity: '1' },
-                            '50%': { opacity: '0.5' },
-                        }
+                        'neo': '0 1px 2px 0 rgba(0, 0, 0, 0.05), inset 0 0 0 1px rgba(255, 255, 255, 0.5)',
+                        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.37), inset 0 0 0 1px rgba(255, 255, 255, 0.1)',
+                        'glass-strong': '0 8px 32px 0 rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.1)',
+                        'glass-hover': '0 8px 32px 0 rgba(31, 38, 135, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.4), 0 0 20px rgba(56, 189, 248, 0.3)',
+                        'card-float': '0 20px 40px -5px rgba(0, 0, 0, 0.2), 0 10px 20px -5px rgba(0, 0, 0, 0.1)',
                     },
                     animation: {
-                        'float-up': 'floatUp 0.8s ease-out forwards',
-                        'pulse-slow': 'pulseSlow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'marquee': 'marquee 40s linear infinite',
+                        'float': 'float 8s ease-in-out infinite',
+                        'float-delayed': 'float 8s ease-in-out 4s infinite',
+                        'pulse-node': 'pulseNode 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'elastic-slide': 'elasticSlide 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-50%)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        pulseNode: {
+                            '0%, 100%': { transform: 'translateX(-50%) scale(1)', opacity: 1 },
+                            '50%': { transform: 'translateX(-50%) scale(1.5)', opacity: 0.7 },
+                        },
+                        elasticSlide: {
+                            '0%': { opacity: 0, transform: 'translateY(60px) scale(0.95)' },
+                            '100%': { opacity: 1, transform: 'translateY(0) scale(1)' },
+                        }
                     }
                 },
             },
@@ -69,169 +77,182 @@
     <style>
         body {
             background-color: #F8F9FA;
+            scroll-behavior: smooth;
         }
 
-        .section-fade-in {
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 60;
+            opacity: 0.35;
+            background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuDeJ5s_M2asw2aNR5k1LSGpNVwecohkKxpYuuebUUb6dNXD-Vh5CAnkBbHMBLareGUHIAsXSpohFAA1P2A3Oul7QhoR_ESNdzdiK66wm8o_K1-FkJWtPsa8vM8sU5bjJKs6nMjTPYMlfJo-L-KIOdzoufXVzhk1JkOX5yx1NXST1Nx829eJw5Fke2jZi9bI9bDgzuZ6a6hzZqh6RMas20DnMZlKGcey-PPlT948WdAkADZ9kLuwLy3xBEQb_cSuTySDLgWkwoTlin8);
+            mix-blend-mode: overlay;
+        }
+
+        #dynamic-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -10;
+            background-color: #F8F9FA;
+            transition: background-color 0.1s linear;
+            will-change: background-color;
+        }
+
+        .reveal-section {
             opacity: 0;
-            animation: floatUp 1s ease-out forwards;
-            animation-delay: 0.2s;
+            transform: translateY(30px);
+            transition: opacity 1s ease-out, transform 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .delay-100 {
-            animation-delay: 0.1s;
+        .reveal-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .delay-200 {
-            animation-delay: 0.2s;
+        .thread-container {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            transform: translateX(-50%);
+            z-index: 15;
+            pointer-events: none;
         }
 
-        .delay-300 {
-            animation-delay: 0.3s;
+        .thread-track {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.05);
         }
 
-        .scrollbar-hide::-webkit-scrollbar {
+        .thread-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0%;
+            background: linear-gradient(to bottom, #1E40AF, #F59E0B, #064E3B);
+            transition: height 0.1s linear;
+        }
+
+        .thread-node {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid white;
+            z-index: 20;
+            background-color: #9CA3AF;
+            transition: background-color 0.5s ease, transform 0.5s ease;
+        }
+
+        .thread-node.active {
+            background-color: #F59E0B;
+            transform: translateX(-50%) scale(1.5);
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.6);
+        }
+
+        #god-mode-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 5;
+            perspective: 1000px;
             display: none;
         }
 
-        .scrollbar-hide {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+        @media (min-width: 1024px) {
+            #god-mode-container {
+                display: block;
+            }
+
+            .data-section,
+            #hero-section-trigger {
+                background-color: transparent !important;
+            }
+        }
+
+        #god-image-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 500px;
+            height: 650px;
+            border-radius: 3rem;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            will-change: transform, width, height, border-radius;
+            transform-origin: center center;
+        }
+
+        .god-image-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+            will-change: opacity;
+        }
+
+        .god-image-layer.active {
+            opacity: 1;
+        }
+
+        @media (min-width: 1024px) {
+            .static-image-placeholder {
+                opacity: 0 !important;
+                visibility: hidden;
+            }
+
+            .hero-static-visual {
+                opacity: 0 !important;
+            }
+        }
+
+        .section-spacer {
+            height: 100%;
+        }
+
+        .floating-card {
+            transition: transform 0.1s linear;
+            will-change: transform;
         }
     </style>
 </head>
 
-<body class="font-body text-charcoal overflow-x-hidden relative bg-slate-50 selection:bg-cobalt selection:text-white">
-    <!-- Floating Inquiry Popup -->
-    <div id="inquiry-popup"
-        class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 opacity-0 transition-opacity duration-500">
-        <div class="absolute inset-0 bg-[#050b14]/70 backdrop-blur-[24px]"></div>
-        <!-- Modal Container -->
-        <div
-            class="relative w-full max-w-[1000px] bg-white/5 border border-white/10 rounded-2xl shadow-glass overflow-hidden flex flex-col md:flex-row group/modal transform scale-95 transition-transform duration-500 font-spline">
-            <!-- Left Panel: Visual/Context -->
+<body class="font-body text-charcoal overflow-x-hidden relative selection:bg-cobalt selection:text-white">
+    <div id="dynamic-background"></div>
+    <div class="grain-overlay"></div>
+    <div id="god-mode-container">
+        <div id="god-image-wrapper">
+            <img alt="Hero Perfume" class="god-image-layer active" id="god-img-hero" src="delight2.png" />
+            <img alt="Health Hospital" class="god-image-layer" id="god-img-health"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3wqmk-y4aNg1zTRt76Z5OKZPmuyIsQa_Vp3zPBmeJApKkESO4BpCOuGhLIO219oGwJNnlDEAR5YxUzMwIsFVGhphnou6BIp3r-I0cgPSeJQPds4APHcmcCkhkhRDzJSsjOO4VPwMPCA1n0ntDmjl-FBgONmhTTSvQDliiZGCBUP9zFhlUOcShTmJsZUzf8epOoADbG42Er4suarHRy8WtzlAWFGu2C2xrAOmPWghLnGBQa5tGnJQHR348HuqY1QBixvmsvDoVoqY" />
+            <img alt="Life Beach" class="god-image-layer" id="god-img-life"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCO4QFobeIZiOeYJyTDimgnPlPXZB7AUUktqB4pHILbi4CLQaAkzhEOAMgnvc-IQB_0xmHhLaev_CsAOumQrPk2s9fZ1NalaLL4bvAoSIBftya0S_APIZSDewVtg-PHuYdH-LExMfYD7ZfX4E5wYiB4_wgUlgP1BtjWZl8rlyAcdwJuqKVlXHpGzFk5ORkZ8G5DN6dd-XPGmHRIdMvRivP78t1dWt9KvbPryMmjc0O4F1VT3UvViHqdQaZYY5pYPcbNDlgsmKh3dxI" />
+            <img alt="Motor Luxury Car" class="god-image-layer" id="god-img-motor"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzveJQ1y39kGE_zeWe9RLPumrQ85T5Ll932MLRIOyjEY0o8165BA4C1DniOJ4kFUu5FFi0DQ4BZTw2zRUnHOdjhtNGsjQaLYsRcXPFZTwe6GsbDYmEUW8HXpszMJsz27WikdNdGYuOvcbTo4iiC4D7aLgLYQi1NmCeQAAWyzTPjCmtNqLkK9tsu6UkNPjWmuPPzmZmtE5Pvq03BizKrhn-EPlYZDm3KyZYXt8NHP2mq3nulJle7zCXgWrwFaZaTKuhVKGFUl71goc" />
+            <img alt="Wealth Data" class="god-image-layer" id="god-img-wealth"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxYqboJh8IEmjWlOUG7RF18ZIMAziN4s6LHxtDl-rJJpq_P564K6pCpumS-wmLcxV8g2Nd7v2oTKvNpAZjd9AQe9PKkFPIqo3crGRgj-cs_Qn1K-CfajNLsaNAbUO5p7MTiWOmxcg_oo6-I8rgCASj436c4jU8ykAR9NtL77jfZmakQRSTjkeo05C7gnGkY17VGiOpQNloZYI5vG47xMTmimDOUsW4D1cQQIHLtld7qIppiQJk5JrXdr0A0_zu-B-N7_W433b420k" />
             <div
-                class="hidden md:flex flex-col justify-between w-1/3 bg-white/5 p-8 border-r border-white/5 relative overflow-hidden">
-                <!-- Decorative Gradients -->
-                <div
-                    class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-primary/10 to-transparent opacity-50">
-                </div>
-                <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-primary/20 rounded-full blur-[80px]"></div>
-                <div class="relative z-10">
-                    <div
-                        class="size-10 bg-white/10 rounded-full flex items-center justify-center mb-6 text-primary border border-white/10">
-                        <span class="material-symbols-outlined">auto_awesome</span>
-                    </div>
-                    <h2 class="text-3xl font-bold text-white tracking-tight mb-2">Let's Craft <br /> Your Vision</h2>
-                    <p class="text-blue-200/60 text-sm leading-relaxed">
-                        Join the waiting list for our 2026 service rollout. We are currently accepting select inquiries
-                        for high-impact projects.
-                    </p>
-                </div>
-                <div class="relative z-10 mt-auto space-y-4">
-                    <div class="flex items-center gap-3 text-white/80">
-                        <span class="material-symbols-outlined text-primary text-xl">verified</span>
-                        <span class="text-xs font-medium tracking-wide">24h Response Time</span>
-                    </div>
-                    <div class="flex items-center gap-3 text-white/80">
-                        <span class="material-symbols-outlined text-primary text-xl">encrypted</span>
-                        <span class="text-xs font-medium tracking-wide">End-to-End Encrypted</span>
-                    </div>
-                </div>
-            </div>
-            <!-- Right Panel: Bento Grid Form -->
-            <div class="flex-1 p-6 md:p-10 bg-white/5 relative">
-                <!-- Close Button -->
-                <button id="close-popup-btn"
-                    class="absolute top-6 right-6 text-white/40 hover:text-white transition-colors">
-                    <span class="material-symbols-outlined">close</span>
-                </button>
-                <div class="mb-8">
-                    <h3 class="text-xl font-bold text-white mb-1">Inquire Now</h3>
-                    <p class="text-sm text-white/40">Fill out the asymmetric grid below to get started.</p>
-                </div>
-                <!-- Bento Grid Input Layout -->
-                <form class="grid grid-cols-1 md:grid-cols-12 gap-4">
-                    <!-- Name (Asymmetric Span) -->
-                    <div class="md:col-span-5 group">
-                        <div class="relative h-14 w-full">
-                            <input
-                                class="peer w-full h-full bg-[#0f1923]/60 border border-white/10 rounded-xl px-4 text-white placeholder-transparent focus:outline-none focus:border-primary focus:shadow-[0_0_15px_rgba(37,147,244,0.15)] transition-all duration-300"
-                                placeholder=" " type="text" />
-                            <label
-                                class="absolute left-4 top-4 text-white/40 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-white/40 peer-focus:top-1 peer-focus:text-[10px] peer-focus:text-primary pointer-events-none">Full
-                                Name</label>
-                            <span
-                                class="material-symbols-outlined absolute right-4 top-4 text-white/20 peer-focus:text-primary transition-colors text-xl">person</span>
-                        </div>
-                    </div>
-                    <!-- Email (Asymmetric Span) -->
-                    <div class="md:col-span-7 group">
-                        <div class="relative h-14 w-full">
-                            <input
-                                class="peer w-full h-full bg-[#0f1923]/60 border border-white/10 rounded-xl px-4 text-white placeholder-transparent focus:outline-none focus:border-primary focus:shadow-[0_0_15px_rgba(37,147,244,0.15)] transition-all duration-300"
-                                placeholder=" " type="email" />
-                            <label
-                                class="absolute left-4 top-4 text-white/40 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-white/40 peer-focus:top-1 peer-focus:text-[10px] peer-focus:text-primary pointer-events-none">Email
-                                Address</label>
-                            <span
-                                class="material-symbols-outlined absolute right-4 top-4 text-white/20 peer-focus:text-primary transition-colors text-xl">mail</span>
-                        </div>
-                    </div>
-                    <!-- Service Interest (Full Row for visual break) -->
-                    <div class="md:col-span-12 group">
-                        <div class="relative h-14 w-full">
-                            <select
-                                class="appearance-none w-full h-full bg-[#0f1923]/60 border border-white/10 rounded-xl px-4 text-white focus:outline-none focus:border-primary focus:shadow-[0_0_15px_rgba(37,147,244,0.15)] transition-all duration-300 cursor-pointer">
-                                <option class="text-gray-500" disabled="" selected="" value="">Select Service
-                                    Interest...</option>
-                                <option class="bg-background-dark text-white" value="design">UI/UX Design Strategy
-                                </option>
-                                <option class="bg-background-dark text-white" value="dev">Full-Stack Development
-                                </option>
-                                <option class="bg-background-dark text-white" value="consult">Brand Consultation
-                                </option>
-                            </select>
-                            <span
-                                class="material-symbols-outlined absolute right-4 top-4 text-white/20 pointer-events-none">expand_more</span>
-                        </div>
-                    </div>
-                    <!-- Message (Large Area) -->
-                    <div class="md:col-span-12 group">
-                        <div class="relative w-full">
-                            <textarea
-                                class="w-full bg-[#0f1923]/60 border border-white/10 rounded-xl p-4 h-32 text-white placeholder-white/30 focus:outline-none focus:border-primary focus:shadow-[0_0_15px_rgba(37,147,244,0.15)] resize-none transition-all duration-300"
-                                placeholder="Tell us about your project..."></textarea>
-                            <div class="absolute bottom-3 right-3 flex gap-2">
-                                <button class="text-white/20 hover:text-primary transition-colors" type="button">
-                                    <span class="material-symbols-outlined text-lg">attach_file</span>
-                                </button>
-                                <button class="text-white/20 hover:text-primary transition-colors" type="button">
-                                    <span class="material-symbols-outlined text-lg">mic</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Liquid Action Button -->
-                    <div class="md:col-span-12 mt-2">
-                        <button class="relative w-full h-14 overflow-hidden rounded-xl group/btn">
-                            <!-- Liquid Gradient Background -->
-                            <div
-                                class="absolute inset-0 bg-gradient-to-r from-[#2593f4] via-teal-400 to-[#2593f4] bg-[length:200%_auto] transition-all duration-500 group-hover/btn:bg-right">
-                            </div>
-                            <!-- Content -->
-                            <div
-                                class="relative z-10 flex items-center justify-center gap-2 text-white font-bold tracking-wide">
-                                <span>Send Message</span>
-                                <span
-                                    class="material-symbols-outlined group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
-                            </div>
-                            <!-- Shine effect -->
-                            <div
-                                class="absolute inset-0 bg-white/20 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300 rounded-xl">
-                            </div>
-                        </button>
-                    </div>
-                </form>
+                class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none mix-blend-multiply">
             </div>
         </div>
     </div>
@@ -240,10 +261,8 @@
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <div class="flex items-center gap-3 cursor-pointer group">
-                    <div
-                        class="w-10 h-10 bg-white border border-gray-100 rounded-lg flex items-center justify-center text-cobalt shadow-neo group-hover:scale-105 transition-transform">
-                        <span class="material-symbols-outlined text-xl">verified_user</span>
-                    </div>
+                    <img src="delight.png" alt="Logo"
+                        class="w-10 h-10 object-contain group-hover:scale-105 transition-transform">
                     <span class="font-display font-bold text-xl tracking-tight text-charcoal">Delight Services</span>
                 </div>
                 <nav class="hidden lg:flex gap-10 items-center">
@@ -253,8 +272,7 @@
                     <a class="text-sm font-medium text-gray-500 hover:text-cobalt transition-colors"
                         href="products.html">Products</a>
                     <a class="text-sm font-medium text-gray-500 hover:text-cobalt transition-colors"
-                        href="aboutus.html">About
-                        Us</a>
+                        href="aboutus.html">About Us</a>
                 </nav>
                 <div class="hidden lg:flex items-center gap-4">
                     <a class="text-sm font-semibold text-charcoal hover:text-cobalt transition-colors" href="#">Log
@@ -267,491 +285,317 @@
             </div>
         </div>
     </header>
-    <section class="relative w-full min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-white">
-        <div
-            class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-100/50 rounded-full blur-[100px] -z-10 animate-pulse-slow">
-        </div>
-        <div
-            class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-yellow-100/50 rounded-full blur-[100px] -z-10 animate-pulse-slow delay-1000">
-        </div>
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 text-center section-fade-in">
 
-            <h1 class="text-6xl lg:text-8xl font-display font-bold text-charcoal leading-[1.05] tracking-tight mb-8">
-                Life, Secured.<br />
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-cobalt to-blue-400">Senses,
-                    Delighted.</span>
-            </h1>
-            <p class="text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed mb-12 font-light">
-                A seamless blend of financial security and sensory experiences. Designed for the modern life.
-            </p>
-            <div class="flex justify-center gap-4">
-                <button onclick="window.location.href='index1.html'"
-                    class="bg-charcoal text-white px-8 py-4 rounded-full font-medium hover:bg-black transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
-                    Explore Services
-                </button>
-                <button onclick="window.location.href='products.html'"
-                    class="bg-white text-charcoal border border-gray-200 px-8 py-4 rounded-full font-medium hover:bg-gray-50 transition-all shadow-neo hover:shadow-md">
-                    View Products
-                </button>
-            </div>
-            <div class="absolute bottom-10 left-0 w-full flex justify-center animate-bounce">
-                <span class="material-symbols-outlined text-gray-300">keyboard_arrow_down</span>
-            </div>
-        </div>
-    </section>
-    <section class="py-24 bg-rose-50 border-t border-rose-100 relative" id="health">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <div class="mb-16 section-fade-in">
-                <span class="text-rose-600 font-bold tracking-wider uppercase text-xs mb-2 block">Health
-                    Protection</span>
-                <h2 class="text-4xl font-display font-bold text-charcoal">Comprehensive Care</h2>
-            </div>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div
-                    class="bg-white p-8 rounded-2xl shadow-neo border border-transparent hover:border-rose-200 hover:shadow-neo-hover transition-all duration-300 group section-fade-in delay-100 flex flex-col h-full">
+    <section class="relative w-full min-h-screen pt-32 lg:pt-0 flex items-center overflow-hidden z-10"
+        id="hero-section-trigger">
+        <div class="absolute top-20 right-1/4 w-64 h-64 bg-cobalt/5 rounded-full blur-[100px] animate-pulse-node"></div>
+        <div class="absolute bottom-20 left-10 w-96 h-96 bg-amber-200/10 rounded-full blur-[120px] animate-float"></div>
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+                <div class="flex flex-col gap-10 order-2 lg:order-1 relative z-20 reveal-section is-visible">
                     <div
-                        class="w-12 h-12 bg-rose-50 rounded-xl flex items-center justify-center text-rose-600 mb-6 group-hover:scale-110 transition-transform">
-                        <span class="material-symbols-outlined">person</span>
+                        class="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-white border border-gray-200 shadow-sm w-fit">
+                        <span class="w-2 h-2 rounded-full bg-cobalt animate-ping"></span>
+                        <span class="text-xs font-bold tracking-widest text-charcoal uppercase">2025 Vision
+                            (Drishti)</span>
                     </div>
-                    <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Individual</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed mb-8 flex-grow">Tailored coverage for the solo
-                        voyager. Complete medical security with zero hassle.</p>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center gap-2 text-sm text-gray-600"><span
-                                class="material-symbols-outlined text-rose-600 text-sm">check_circle</span> ₹5 Lakh
-                            Coverage
-                        </li>
-                        <li class="flex items-center gap-2 text-sm text-gray-600"><span
-                                class="material-symbols-outlined text-rose-600 text-sm">check_circle</span> Cashless
-                            Network</li>
-                    </ul>
-                    <a class="w-full block text-center py-3 rounded-lg border border-rose-100 text-rose-600 font-medium hover:bg-rose-50 transition-colors"
-                        href="#">Select Plan</a>
+                    <h1 class="text-6xl lg:text-8xl font-serif text-charcoal leading-[0.95] tracking-tight">
+                        Securing<br />
+                        <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-cobalt to-purple-600">Futures.</span><br />
+                        Delighting<br />
+                        <span class="italic font-light text-gray-400">Senses.</span>
+                    </h1>
+                    <p class="text-xl text-gray-500 max-w-lg leading-relaxed border-l-4 border-cobalt pl-8">
+                        A seamless blend of financial security and sensory experiences (Indriya Anubhav). Designed for
+                        the modern Indian life.
+                    </p>
+                    <div class="flex flex-wrap gap-5 pt-4">
+                        <button onclick="window.location.href='started.html'"
+                            class="bg-cobalt text-white font-bold px-10 py-5 rounded-2xl transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 flex items-center gap-3 text-lg group">
+                            Start Journey <span
+                                class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        </button>
+                    </div>
                 </div>
-                <div
-                    class="bg-white p-8 rounded-2xl shadow-neo border border-rose-100 ring-1 ring-rose-50 hover:shadow-neo-hover transition-all duration-300 group section-fade-in delay-200 flex flex-col h-full relative">
-                    <div
-                        class="absolute top-4 right-4 bg-rose-600 text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wide">
-                        Popular</div>
-                    <div
-                        class="w-12 h-12 bg-rose-50 rounded-xl flex items-center justify-center text-rose-600 mb-6 group-hover:scale-110 transition-transform">
-                        <span class="material-symbols-outlined">diversity_3</span>
+                <div class="relative h-[500px] lg:h-[800px] w-full order-1 lg:order-2 perspective-1000 flex items-center justify-center"
+                    id="hero-target-zone">
+                    <div class="relative w-4/5 h-4/5 z-10 hero-static-visual lg:opacity-0">
+                        <img alt="Perfume" class="w-full h-full object-cover rounded-[3rem] shadow-2xl rotate-3"
+                            src="delight2.png" />
                     </div>
-                    <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Family Floater</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed mb-8 flex-grow">One plan to protect everyone you
-                        love. Maternity benefits included.</p>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center gap-2 text-sm text-gray-600"><span
-                                class="material-symbols-outlined text-rose-600 text-sm">check_circle</span> Covers 4
-                            Family Members</li>
-                        <li class="flex items-center gap-2 text-sm text-gray-600"><span
-                                class="material-symbols-outlined text-rose-600 text-sm">check_circle</span> ₹10-25 Lakh
-                            Cover
-                        </li>
-                    </ul>
-                    <a class="w-full block text-center py-3 rounded-lg bg-rose-600 text-white font-medium hover:bg-rose-700 transition-colors shadow-lg shadow-rose-200"
-                        href="#">Get Health Quote</a>
-                </div>
-                <div
-                    class="bg-white p-8 rounded-2xl shadow-neo border border-transparent hover:border-rose-200 hover:shadow-neo-hover transition-all duration-300 group section-fade-in delay-300 flex flex-col h-full">
-                    <div
-                        class="w-12 h-12 bg-rose-50 rounded-xl flex items-center justify-center text-rose-600 mb-6 group-hover:scale-110 transition-transform">
-                        <span class="material-symbols-outlined">elderly</span>
-                    </div>
-                    <h3 class="text-xl font-bold font-display text-gray-900 mb-3">Senior Citizen</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed mb-8 flex-grow">Respectful care for the golden
-                        years. Pre-existing disease cover options.</p>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center gap-2 text-sm text-gray-600"><span
-                                class="material-symbols-outlined text-rose-600 text-sm">check_circle</span> Annual
-                            Checkup</li>
-                        <li class="flex items-center gap-2 text-sm text-gray-600"><span
-                                class="material-symbols-outlined text-rose-600 text-sm">check_circle</span> AYUSH
-                            Treatment
-                        </li>
-                    </ul>
-                    <a class="w-full block text-center py-3 rounded-lg border border-rose-100 text-rose-600 font-medium hover:bg-rose-50 transition-colors"
-                        href="#">Select Plan</a>
+                    <!-- Hero card logic can remain, it is decorative -->
                 </div>
             </div>
         </div>
     </section>
-    <section class="py-32 bg-white relative overflow-hidden" id="life">
-        <div class="absolute right-0 top-0 w-1/2 h-full bg-blue-50/50 -z-10 rounded-l-[100px]"></div>
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <div class="section-fade-in">
-                    <span class="text-cobalt font-bold tracking-wider uppercase text-xs mb-2 block">Life
-                        Insurance</span>
-                    <h2 class="text-5xl font-display font-bold text-charcoal mb-6 leading-tight">Protect Your
-                        <br />Legacy.
-                    </h2>
-                    <p class="text-gray-600 text-lg mb-8 max-w-md">Ensure your family's financial stability no matter
-                        what happens. Our term plans offer high coverage at affordable premiums.</p>
-                    <div class="flex flex-col gap-4">
+
+    <div
+        class="bg-charcoal border-y border-white/10 z-20 relative py-6 overflow-hidden transform -skew-y-1 origin-left mt-[-40px]">
+        <div class="animate-marquee whitespace-nowrap flex gap-24 items-center w-max opacity-80">
+            <span class="text-4xl font-serif italic text-white/40 flex items-center gap-12">
+                Transparency (Pardarshita) <span class="w-3 h-3 bg-cobalt rounded-full"></span> Customer Care (Seva)
+                <span class="w-3 h-3 bg-amber-400 rounded-full"></span> Long-term Trust (Vishwas) <span
+                    class="w-3 h-3 bg-emerald-400 rounded-full"></span>
+            </span>
+            <span class="text-4xl font-serif italic text-white/40 flex items-center gap-12">
+                Transparency (Pardarshita) <span class="w-3 h-3 bg-cobalt rounded-full"></span> Customer Care (Seva)
+                <span class="w-3 h-3 bg-amber-400 rounded-full"></span> Long-term Trust (Vishwas) <span
+                    class="w-3 h-3 bg-emerald-400 rounded-full"></span>
+            </span>
+        </div>
+    </div>
+
+    <div class="relative w-full overflow-hidden" id="scroll-reel-container">
+        <div class="thread-container hidden lg:block">
+            <div class="thread-track"></div>
+            <div class="thread-progress" id="thread-progress-bar"></div>
+        </div>
+
+        <section class="relative py-32 lg:py-48 overflow-hidden data-section" id="section-health">
+            <div class="lg:hidden absolute inset-0 bg-health-rose -z-10"></div>
+            <div class="thread-node hidden lg:block top-1/2 -translate-y-1/2" id="node-health"></div>
+            <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+                <div class="grid lg:grid-cols-2 gap-20 items-center">
+                    <div class="order-2 lg:order-1 reveal-section">
+                        <span class="text-rose-600 font-bold tracking-widest uppercase text-xs mb-4 block">Holistic
+                            Care (Sampoorna Swasthya)</span>
+                        <h2 class="text-6xl lg:text-7xl font-serif text-charcoal mb-6">Health<br /><span
+                                class="text-rose-400 italic">Restored.</span></h2>
+                        <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                            Navigate the complexities of healthcare with a partner that puts your wellbeing first.
+                            Serene, simpler, and completely transparent.
+                        </p>
+                        <button onclick="window.location.href='health3.html'"
+                            class="flex items-center gap-2 text-rose-600 font-bold hover:gap-4 transition-all group">
+                            Explore Health Plans <span
+                                class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_right_alt</span>
+                        </button>
+                    </div>
+                    <div class="order-1 lg:order-2 relative h-[600px] w-full group reel-target-zone" id="target-health">
                         <div
-                            class="flex items-center gap-4 p-4 bg-white rounded-xl shadow-sm border border-gray-100 max-w-sm">
-                            <span class="material-symbols-outlined text-cobalt text-3xl">shield_lock</span>
-                            <div>
-                                <h4 class="font-bold text-gray-900">Guaranteed Payout</h4>
-                                <p class="text-xs text-gray-500">100% claim settlement ratio guarantee.</p>
-                            </div>
+                            class="absolute inset-0 bg-white rounded-[3rem] overflow-hidden shadow-2xl static-image-placeholder lg:hidden">
+                            <img alt="Serene Hospital Room" class="w-full h-full object-cover opacity-90"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3wqmk-y4aNg1zTRt76Z5OKZPmuyIsQa_Vp3zPBmeJApKkESO4BpCOuGhLIO219oGwJNnlDEAR5YxUzMwIsFVGhphnou6BIp3r-I0cgPSeJQPds4APHcmcCkhkhRDzJSsjOO4VPwMPCA1n0ntDmjl-FBgONmhTTSvQDliiZGCBUP9zFhlUOcShTmJsZUzf8epOoADbG42Er4suarHRy8WtzlAWFGu2C2xrAOmPWghLnGBQa5tGnJQHR348HuqY1QBixvmsvDoVoqY" />
                         </div>
-                        <div
-                            class="flex items-center gap-4 p-4 bg-white rounded-xl shadow-sm border border-gray-100 max-w-sm">
-                            <span class="material-symbols-outlined text-cobalt text-3xl">savings</span>
-                            <div>
-                                <h4 class="font-bold text-gray-900">Return of Premium</h4>
-                                <p class="text-xs text-gray-500">Get your money back if you outlive the term.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="relative h-[500px] w-full section-fade-in delay-200">
-                    <div
-                        class="absolute top-10 left-10 w-64 p-6 bg-white rounded-2xl shadow-float border border-blue-100 z-10 animate-[floatUp_3s_ease-in-out_infinite_alternate]">
-                        <div class="h-2 w-12 bg-cobalt rounded-full mb-4"></div>
-                        <div class="h-24 bg-gray-100 rounded-lg mb-4"></div>
-                        <div class="h-2 w-full bg-gray-100 rounded-full mb-2"></div>
-                        <div class="h-2 w-2/3 bg-gray-100 rounded-full"></div>
-                    </div>
-                    <div
-                        class="absolute top-32 right-10 w-64 p-6 bg-white rounded-2xl shadow-float border border-blue-100 z-20 animate-[floatUp_4s_ease-in-out_infinite_alternate-reverse]">
-                        <div class="flex justify-between items-center mb-4">
-                            <div class="h-8 w-8 rounded-full bg-blue-50 flex items-center justify-center text-cobalt">
-                                <span class="material-symbols-outlined text-sm">verified</span>
-                            </div>
-                            <span class="text-xs font-bold text-green-500">+12%</span>
-                        </div>
-                        <div class="text-2xl font-bold text-charcoal mb-1">$1.2M</div>
-                        <div class="text-xs text-gray-400">Total Coverage</div>
-                    </div>
-                    <div
-                        class="absolute bottom-20 left-20 w-72 p-6 bg-gradient-to-br from-cobalt to-blue-600 rounded-2xl shadow-xl shadow-blue-200 z-30 animate-[floatUp_3.5s_ease-in-out_infinite_alternate]">
-                        <div class="text-white/80 text-xs font-bold uppercase tracking-wider mb-6">Premium Plan</div>
-                        <h3 class="text-white text-2xl font-display font-bold mb-2">Secure Life Plus</h3>
-                        <p class="text-blue-100 text-sm">Valid until 2065</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <section class="py-24 bg-slate-900 border-y border-slate-800" id="motor">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <div class="flex justify-between items-end mb-12 section-fade-in">
+        </section>
+
+        <section class="relative py-32 lg:py-48 text-white overflow-hidden data-section" id="section-life">
+            <div class="lg:hidden absolute inset-0 bg-cobalt -z-10"></div>
+            <div class="thread-node hidden lg:block top-1/2 -translate-y-1/2" id="node-life"></div>
+            <div
+                class="absolute inset-0 bg-[url('https://lh3.googleusercontent.com/aida-public/AB6AXuArChni_idj3QHhhvszP8VMyAWj6iPWXm-EkcXPs6BHeejCkd8BZXtAQkdT5sAQBKza47OIu0bXrZpGcvZAIeYAslAMArb0OBBaDAxqJoM0l0kTe7f_j3tJdErgCxJq85d3Ua5lvCFe88l95hj4KuG4IBIAVghdCVLEoax3nRaiF-H7ke337G2I28OcAKypBKT7juJKMSGPCSH66dicaf-1nJkHHgDf0eOuQ-jWBMwwLxuKGilQZaAFKaGd4pAhG3GOnczDHBgM730')] opacity-10 mix-blend-overlay bg-cover bg-fixed pointer-events-none">
+            </div>
+            <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+                <div class="grid lg:grid-cols-2 gap-20 items-center">
+                    <div class="relative h-[600px] w-full perspective-1000 reel-target-zone" id="target-life">
+                        <div
+                            class="absolute inset-4 lg:inset-10 rounded-[3rem] overflow-hidden shadow-2xl z-10 border border-white/20 static-image-placeholder lg:hidden">
+                            <img alt="Family Beach" class="w-full h-full object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCO4QFobeIZiOeYJyTDimgnPlPXZB7AUUktqB4pHILbi4CLQaAkzhEOAMgnvc-IQB_0xmHhLaev_CsAOumQrPk2s9fZ1NalaLL4bvAoSIBftya0S_APIZSDewVtg-PHuYdH-LExMfYD7ZfX4E5wYiB4_wgUlgP1BtjWZl8rlyAcdwJuqKVlXHpGzFk5ORkZ8G5DN6dd-XPGmHRIdMvRivP78t1dWt9KvbPryMmjc0O4F1VT3UvViHqdQaZYY5pYPcbNDlgsmKh3dxI" />
+                        </div>
+                    </div>
+                    <div class="reveal-section pl-0 lg:pl-10">
+                        <span class="text-blue-300 font-bold tracking-widest uppercase text-xs mb-4 block">Life &amp;
+                            Legacy (Jeevan & Virasat)</span>
+                        <h2 class="text-6xl lg:text-7xl font-serif text-white mb-6">Life,<br /><span
+                                class="text-blue-300 italic">Uninterrupted.</span></h2>
+                        <p class="text-xl text-blue-100 mb-8 leading-relaxed font-light">
+                            Protecting what matters most isn't just about insurance. It's about ensuring your story
+                            continues, exactly as you wrote it.
+                        </p>
+                        <button onclick="window.location.href='started.html'"
+                            class="bg-white text-cobalt font-bold px-8 py-4 rounded-full hover:bg-blue-50 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
+                            Secure Your Future
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="relative py-32 lg:py-48 text-white overflow-hidden data-section" id="section-motor">
+            <div class="lg:hidden absolute inset-0 bg-motor-slate -z-10"></div>
+            <div class="thread-node hidden lg:block top-1/2 -translate-y-1/2" id="node-motor"></div>
+            <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+                <div class="grid lg:grid-cols-2 gap-20 items-center">
+                    <div class="order-2 lg:order-1 reveal-section">
+                        <span class="text-gray-400 font-bold tracking-widest uppercase text-xs mb-4 block">Motion
+                            (Gati)</span>
+                        <h2 class="text-6xl lg:text-7xl font-serif text-white mb-6">Driven by<br /><span
+                                class="text-gray-400 italic">Precision.</span></h2>
+                        <p class="text-xl text-gray-400 mb-8 leading-relaxed font-light">
+                            From daily commutes to luxury touring, our motor coverage is engineered for zero friction.
+                            Claims processed at the speed of life.
+                        </p>
+                    </div>
+                    <div class="order-1 lg:order-2 h-[500px] w-full relative reel-target-zone" id="target-motor">
+                        <div
+                            class="absolute inset-0 rounded-[3rem] overflow-hidden shadow-2xl border border-white/10 static-image-placeholder lg:hidden">
+                            <img alt="Luxury Car Detail" class="w-full h-full object-cover opacity-80"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzveJQ1y39kGE_zeWe9RLPumrQ85T5Ll932MLRIOyjEY0o8165BA4C1DniOJ4kFUu5FFi0DQ4BZTw2zRUnHOdjhtNGsjQaLYsRcXPFZTwe6GsbDYmEUW8HXpszMJsz27WikdNdGYuOvcbTo4iiC4D7aLgLYQi1NmCeQAAWyzTPjCmtNqLkK9tsu6UkNPjWmuPPzmZmtE5Pvq03BizKrhn-EPlYZDm3KyZYXt8NHP2mq3nulJle7zCXgWrwFaZaTKuhVKGFUl71goc" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="relative py-32 lg:py-48 text-white overflow-hidden data-section" id="section-wealth">
+            <div class="lg:hidden absolute inset-0 bg-wealth-emerald -z-10"></div>
+            <div class="thread-node hidden lg:block top-1/2 -translate-y-1/2" id="node-wealth"></div>
+            <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+                <div class="grid lg:grid-cols-2 gap-20 items-center">
+                    <div class="h-[600px] w-full relative group perspective-1000 reel-target-zone" id="target-wealth">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-tr from-emerald-900 to-emerald-600 rounded-[3rem] opacity-50 blur-3xl group-hover:opacity-75 transition-opacity duration-700">
+                        </div>
+                        <div
+                            class="absolute inset-4 rounded-[2.5rem] overflow-hidden border border-emerald-400/30 bg-black/20 backdrop-blur-sm shadow-glass-strong static-image-placeholder lg:hidden">
+                            <img alt="Data Visualization" class="w-full h-full object-cover opacity-60 mix-blend-screen"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxYqboJh8IEmjWlOUG7RF18ZIMAziN4s6LHxtDl-rJJpq_P564K6pCpumS-wmLcxV8g2Nd7v2oTKvNpAZjd9AQe9PKkFPIqo3crGRgj-cs_Qn1K-CfajNLsaNAbUO5p7MTiWOmxcg_oo6-I8rgCASj436c4jU8ykAR9NtL77jfZmakQRSTjkeo05C7gnGkY17VGiOpQNloZYI5vG47xMTmimDOUsW4D1cQQIHLtld7qIppiQJk5JrXdr0A0_zu-B-N7_W433b420k" />
+                        </div>
+                    </div>
+                    <div class="reveal-section pl-0 lg:pl-10">
+                        <span class="text-emerald-300 font-bold tracking-widest uppercase text-xs mb-4 block">Wealth
+                            Management (Dhan Prabandhan)</span>
+                        <h2 class="text-6xl lg:text-7xl font-serif text-white mb-6">Growth<br /><span
+                                class="text-emerald-300 italic">Defined.</span></h2>
+                        <p class="text-xl text-emerald-100 mb-8 leading-relaxed font-light">
+                            Sophisticated investment strategies tailored to your timeline. Watch your portfolio thrive
+                            with our data-driven approach.
+                        </p>
+                        <button onclick="window.location.href='index1.html'"
+                            class="border border-emerald-400 text-emerald-300 px-8 py-3 rounded-full hover:bg-emerald-400 hover:text-emerald-900 transition-colors uppercase text-sm tracking-widest font-bold">
+                            View Portfolio
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section class="py-32 bg-product-amber relative z-10 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-24 gap-6 reveal-section">
                 <div>
-                    <span class="text-slate-400 font-bold tracking-wider uppercase text-xs mb-2 block">Motor
-                        Insurance</span>
-                    <h2 class="text-4xl font-display font-bold text-white">Hit the Road</h2>
+                    <span
+                        class="bg-black text-amberVibrant font-bold tracking-widest uppercase text-xs px-3 py-1 mb-4 inline-block">Boutique</span>
+                    <h2 class="text-6xl lg:text-8xl font-serif text-charcoal">Sensory<br />Essentials</h2>
                 </div>
-                <div class="hidden md:block">
-                    <button
-                        class="flex items-center gap-2 text-slate-300 font-medium hover:text-white transition-colors">
-                        Compare Models <span class="material-symbols-outlined">arrow_forward</span>
-                    </button>
-                </div>
+                <a class="text-charcoal text-xl font-medium border-b-2 border-charcoal hover:text-amber-600 hover:border-amber-600 transition-colors flex items-center gap-2 group pb-1"
+                    href="products.html">
+                    Visit Full Collection <span
+                        class="material-symbols-outlined group-hover:translate-x-2 transition-transform">arrow_forward</span>
+                </a>
             </div>
-            <div class="flex overflow-x-auto gap-6 pb-8 scrollbar-hide snap-x section-fade-in delay-100">
-                <div
-                    class="snap-center shrink-0 w-[350px] bg-slate-800 rounded-xl overflow-hidden border border-slate-700 shadow-xl hover:shadow-2xl transition-all duration-300 group hover:border-slate-500">
-                    <div class="h-48 bg-slate-700 relative overflow-hidden">
-                        <div
-                            class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] opacity-20">
-                        </div>
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <span
-                                class="material-symbols-outlined text-6xl text-slate-500 group-hover:text-white transition-colors">two_wheeler</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <h3 class="font-bold text-xl text-white">Two-Wheeler</h3>
-                                <p class="text-xs text-slate-400 font-medium uppercase">Comprehensive</p>
-                            </div>
-                            <span class="bg-slate-700 text-slate-300 text-xs font-bold px-2 py-1 rounded">5 Yr</span>
-                        </div>
-                        <ul class="space-y-2 mb-6">
-                            <li class="text-sm text-slate-300 flex items-center gap-2"><span
-                                    class="w-1.5 h-1.5 rounded-full bg-slate-500"></span> Own Damage</li>
-                            <li class="text-sm text-slate-300 flex items-center gap-2"><span
-                                    class="w-1.5 h-1.5 rounded-full bg-slate-500"></span> 3rd Party Liability</li>
-                        </ul>
-                        <button
-                            class="w-full py-2 bg-slate-700 border border-slate-600 text-white font-medium rounded hover:bg-white hover:text-slate-900 transition-colors">Details</button>
-                    </div>
-                </div>
-                <div
-                    class="snap-center shrink-0 w-[350px] bg-slate-800 rounded-xl overflow-hidden border border-slate-700 shadow-xl hover:shadow-2xl transition-all duration-300 group hover:border-slate-500">
-                    <div class="h-48 bg-slate-700 relative overflow-hidden">
-                        <div
-                            class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10">
-                        </div>
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <span
-                                class="material-symbols-outlined text-6xl text-slate-500 group-hover:text-white transition-colors">directions_car</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <h3 class="font-bold text-xl text-white">Private Car</h3>
-                                <p class="text-xs text-slate-400 font-medium uppercase">Zero Depreciation</p>
-                            </div>
-                            <span class="bg-slate-700 text-slate-300 text-xs font-bold px-2 py-1 rounded">1 Yr</span>
-                        </div>
-                        <ul class="space-y-2 mb-6">
-                            <li class="text-sm text-slate-300 flex items-center gap-2"><span
-                                    class="w-1.5 h-1.5 rounded-full bg-slate-500"></span> Bumper to Bumper</li>
-                            <li class="text-sm text-slate-300 flex items-center gap-2"><span
-                                    class="w-1.5 h-1.5 rounded-full bg-slate-500"></span> Engine Protect</li>
-                        </ul>
-                        <button
-                            class="w-full py-2 bg-slate-700 border border-slate-600 text-white font-medium rounded hover:bg-white hover:text-slate-900 transition-colors">Details</button>
-                    </div>
-                </div>
-                <div
-                    class="snap-center shrink-0 w-[350px] bg-slate-800 rounded-xl overflow-hidden border border-slate-700 shadow-xl hover:shadow-2xl transition-all duration-300 group hover:border-slate-500">
-                    <div class="h-48 bg-slate-700 relative overflow-hidden">
-                        <div
-                            class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] opacity-30">
-                        </div>
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <span
-                                class="material-symbols-outlined text-6xl text-slate-500 group-hover:text-white transition-colors">electric_car</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <h3 class="font-bold text-xl text-white">EV Protect</h3>
-                                <p class="text-xs text-slate-400 font-medium uppercase">Battery Cover</p>
-                            </div>
-                            <span class="bg-green-900/30 text-green-400 text-xs font-bold px-2 py-1 rounded">Eco</span>
-                        </div>
-                        <ul class="space-y-2 mb-6">
-                            <li class="text-sm text-slate-300 flex items-center gap-2"><span
-                                    class="w-1.5 h-1.5 rounded-full bg-slate-500"></span> Charger Cover</li>
-                            <li class="text-sm text-slate-300 flex items-center gap-2"><span
-                                    class="w-1.5 h-1.5 rounded-full bg-slate-500"></span> Roadside Assist</li>
-                        </ul>
-                        <button
-                            class="w-full py-2 bg-slate-700 border border-slate-600 text-white font-medium rounded hover:bg-white hover:text-slate-900 transition-colors">Details</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="py-24 bg-white" id="invest">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <div class="text-center mb-16 section-fade-in">
-                <span class="text-emerald-600 font-bold tracking-wider uppercase text-xs mb-2 block">Wealth
-                    Growth</span>
-                <h2 class="text-4xl font-display font-bold text-charcoal">Smart Investments</h2>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div
-                    class="col-span-1 md:col-span-2 bg-white rounded-2xl p-6 border border-gray-100 shadow-neo hover:shadow-neo-hover hover:border-emerald-200 transition-all duration-300 section-fade-in delay-100">
-                    <div class="flex justify-between items-center mb-6">
-                        <h3 class="font-bold text-lg text-gray-800">SIP Performance</h3>
-                        <span class="bg-emerald-50 text-emerald-600 text-xs font-bold px-2 py-1 rounded">+18.2%</span>
-                    </div>
-                    <div class="h-40 flex items-end gap-2">
-                        <div class="w-full bg-emerald-50 rounded-t h-[40%] hover:bg-emerald-100 transition-colors">
-                        </div>
-                        <div class="w-full bg-emerald-50 rounded-t h-[60%] hover:bg-emerald-100 transition-colors">
-                        </div>
-                        <div class="w-full bg-emerald-100 rounded-t h-[50%] hover:bg-emerald-200 transition-colors">
-                        </div>
-                        <div class="w-full bg-emerald-200 rounded-t h-[75%] hover:bg-emerald-300 transition-colors">
-                        </div>
-                        <div
-                            class="w-full bg-emerald-400 rounded-t h-[90%] hover:bg-emerald-500 transition-colors shadow-lg shadow-emerald-200">
-                        </div>
-                    </div>
-                    <div class="mt-4 flex justify-between text-xs text-gray-400">
-                        <span>2020</span>
-                        <span>2024</span>
-                    </div>
-                </div>
-                <div
-                    class="bg-white rounded-2xl p-6 border border-gray-100 shadow-neo hover:shadow-neo-hover hover:border-emerald-200 transition-all duration-300 section-fade-in delay-200 flex flex-col justify-center items-center text-center">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+                <!-- Perfume Card -->
+                <div class="group relative cursor-pointer reveal-section" style="transition-delay: 0.1s">
                     <div
-                        class="w-16 h-16 rounded-full border-4 border-emerald-100 border-t-emerald-500 flex items-center justify-center mb-4">
-                        <span class="material-symbols-outlined text-emerald-500">trending_up</span>
-                    </div>
-                    <div class="text-3xl font-display font-bold text-charcoal mb-1">15%</div>
-                    <p class="text-sm text-gray-500">Avg. Annual Returns</p>
-                </div>
-                <div
-                    class="bg-white rounded-2xl p-6 border border-gray-100 shadow-neo hover:shadow-neo-hover hover:border-emerald-200 transition-all duration-300 section-fade-in delay-300">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div
-                            class="w-10 h-10 bg-emerald-50 rounded-lg flex items-center justify-center text-emerald-600">
-                            <span class="material-symbols-outlined">pie_chart</span>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-sm text-gray-800">Allocation</h4>
-                            <p class="text-xs text-gray-400">Diversified Portfolio</p>
-                        </div>
-                    </div>
-                    <div class="space-y-3 mt-6">
-                        <div>
-                            <div class="flex justify-between text-xs mb-1 text-gray-600">
-                                <span>Equity</span><span>60%</span>
-                            </div>
-                            <div class="h-1.5 w-full bg-gray-100 rounded-full">
-                                <div class="h-full bg-emerald-500 w-[60%] rounded-full"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between text-xs mb-1 text-gray-600">
-                                <span>Debt</span><span>30%</span>
-                            </div>
-                            <div class="h-1.5 w-full bg-gray-100 rounded-full">
-                                <div class="h-full bg-emerald-300 w-[30%] rounded-full"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between text-xs mb-1 text-gray-600">
-                                <span>Gold</span><span>10%</span>
-                            </div>
-                            <div class="h-1.5 w-full bg-gray-100 rounded-full">
-                                <div class="h-full bg-emerald-200 w-[10%] rounded-full"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="py-24 bg-amber-50" id="products">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <div class="mb-12 section-fade-in">
-                <span class="text-amber-700 font-bold tracking-wider uppercase text-xs mb-2 block">The Store</span>
-                <h2 class="text-4xl font-display font-bold text-charcoal">Sensory Essentials</h2>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div
-                    class="bg-white rounded-2xl overflow-hidden shadow-neo border border-transparent hover:border-amber-200 hover:shadow-xl transition-all duration-500 group section-fade-in delay-100 flex flex-col">
-                    <div class="aspect-square relative overflow-hidden shrink-0">
+                        class="relative overflow-hidden rounded-[3rem] bg-white aspect-[4/5] mb-8 shadow-2xl transition-all duration-500 group-hover:shadow-[0_20px_60px_-15px_rgba(251,191,36,0.4)]">
                         <img alt="Perfume"
-                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110 group-hover:rotate-1"
                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsPhut2Z9UwCRb92YaGVtiebinSLdoijXY03VPGk6cXpaK9kk3Mw13vkt2RCnuSW6u7nQugf8HxNW1bR3me67RbsrIUXbo2-tD-OhtFV03Y78UMbmRhOAdncrUt5DFy1Fzmb_0pPDY_-n-Azg7IrC7R4jADHSd5eBYl8OvMyNJWGONrClKfEQgzoyYzkWRbp8K2VmesctJr_fqx1qjdrzStR2RjIsBkAquYFt2xd0-DKiGi8ONcpRD_AET-rGLkxwiOYGZZSE7Ke0" />
-                        <div class="absolute inset-0 bg-amber-900/10 group-hover:bg-transparent transition-colors">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60">
+                        </div>
+                        <div class="absolute bottom-8 left-8 right-8">
+                            <div
+                                class="bg-white/90 backdrop-blur-md px-6 py-4 rounded-2xl flex justify-between items-center transform translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 cubic-bezier(0.34, 1.56, 0.64, 1)">
+                                <div>
+                                    <p class="font-bold text-charcoal uppercase text-sm">Signature Scent</p>
+                                    <p class="text-xs text-gray-500">₹10,000</p>
+                                </div>
+                                <div
+                                    class="w-8 h-8 bg-charcoal rounded-full flex items-center justify-center text-white hover:bg-cobalt transition-colors">
+                                    <span class="material-symbols-outlined text-sm">shopping_bag</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="p-6 flex flex-col flex-1">
-                        <span class="text-xs font-bold text-amber-600 uppercase tracking-wide">Signature Scent</span>
-                        <h3 class="text-xl font-display font-bold text-charcoal mt-1">Golden Oud</h3>
-                        <div class="flex justify-between items-center mt-auto pt-4">
-                            <span class="font-medium text-gray-900">₹6,500</span>
-                            <button
-                                class="w-8 h-8 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center hover:bg-amber-500 hover:text-white transition-colors">
-                                <span class="material-symbols-outlined text-sm">add</span>
-                            </button>
-                        </div>
-                    </div>
+                    <h3
+                        class="text-4xl font-serif font-bold text-charcoal group-hover:text-amber-600 transition-colors">
+                        Luxury Perfumes</h3>
+                    <p class="text-charcoal/70 mt-3 text-lg">Notes of sandalwood and bergamot designed for presence.</p>
                 </div>
-                <div
-                    class="bg-white rounded-2xl overflow-hidden shadow-neo border border-transparent hover:border-amber-200 hover:shadow-xl transition-all duration-500 group section-fade-in delay-200 flex flex-col">
-                    <div class="aspect-square relative overflow-hidden shrink-0">
-                        <img alt="Incense"
-                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuADYj5O2SRBVr3px4ZelpI3q7Zfv23IGd8EKNZe8Wsnw8m1HDrZUD-CT4AU2JEXJ3LqtrF5obcJczV-RopZzSGBwrVulr2eTlEPAwJf87o4awPqrsLJ-ZotbSbyTDnWDamHDSNYHeIR3vUr4Z5nyPwe0Mu_ij8FW1gMbGjAeu2TcLkVfVXzoHm6yJhevBNbli-G48faDX4T16mZaWinc72_w2ynd5IlkcFX9POCAsV1dhfY-hphMUw_0VKQyvK6l3x-d1cJnemzxBQ" />
-                        <div class="absolute inset-0 bg-amber-900/10 group-hover:bg-transparent transition-colors">
-                        </div>
-                    </div>
-                    <div class="p-6 flex flex-col flex-1">
-                        <span class="text-xs font-bold text-amber-600 uppercase tracking-wide">Aromatherapy</span>
-                        <h3 class="text-xl font-display font-bold text-charcoal mt-1">Sandalwood Sticks</h3>
-                        <div class="flex justify-between items-center mt-auto pt-4">
-                            <span class="font-medium text-gray-900">₹850</span>
-                            <button
-                                class="w-8 h-8 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center hover:bg-amber-500 hover:text-white transition-colors">
-                                <span class="material-symbols-outlined text-sm">add</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="bg-white rounded-2xl overflow-hidden shadow-neo border border-transparent hover:border-amber-200 hover:shadow-xl transition-all duration-500 group section-fade-in delay-300 flex flex-col">
+                <!-- Sunday Reset Card -->
+                <div class="group relative cursor-pointer mt-0 md:mt-24 reveal-section" style="transition-delay: 0.2s">
                     <div
-                        class="aspect-square relative overflow-hidden bg-amber-50 flex items-center justify-center shrink-0">
-                        <span class="material-symbols-outlined text-9xl text-amber-200">spa</span>
-                    </div>
-                    <div class="p-6 flex flex-col flex-1">
-                        <span class="text-xs font-bold text-amber-600 uppercase tracking-wide">Wellness Kit</span>
-                        <h3 class="text-xl font-display font-bold text-charcoal mt-1">Sunday Reset</h3>
-                        <p class="text-xs text-gray-500 mt-2">Includes oils, diffuser, and guide.</p>
-                        <div class="flex justify-between items-center mt-auto pt-4">
-                            <span class="font-medium text-gray-900">₹3,500</span>
-                            <button
-                                class="w-8 h-8 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center hover:bg-amber-500 hover:text-white transition-colors">
-                                <span class="material-symbols-outlined text-sm">add</span>
-                            </button>
+                        class="relative overflow-hidden rounded-[3rem] bg-white aspect-[4/5] mb-8 shadow-2xl transition-all duration-500 group-hover:shadow-[0_20px_60px_-15px_rgba(251,191,36,0.4)]">
+                        <img alt="Sunday Reset"
+                            class="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110 group-hover:-rotate-1"
+                            src="delight3.png" />
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60">
+                        </div>
+                        <div class="absolute bottom-8 left-8 right-8">
+                            <div
+                                class="bg-white/90 backdrop-blur-md px-6 py-4 rounded-2xl flex justify-between items-center transform translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 cubic-bezier(0.34, 1.56, 0.64, 1)">
+                                <div>
+                                    <p class="font-bold text-charcoal uppercase text-sm">Sunday Reset (Aaram)</p>
+                                    <p class="text-xs text-gray-500">₹3,500</p>
+                                </div>
+                                <div
+                                    class="w-8 h-8 bg-charcoal rounded-full flex items-center justify-center text-white hover:bg-cobalt transition-colors">
+                                    <span class="material-symbols-outlined text-sm">shopping_bag</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <h3
+                        class="text-4xl font-serif font-bold text-charcoal group-hover:text-amber-600 transition-colors">
+                        Sunday Reset</h3>
+                    <p class="text-charcoal/70 mt-3 text-lg">Organic blends crafted to create a sanctuary at home.</p>
                 </div>
             </div>
         </div>
     </section>
-    <footer class="bg-deep-blue text-white pt-24 pb-12 z-10 relative border-t-8 border-cobalt">
+
+    <footer class="bg-deepCobalt text-white pt-32 pb-12 z-10 relative">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-x-8 gap-y-12 border-b border-white/10 pb-16">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-x-12 gap-y-16 border-b border-white/10 pb-20">
                 <div class="md:col-span-1">
-                    <div class="flex items-center gap-2 mb-8">
-                        <div class="w-8 h-8 bg-cobalt rounded flex items-center justify-center text-white">
+                    <div class="flex items-center gap-2 mb-10">
+                        <div
+                            class="w-10 h-10 bg-marigold rounded-full flex items-center justify-center text-deepCobalt">
                             <span class="material-symbols-outlined text-xl">verified_user</span>
                         </div>
-                        <span class="font-display font-bold text-xl tracking-tight text-white">Delight</span>
+                        <span class="font-serif font-bold text-2xl tracking-tight text-white">Delight.</span>
                     </div>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-8">
+                    <p class="text-blue-200 text-sm leading-loose mb-10">
                         Redefining reliability in the digital age. Secure your future, elevate your present.
                     </p>
-                    <div class="flex gap-4">
-                        <a class="w-10 h-10 border border-white/20 rounded-full flex items-center justify-center hover:bg-cobalt hover:border-cobalt transition-all"
-                            href="#">
-                            <span class="text-xs font-bold">IG</span>
-                        </a>
-                        <a class="w-10 h-10 border border-white/20 rounded-full flex items-center justify-center hover:bg-cobalt hover:border-cobalt transition-all"
-                            href="#">
-                            <span class="text-xs font-bold">X</span>
-                        </a>
-                        <a class="w-10 h-10 border border-white/20 rounded-full flex items-center justify-center hover:bg-cobalt hover:border-cobalt transition-all"
-                            href="#">
-                            <span class="text-xs font-bold">LN</span>
-                        </a>
-                    </div>
                 </div>
-                <div class="md:col-span-1 md:pl-8 md:border-l border-white/10">
-                    <h4 class="font-display font-bold text-cobalt mb-6 uppercase tracking-wider text-sm">Services</h4>
-                    <ul class="space-y-4 text-sm text-gray-300">
-                        <li><a class="hover:text-white transition-colors block py-1 border-b border-transparent hover:border-white/20 w-fit"
-                                href="#">Health &amp; Life</a></li>
-                        <li><a class="hover:text-white transition-colors block py-1 border-b border-transparent hover:border-white/20 w-fit"
-                                href="#">Motor Insurance</a></li>
-                        <li><a class="hover:text-white transition-colors block py-1 border-b border-transparent hover:border-white/20 w-fit"
-                                href="#">Investments</a></li>
+                <div class="md:col-span-1 md:pl-12">
+                    <h4 class="font-bold text-marigold mb-8 uppercase tracking-widest text-xs">Services</h4>
+                    <ul class="space-y-6 text-sm text-gray-300 font-medium">
+                        <li><a class="hover:text-white hover:translate-x-2 transition-all block w-fit"
+                                href="index1.html">Health &amp; Life</a></li>
+                        <li><a class="hover:text-white hover:translate-x-2 transition-all block w-fit"
+                                href="index1.html">Motor Insurance</a></li>
+                        <li><a class="hover:text-white hover:translate-x-2 transition-all block w-fit"
+                                href="index1.html">Investments</a></li>
                     </ul>
                 </div>
-                <div class="md:col-span-1 md:pl-8 md:border-l border-white/10">
-                    <h4 class="font-display font-bold text-cobalt mb-6 uppercase tracking-wider text-sm">Shop</h4>
-                    <ul class="space-y-4 text-sm text-gray-300">
-                        <li><a class="hover:text-white transition-colors block py-1 border-b border-transparent hover:border-white/20 w-fit"
-                                href="#">Perfumes</a></li>
-                        <li><a class="hover:text-white transition-colors block py-1 border-b border-transparent hover:border-white/20 w-fit"
-                                href="#">Incense</a></li>
-                        <li><a class="hover:text-white transition-colors block py-1 border-b border-transparent hover:border-white/20 w-fit"
-                                href="#">Gift Sets</a></li>
+                <div class="md:col-span-1 md:pl-12">
+                    <h4 class="font-bold text-marigold mb-8 uppercase tracking-widest text-xs">Shop</h4>
+                    <ul class="space-y-6 text-sm text-gray-300 font-medium">
+                        <li><a class="hover:text-white hover:translate-x-2 transition-all block w-fit"
+                                href="products.html">Perfumes</a></li>
+                        <li><a class="hover:text-white hover:translate-x-2 transition-all block w-fit"
+                                href="products.html">Incense</a></li>
+                        <li><a class="hover:text-white hover:translate-x-2 transition-all block w-fit"
+                                href="products.html">Gift Sets</a></li>
                     </ul>
                 </div>
-                <div class="md:col-span-1 md:pl-8 md:border-l border-white/10">
-                    <h4 class="font-display font-bold text-cobalt mb-6 uppercase tracking-wider text-sm">Contact</h4>
-                    <ul class="space-y-4 text-sm text-gray-300">
-                        <li>hello@delightservices.com</li>
-                        <li>+1 (555) 987-6543</li>
-                        <li class="pt-4 text-xs text-gray-500">
+                <div class="md:col-span-1 md:pl-12">
+                    <h4 class="font-bold text-marigold mb-8 uppercase tracking-widest text-xs">Contact</h4>
+                    <ul class="space-y-6 text-sm text-gray-300 font-medium">
+                        <li>delightservices2021@gmail.com</li>
+                        <li>+91 7594 940 103</li>
+                        <li class="pt-4 text-xs text-gray-500 leading-relaxed">
                             123 Delight Tower,<br />
                             Financial District
                         </li>
@@ -759,9 +603,9 @@
                 </div>
             </div>
             <div
-                class="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500 uppercase tracking-widest">
+                class="pt-10 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-gray-500 uppercase tracking-widest">
                 <p>© 2025 Delight Services.</p>
-                <div class="flex gap-8">
+                <div class="flex gap-10">
                     <a class="hover:text-white transition-colors" href="#">Privacy</a>
                     <a class="hover:text-white transition-colors" href="#">Terms</a>
                 </div>
@@ -769,7 +613,191 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- GOD MODE SETUP ---
+            const godWrapper = document.getElementById('god-image-wrapper');
+            const dynamicBg = document.getElementById('dynamic-background');
+            // Element removed: stepBadge
+            const godImages = {
+                hero: document.getElementById('god-img-hero'),
+                health: document.getElementById('god-img-health'),
+                life: document.getElementById('god-img-life'),
+                motor: document.getElementById('god-img-motor'),
+                wealth: document.getElementById('god-img-wealth')
+            };
+
+            const stages = [
+                { id: 'hero', el: document.getElementById('hero-target-zone'), bgColor: [248, 249, 250], img: 'hero', step: '01', adjust: { scale: 0.8, padX: 0.1, padY: 0.1, rot: 3 } },
+                { id: 'health', el: document.getElementById('target-health'), bgColor: [255, 241, 242], img: 'health', step: '02', adjust: { scale: 1.0, padX: 0, padY: 0, rot: 0 } },
+                { id: 'life', el: document.getElementById('target-life'), bgColor: [30, 64, 175], img: 'life', step: '03', adjust: { scale: 1.0, padX: -16, padY: -16, rot: 0 } },
+                { id: 'motor', el: document.getElementById('target-motor'), bgColor: [15, 23, 42], img: 'motor', step: '04', adjust: { scale: 1.0, padX: 0, padY: 0, rot: 0 } },
+                { id: 'wealth', el: document.getElementById('target-wealth'), bgColor: [6, 78, 59], img: 'wealth', step: '05', adjust: { scale: 1.0, padX: -16, padY: -16, rot: 0 } }
+            ];
+
+            // Ensure elements exist before running loop
+            if (!godWrapper || !dynamicBg) return;
+
+            // Math helpers
+            function lerp(start, end, t) {
+                return start * (1 - t) + end * t;
+            }
+            function lerpColor(c1, c2, t) {
+                const r = Math.round(lerp(c1[0], c2[0], t));
+                const g = Math.round(lerp(c1[1], c2[1], t));
+                const b = Math.round(lerp(c1[2], c2[2], t));
+                return `rgb(${r}, ${g}, ${b})`;
+            }
+
+            function updateGodMode() {
+                const windowHeight = window.innerHeight;
+                const viewCenter = windowHeight / 2;
+
+                const stageMetrics = stages.map(stage => {
+                    const el = stage.el;
+                    if (!el) return { ...stage, rect: { top: 0, height: 0, left: 0, width: 0 }, center: 0 };
+                    const rect = el.getBoundingClientRect();
+                    const center = rect.top + rect.height / 2;
+                    return { ...stage, rect, center };
+                });
+
+                let activeIndex = 0;
+                let progress = 0;
+                let nextStageIndex = stageMetrics.findIndex(m => m.center > viewCenter);
+
+                if (nextStageIndex === -1) {
+                    activeIndex = stageMetrics.length - 1;
+                    progress = 0;
+                } else if (nextStageIndex === 0) {
+                    activeIndex = 0;
+                    progress = 0;
+                } else {
+                    const prevIndex = nextStageIndex - 1;
+                    const prevMetric = stageMetrics[prevIndex];
+                    const nextMetric = stageMetrics[nextStageIndex];
+                    const totalDist = nextMetric.center - prevMetric.center;
+                    const currentDist = viewCenter - prevMetric.center;
+                    progress = currentDist / totalDist;
+                    activeIndex = prevIndex;
+                }
+
+                const currentStage = stageMetrics[activeIndex];
+                const nextStage = stageMetrics[Math.min(activeIndex + 1, stageMetrics.length - 1)];
+                const t = Math.min(Math.max(progress, 0), 1);
+
+                // --- Geometry Interpolation ---
+                const getLayout = (m) => {
+                    let w = m.rect.width || 0;
+                    let h = m.rect.height || 0;
+                    let x = m.rect.left || 0;
+                    let y = m.rect.top || 0;
+
+                    if (m.adjust.padX > 0 && m.adjust.padX < 1) {
+                        x += w * m.adjust.padX;
+                        y += h * m.adjust.padY;
+                        w *= m.adjust.scale;
+                        h *= m.adjust.scale;
+                    } else {
+                        if (m.adjust.padX < 0) {
+                            const inset = Math.abs(m.adjust.padX);
+                            x += inset;
+                            y += inset;
+                            w -= (inset * 2);
+                            h -= (inset * 2);
+                        }
+                    }
+                    return { x, y, w, h, rot: m.adjust.rot };
+                };
+
+                const startLayout = getLayout(currentStage);
+                const endLayout = getLayout(nextStage);
+
+                const curX = lerp(startLayout.x, endLayout.x, t);
+                const curY = lerp(startLayout.y, endLayout.y, t);
+                const curW = lerp(startLayout.w, endLayout.w, t);
+                const curH = lerp(startLayout.h, endLayout.h, t);
+                const curRot = lerp(startLayout.rot, endLayout.rot, t);
+
+                godWrapper.style.width = `${Math.max(0, curW)}px`;
+                godWrapper.style.height = `${Math.max(0, curH)}px`;
+                godWrapper.style.transform = `translate3d(${curX}px, ${curY}px, 0) rotate(${curRot}deg)`;
+
+                if (activeIndex < stageMetrics.length - 1) {
+                    dynamicBg.style.backgroundColor = lerpColor(currentStage.bgColor, nextStage.bgColor, t);
+                } else {
+                    dynamicBg.style.backgroundColor = `rgb(${currentStage.bgColor.join(',')})`;
+                }
+
+                Object.values(godImages).forEach(img => {
+                    if (img) {
+                        img.style.opacity = 0;
+                        img.style.zIndex = 0;
+                    }
+                });
+
+                if (godImages[currentStage.img]) {
+                    godImages[currentStage.img].style.opacity = 1 - t;
+                    godImages[currentStage.img].style.zIndex = 1;
+                }
+                if (godImages[nextStage.img]) {
+                    godImages[nextStage.img].style.opacity = t;
+                    godImages[nextStage.img].style.zIndex = 2;
+                }
+
+                requestAnimationFrame(updateGodMode);
+            }
+
+            if (window.innerWidth >= 1024) {
+                requestAnimationFrame(updateGodMode);
+            }
+
+            // --- THREAD LOGIC ---
+            const threadBar = document.getElementById('thread-progress-bar');
+            const contentContainer = document.getElementById('scroll-reel-container');
+            window.addEventListener('scroll', () => {
+                if (!contentContainer) return;
+                const rect = contentContainer.getBoundingClientRect();
+                const containerTop = rect.top + window.scrollY;
+                const containerHeight = contentContainer.offsetHeight;
+                const scrollDistance = window.scrollY - (containerTop - window.innerHeight / 2);
+                const progress = (scrollDistance / (containerHeight)) * 100;
+                if (threadBar) {
+                    threadBar.style.height = `${Math.min(Math.max(progress, 0), 100)}%`;
+                }
+
+                const nodes = [
+                    { id: 'node-health', section: 'section-health' },
+                    { id: 'node-life', section: 'section-life' },
+                    { id: 'node-motor', section: 'section-motor' },
+                    { id: 'node-wealth', section: 'section-wealth' }
+                ];
+                nodes.forEach(nodeData => {
+                    const node = document.getElementById(nodeData.id);
+                    const section = document.getElementById(nodeData.section);
+                    if (node && section) {
+                        const sectionRect = section.getBoundingClientRect();
+                        const sectionCenter = sectionRect.top + (sectionRect.height / 2);
+                        const viewportCenter = window.innerHeight / 2;
+                        if (Math.abs(sectionCenter - viewportCenter) < (sectionRect.height / 3)) {
+                            node.classList.add('active');
+                        } else {
+                            node.classList.remove('active');
+                        }
+                    }
+                });
+            });
+
+            // --- REVEAL ON SCROLL ---
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: "0px 0px -10% 0px" });
+            document.querySelectorAll('.reveal-section').forEach(el => revealObserver.observe(el));
+        });
+    </script>
 </body>
 
 </html>
