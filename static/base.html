@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>IntelliFlow Copilot - Enterprise Base Layout</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#8c2bee",
+                        "background-light": "#f5f7fa",
+                        "background-dark": "#191022",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+    <!-- Sticky Top Header -->
+    <header
+        class="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md">
+        <div class="max-w-[1280px] mx-auto px-6 h-16 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <div class="flex items-center gap-2 group cursor-pointer">
+                <div class="size-8 bg-primary/10 flex items-center justify-center rounded-lg text-primary">
+                    <span class="text-xl">🎯</span>
+                </div>
+                <h2 class="text-[#140d1b] dark:text-white text-lg font-bold leading-tight tracking-tight">IntelliFlow
+                    Copilot</h2>
+            </div>
+            <!-- Top-Level Navigation -->
+            <nav class="hidden md:flex items-center gap-1">
+                <a class="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors"
+                    href="#">Dashboard</a>
+                <a class="px-4 py-2 text-sm font-semibold text-primary border-b-2 border-primary" href="#">Tickets</a>
+                <a class="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors"
+                    href="#">Analytics</a>
+                <a class="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors"
+                    href="#">Knowledge Base</a>
+                <a class="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors"
+                    href="#">Settings</a>
+            </nav>
+            <!-- Utility Actions -->
+            <div class="flex items-center gap-3">
+                <button
+                    class="flex items-center justify-center rounded-xl size-10 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-primary/10 hover:text-primary transition-all">
+                    <span class="material-symbols-outlined text-[20px]">notifications</span>
+                </button>
+                <div class="h-8 w-[1px] bg-slate-200 dark:border-slate-700 mx-1"></div>
+                <div class="flex items-center gap-3 pl-1">
+                    <div class="flex flex-col items-end hidden sm:flex">
+                        <span class="text-xs font-bold text-slate-900 dark:text-white">Alex Morgan</span>
+                        <span class="text-[10px] text-slate-500 uppercase tracking-wider">IT Admin</span>
+                    </div>
+                    <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-9 border-2 border-white dark:border-slate-800 shadow-sm"
+                        data-alt="Professional user profile avatar"
+                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDa2Qnyrxf60RLS2Hk4Kct_QGtV_DpaWQw-G_-7nzIAiSpU56lDSF0ctZbZvDiUrjsfIzxPrD-fC6-GwBTQrRRyTvtpsmwXMrP5niyEaRv_Ha8O_AuuFfSurKDsf6FkJRUtHN5ceeXs5xgb3gFdztuiKKHDy2NvnWo5FvnhSI_ccEz8C0pX1h26-YcUpvC3m_rZruIz3b1cW9bsvbX_LaUpncQGF_nYV0wQ8jIu9VPe2AHClQbzEgME1Tu_EpjkRx4ER2ByJ-zzkrU");'>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Main Layout Container -->
+    <main class="max-w-[1280px] mx-auto px-6 py-6">
+        <!-- Breadcrumb Trail -->
+        <nav class="flex items-center gap-2 mb-4 text-sm">
+            <a class="text-slate-500 hover:text-primary transition-colors flex items-center gap-1" href="#">
+                <span class="material-symbols-outlined text-sm">home</span>
+                Home
+            </a>
+            <span class="material-symbols-outlined text-slate-300 text-xs">chevron_right</span>
+            <span class="text-slate-900 dark:text-slate-200 font-medium">Tickets</span>
+        </nav>
+        <!-- Page Heading Section -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+            <div class="space-y-1">
+                <h1 class="text-[#140d1b] dark:text-white text-3xl font-black leading-tight tracking-tight">Ticket
+                    Operations</h1>
+                <p class="text-slate-500 dark:text-slate-400 text-sm">Manage and monitor enterprise-wide IT support
+                    workflows.</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <button
+                    class="flex items-center justify-center gap-2 rounded-xl h-11 px-5 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm font-bold hover:bg-slate-50 transition-all">
+                    <span class="material-symbols-outlined text-lg">filter_list</span>
+                    <span>Filters</span>
+                </button>
+                <button
+                    class="flex items-center justify-center gap-2 rounded-xl h-11 px-6 bg-primary text-white text-sm font-bold shadow-lg shadow-primary/25 hover:opacity-90 active:scale-95 transition-all">
+                    <span class="material-symbols-outlined text-lg">add</span>
+                    <span>Create Ticket</span>
+                </button>
+            </div>
+        </div>
+        <!-- Main Content Area Shell -->
+        <div
+            class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
+            <!-- Context Placeholder -->
+            <div class="p-12 flex flex-col items-center justify-center min-h-[400px] text-center">
+                <div class="size-20 bg-primary/5 rounded-full flex items-center justify-center mb-6">
+                    <span class="material-symbols-outlined text-primary text-4xl">dashboard_customize</span>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Main Content Area</h3>
+                <p class="text-slate-500 dark:text-slate-400 max-w-[520px] leading-relaxed mb-8">
+                    Specific page content will be injected here via <code
+                        class="bg-slate-100 dark:bg-slate-800 px-1 rounded text-primary">base.html</code>. This area is
+                    designed for high productivity, featuring data grids, kanban boards, or analytic widgets.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button
+                        class="flex items-center justify-center gap-2 rounded-xl h-10 px-6 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm font-bold hover:bg-slate-200 transition-all">
+                        <span class="material-symbols-outlined text-lg">description</span>
+                        <span>View Documentation</span>
+                    </button>
+                    <button
+                        class="flex items-center justify-center gap-2 rounded-xl h-10 px-6 bg-primary/10 text-primary text-sm font-bold hover:bg-primary/20 transition-all">
+                        <span class="material-symbols-outlined text-lg">bolt</span>
+                        <span>Start Onboarding</span>
+                    </button>
+                </div>
+            </div>
+            <!-- Content Area Footer / Stats Bar -->
+            <div
+                class="border-t border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/50 px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-6">
+                    <div class="flex items-center gap-2">
+                        <div class="size-2 rounded-full bg-emerald-500"></div>
+                        <span class="text-xs font-medium text-slate-600 dark:text-slate-400">System Status:
+                            Optimal</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-slate-400 text-sm">database</span>
+                        <span class="text-xs font-medium text-slate-600 dark:text-slate-400">DB Sync: 2m ago</span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <span class="text-xs text-slate-400">v2.4.0-stable</span>
+                    <button class="text-xs font-bold text-primary hover:underline">Support Center</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Simple Footer -->
+    <footer class="mt-auto py-8 text-center">
+        <p class="text-slate-400 text-xs font-medium uppercase tracking-widest">
+            © 2024 IntelliFlow Copilot • Enterprise AI Operations
+        </p>
+    </footer>
+</body>
+
+</html>

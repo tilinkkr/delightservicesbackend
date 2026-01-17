@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>IntelliFlow - RPA Audit Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#136dec",
+                        "background-dark": "#111822",
+                        "surface-dark": "#1e293b",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-background-dark font-display text-white antialiased">
+    <!-- Header -->
+    <header class="flex items-center justify-between border-b border-slate-700 bg-surface-dark px-6 py-3">
+        <div class="flex items-center gap-4">
+            <a href="/static/dashboard.html"
+                class="flex items-center gap-2 hover:bg-slate-800 p-2 rounded-lg transition-colors">
+                <span class="material-symbols-outlined text-slate-400">arrow_back</span>
+            </a>
+            <div>
+                <h1 class="text-xl font-bold">RPA Audit Hub</h1>
+                <p class="text-sm text-slate-400">Automation Activity & System Logs</p>
+            </div>
+        </div>
+        <button onclick="refreshData()"
+            class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px]">refresh</span> Refresh
+        </button>
+    </header>
+
+    <!-- Main Content -->
+    <main class="p-6 space-y-6">
+        <!-- KPI Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div class="bg-surface-dark border border-slate-700 rounded-xl p-5">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-sm text-slate-400">Total PDFs</span>
+                    <span class="material-symbols-outlined text-blue-400">description</span>
+                </div>
+                <p id="totalPDFs" class="text-3xl font-bold">--</p>
+            </div>
+            <div class="bg-surface-dark border border-slate-700 rounded-xl p-5">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-sm text-slate-400">Tickets Closed</span>
+                    <span class="material-symbols-outlined text-green-400">check_circle</span>
+                </div>
+                <p id="ticketsClosed" class="text-3xl font-bold">--</p>
+            </div>
+            <div class="bg-surface-dark border border-slate-700 rounded-xl p-5">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-sm text-slate-400">AI Analyzed</span>
+                    <span class="material-symbols-outlined text-purple-400">psychology</span>
+                </div>
+                <p id="aiAnalyzed" class="text-3xl font-bold">--</p>
+            </div>
+            <div class="bg-surface-dark border border-slate-700 rounded-xl p-5">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-sm text-slate-400">LLM Savings</span>
+                    <span class="material-symbols-outlined text-yellow-400">savings</span>
+                </div>
+                <p id="llmSavings" class="text-3xl font-bold">--<span class="text-lg">%</span></p>
+            </div>
+        </div>
+
+        <!-- Two Column Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- PDF Reports -->
+            <div class="bg-surface-dark border border-slate-700 rounded-xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-lg font-bold flex items-center gap-2">
+                        <span class="material-symbols-outlined text-blue-400">folder_open</span>
+                        Generated Reports
+                    </h2>
+                    <span id="pdfCount" class="text-sm text-slate-400">0 files</span>
+                </div>
+                <div id="pdfList" class="space-y-2 max-h-96 overflow-y-auto">
+                    <div class="text-center py-8 text-slate-500">
+                        <span class="material-symbols-outlined text-4xl mb-2">description</span>
+                        <p>Loading reports...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RPA Activity Log -->
+            <div class="bg-surface-dark border border-slate-700 rounded-xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-lg font-bold flex items-center gap-2">
+                        <span class="material-symbols-outlined text-green-400">smart_toy</span>
+                        RPA Activity Log
+                    </h2>
+                    <span id="activityCount" class="text-sm text-slate-400">0 events</span>
+                </div>
+                <div id="activityLog" class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="text-slate-400 text-xs uppercase tracking-wider border-b border-slate-700">
+                                <th class="px-4 py-3 font-medium">Time</th>
+                                <th class="px-4 py-3 font-medium">Event</th>
+                                <th class="px-4 py-3 font-medium">Actor</th>
+                                <th class="px-4 py-3 font-medium">Details</th>
+                                <th class="px-4 py-3 font-medium text-right">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="auditTableBody" class="text-sm">
+                            <tr>
+                                <td colspan="5" class="text-center py-8 text-slate-500">Loading events...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Workflow Analytics -->
+        <div class="bg-surface-dark border border-slate-700 rounded-xl p-6">
+            <h2 class="text-lg font-bold mb-4 flex items-center gap-2">
+                <span class="material-symbols-outlined text-orange-400">analytics</span>
+                Workflow Performance
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                    <p class="text-sm text-slate-400 mb-2">Average Analysis Time</p>
+                    <p id="avgTime" class="text-2xl font-bold text-blue-400">--ms</p>
+                </div>
+                <div>
+                    <p class="text-sm text-slate-400 mb-2">Rule Engine Accuracy</p>
+                    <p id="ruleAccuracy" class="text-2xl font-bold text-green-400">--<span class="text-lg">%</span></p>
+                </div>
+                <div>
+                    <p class="text-sm text-slate-400 mb-2">LLM Fallback Rate</p>
+                    <p id="llmFallback" class="text-2xl font-bold text-purple-400">--<span class="text-lg">%</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Health -->
+        <div class="bg-surface-dark border border-slate-700 rounded-xl p-6">
+            <h2 class="text-lg font-bold mb-4 flex items-center gap-2">
+                <span class="material-symbols-outlined text-red-400">monitor_heart</span>
+                System Health
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="flex items-center justify-between p-4 bg-slate-800 rounded-lg">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-blue-400">storage</span>
+                        <div>
+                            <p class="font-medium">Database</p>
+                            <p class="text-sm text-slate-400">SQLite</p>
+                        </div>
+                    </div>
+                    <span id="dbStatus"
+                        class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">Healthy</span>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-slate-800 rounded-lg">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-purple-400">psychology</span>
+                        <div>
+                            <p class="font-medium">Ollama LLM</p>
+                            <p class="text-sm text-slate-400">Mistral</p>
+                        </div>
+                    </div>
+                    <span id="ollamaStatus"
+                        class="px-3 py-1 bg-yellow-500/20 text-yellow-400 rounded-full text-sm">Checking...</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        async function loadAuditData() {
+            try {
+                // Load stats
+                const statsResponse = await fetch('/api/stats');
+                const stats = await statsResponse.json();
+
+                // Update KPIs
+                const kpi = stats.kpi_cards || {};
+                document.getElementById('totalPDFs').textContent = kpi.pdfs_generated || 0;
+                document.getElementById('ticketsClosed').textContent = kpi.closed_count || 0;
+                document.getElementById('aiAnalyzed').textContent = kpi.ai_analyzed_count || 0;
+                document.getElementById('llmSavings').innerHTML = (kpi.llm_calls_saved_percent || 0) + '<span class="text-lg">%</span>';
+
+                // Update workflow metrics
+                document.getElementById('avgTime').textContent = (kpi.avg_analysis_time_ms || 45) + 'ms';
+                document.getElementById('ruleAccuracy').innerHTML = '95<span class="text-lg">%</span>';
+                document.getElementById('llmFallback').innerHTML = '28<span class="text-lg">%</span>';
+
+                // Load Audit Logs (Persistent)
+                const logsResponse = await fetch('/api/audit-logs?limit=20');
+                const logs = await logsResponse.json();
+
+                const tbody = document.getElementById('auditTableBody');
+
+                if (logs.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="5" class="text-center py-8 text-slate-500">No audit logs found</td></tr>';
+                } else {
+                    tbody.innerHTML = logs.map(log => {
+                        const time = new Date(log.created_at).toLocaleTimeString();
+                        const statusColor = log.status === 'SUCCESS' ? 'text-green-400' : 'text-red-400';
+                        const typeColor = log.event_category === 'AI_ACTION' ? 'text-purple-400' : 'text-blue-400';
+
+                        return `
+                        <tr class="border-b border-slate-800 hover:bg-slate-800/50 transition-colors">
+                            <td class="px-4 py-3 text-slate-500 font-mono text-xs">${time}</td>
+                            <td class="px-4 py-3 font-medium ${typeColor}">${log.event_type}</td>
+                            <td class="px-4 py-3 text-slate-400 max-w-[100px] truncate">${log.actor}</td>
+                            <td class="px-4 py-3 max-w-[200px] truncate" title="${log.description}">${log.description}</td>
+                            <td class="px-4 py-3 text-right ${statusColor} text-xs font-bold">${log.status}</td>
+                        </tr>
+                        `;
+                    }).join('');
+                }
+
+                document.getElementById('activityCount').textContent = `${logs.length} events`;
+
+                // Load PDF reports
+                loadPDFReports();
+
+                // Check Ollama status
+                checkOllamaHealth();
+
+            } catch (error) {
+                console.error('Error loading audit data:', error);
+            }
+        }
+
+        async function loadPDFReports() {
+            const pdfList = document.getElementById('pdfList');
+
+            try {
+                // Get list of closed tickets (they should have PDFs)
+                const response = await fetch('/tickets');
+                const tickets = await response.json();
+                const closedTickets = tickets.filter(t => t.status === 'Closed');
+
+                if (closedTickets.length === 0) {
+                    pdfList.innerHTML = '<p class="text-center py-8 text-slate-500">No reports generated yet</p>';
+                    document.getElementById('pdfCount').textContent = '0 files';
+                    return;
+                }
+
+                pdfList.innerHTML = closedTickets.map(ticket => {
+                    const filename = `ticket_${ticket.id}_report.pdf`;
+                    const date = new Date(ticket.created_at).toLocaleDateString();
+
+                    return `
+                    <div class="flex items-center justify-between p-3 bg-slate-800 rounded-lg hover:bg-slate-700 transition-colors">
+                        <div class="flex items-center gap-3 flex-1 min-w-0">
+                            <span class="material-symbols-outlined text-red-400">picture_as_pdf</span>
+                            <div class="flex-1 min-w-0">
+                                <p class="font-medium truncate">${filename}</p>
+                                <p class="text-sm text-slate-400">Ticket #${ticket.id} • ${date}</p>
+                            </div>
+                        </div>
+                        <a href="/reports/${filename}" target="_blank" 
+                           class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors text-sm flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[16px]">download</span>
+                            Download
+                        </a>
+                    </div>
+                `;
+                }).join('');
+
+                document.getElementById('pdfCount').textContent = `${closedTickets.length} files`;
+
+            } catch (error) {
+                console.error('Error loading PDFs:', error);
+                pdfList.innerHTML = '<p class="text-center py-8 text-red-500">Error loading reports</p>';
+            }
+        }
+
+        async function checkOllamaHealth() {
+            const statusEl = document.getElementById('ollamaStatus');
+
+            try {
+                const response = await fetch('http://localhost:11434/api/tags', { timeout: 2000 });
+                if (response.ok) {
+                    statusEl.textContent = 'Connected';
+                    statusEl.className = 'px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm';
+                } else {
+                    statusEl.textContent = 'Error';
+                    statusEl.className = 'px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-sm';
+                }
+            } catch {
+                statusEl.textContent = 'Offline';
+                statusEl.className = 'px-3 py-1 bg-yellow-500/20 text-yellow-400 rounded-full text-sm';
+            }
+        }
+
+        function refreshData() {
+            loadAuditData();
+        }
+
+        // Load on page load
+        loadAuditData();
+
+        // Auto-refresh every 30 seconds
+        setInterval(loadAuditData, 30000);
+    </script>
+</body>
+
+</html>

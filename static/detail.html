@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>IntelliFlow Copilot - Ticket Details</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#136dec",
+                        "primary-dark": "#0e5bc4",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#111822",
+                        "surface-dark": "#1e293b",
+                        "surface-light": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white overflow-hidden h-screen flex flex-col antialiased">
+    <!-- Top Navigation Bar -->
+    <header
+        class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-[#233348] bg-surface-light dark:bg-[#111822] px-6 py-3 shrink-0 z-20">
+        <div class="flex items-center gap-4">
+            <a href="/static/dashboard.html"
+                class="flex items-center gap-2 hover:bg-slate-100 dark:hover:bg-slate-800 p-2 rounded-lg transition-colors">
+                <span class="material-symbols-outlined text-slate-500">arrow_back</span>
+            </a>
+            <h1 class="text-slate-900 dark:text-white text-xl font-bold leading-tight tracking-tight">Ticket Details
+            </h1>
+        </div>
+        <div class="flex items-center gap-3">
+            <button id="runAIBtn" onclick="runAIAnalysis()"
+                class="hidden px-4 py-2 rounded-lg bg-primary text-white text-sm font-bold hover:bg-blue-700 transition-colors flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px]">psychology</span> Run AI Analysis
+            </button>
+            <button id="approveBtn" onclick="approveTicket()"
+                class="hidden px-4 py-2 rounded-lg bg-emerald-600 text-white text-sm font-bold hover:bg-emerald-700 transition-colors flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px]">check_circle</span> Approve & Resolve
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content: Split Pane -->
+    <main class="flex flex-1 overflow-hidden relative">
+        <!-- Left Pane: Original Ticket Data -->
+        <aside
+            class="w-full lg:w-[40%] flex flex-col border-r border-slate-200 dark:border-[#233348] bg-surface-light dark:bg-[#111822] overflow-y-auto">
+            <div class="p-6 pb-2">
+                <div class="flex items-center justify-between mb-4">
+                    <span id="priorityBadge"
+                        class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset">...</span>
+                    <span id="statusBadge" class="px-2 py-1 rounded text-xs font-medium">...</span>
+                </div>
+                <h2 id="ticketTitle"
+                    class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white mb-2 leading-snug">
+                    Loading...</h2>
+            </div>
+            <div class="px-6 py-4">
+                <div class="grid grid-cols-2 gap-y-4 gap-x-8 border-y border-slate-200 dark:border-[#233348] py-4">
+                    <div>
+                        <p class="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">
+                            Ticket ID</p>
+                        <p id="ticketId" class="text-sm font-semibold text-slate-900 dark:text-white">#--</p>
+                    </div>
+                    <div>
+                        <p class="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">
+                            Category</p>
+                        <p id="ticketCategory" class="text-sm font-semibold text-slate-900 dark:text-white">--</p>
+                    </div>
+                </div>
+            </div>
+            <div class="px-6 py-2 flex-1">
+                <p class="text-sm font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-3">
+                    Description</p>
+                <div id="ticketDesc"
+                    class="prose prose-invert max-w-none text-slate-700 dark:text-slate-300 text-base leading-relaxed">
+                    Loading description...
+                </div>
+            </div>
+        </aside>
+
+        <!-- Right Pane: Intelligence Layer -->
+        <section class="w-full lg:w-[60%] bg-slate-100 dark:bg-[#0b1016] flex flex-col overflow-hidden">
+            <div class="p-6 pb-2 shrink-0">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-primary/20 rounded-lg text-primary">
+                            <span class="material-symbols-outlined">psychology</span>
+                        </div>
+                        <div>
+                            <h2 class="text-lg font-bold text-slate-900 dark:text-white">Agent Intelligence Layer</h2>
+                            <p class="text-sm text-slate-500 dark:text-slate-400">Automated triage & risk assessment</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Analysis Cards -->
+            <div id="aiPanelContainer" class="flex-1 overflow-y-auto p-6 pt-2 space-y-6 pb-24 hidden">
+                <!-- Triage Agent -->
+                <div
+                    class="bg-white dark:bg-[#1e293b] rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm p-5 relative">
+                    <div class="flex items-center gap-2 text-primary mb-4">
+                        <span class="material-symbols-outlined">smart_toy</span>
+                        <span class="font-semibold text-sm uppercase tracking-wide">Triage Agent</span>
+                    </div>
+                    <div class="space-y-3">
+                        <div>
+                            <p class="text-xs text-slate-500 mb-1">Reasoning</p>
+                            <p id="triageReason" class="text-sm text-slate-300">Analysis pending...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Compliance Agent -->
+                <div
+                    class="bg-white dark:bg-[#1e293b] rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm p-5 relative">
+                    <div class="flex items-center gap-2 text-purple-400 mb-4">
+                        <span class="material-symbols-outlined">policy</span>
+                        <span class="font-semibold text-sm uppercase tracking-wide">Compliance</span>
+                    </div>
+                    <div id="complianceContent" class="text-sm text-slate-300">Checking...</div>
+                </div>
+
+                <!-- Risk Agent -->
+                <div
+                    class="bg-white dark:bg-[#1e293b] rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm p-5 relative">
+                    <div class="flex items-center gap-2 text-orange-400 mb-4">
+                        <span class="material-symbols-outlined">trending_up</span>
+                        <span class="font-semibold text-sm uppercase tracking-wide">Risk Assessment</span>
+                    </div>
+                    <div class="flex flex-col gap-4">
+                        <div class="flex items-end justify-between mb-1">
+                            <div>
+                                <span id="riskScore" class="text-3xl font-bold text-slate-900 dark:text-white">--</span>
+                                <span class="text-sm text-slate-500">/100</span>
+                            </div>
+                            <span id="riskLabel" class="text-sm font-bold text-orange-400">Loading...</span>
+                        </div>
+                        <div class="h-4 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden relative">
+                            <div id="riskBar"
+                                class="h-full bg-gradient-to-r from-green-500 via-yellow-500 to-red-500 w-[0%] rounded-full relative transition-all duration-1000">
+                            </div>
+                        </div>
+                        <p id="riskReason" class="text-sm text-slate-400 mt-2"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty State -->
+            <div id="aiEmptyState" class="flex-1 flex flex-col items-center justify-center text-center p-12">
+                <div
+                    class="w-16 h-16 bg-slate-200 dark:bg-slate-800 rounded-full flex items-center justify-center mb-4">
+                    <span class="material-symbols-outlined text-3xl text-slate-400">psychology_alt</span>
+                </div>
+                <h3 class="text-lg font-medium text-slate-900 dark:text-white">Awaiting Analysis</h3>
+                <p class="text-sm text-slate-500 max-w-xs mt-2">Run the AI agents to classify, check compliance, and
+                    assess risk for this ticket.</p>
+                <button onclick="runAIAnalysis()"
+                    class="mt-6 px-6 py-2 bg-primary text-white rounded-lg font-bold hover:bg-blue-700 transition-colors">
+                    Start Analysis
+                </button>
+            </div>
+
+            <!-- Analysis Progress Overlay -->
+            <div id="analysisProgress"
+                class="hidden absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
+                <div class="bg-white dark:bg-slate-800 rounded-xl p-8 max-w-md mx-4 text-center">
+                    <div
+                        class="animate-spin w-12 h-12 border-4 border-primary border-t-transparent rounded-full mx-auto mb-4">
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Analyzing Ticket...</h3>
+                    <p id="progressMessage" class="text-sm text-slate-600 dark:text-slate-400">Running AI agents...</p>
+                    <div class="mt-4 text-xs text-slate-500">
+                        <p id="ollamaStatus">Checking Ollama status...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // State
+        let currentTicketId = null;
+        let currentTicket = null;
+
+        // Parse ticket ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        currentTicketId = urlParams.get('id');
+
+        if (!currentTicketId) {
+            document.body.innerHTML = '<div class="flex items-center justify-center h-screen"><div class="text-center"><p class="text-red-500 font-bold mb-2">Error: No Ticket ID</p><a href="/static/dashboard.html" class="text-blue-500 underline">Return to Dashboard</a></div></div>';
+        } else {
+            loadTicket();
+        }
+
+        // Load ticket details
+        async function loadTicket() {
+            try {
+                const response = await fetch(`/tickets/${currentTicketId}`);
+                if (!response.ok) throw new Error('Ticket not found');
+
+                currentTicket = await response.json();
+
+                // Update left pane
+                updateTicketDisplay(currentTicket);
+
+                // Check if already analyzed
+                if (currentTicket.status === 'Closed') {
+                    document.getElementById('aiPanelContainer').classList.remove('hidden');
+                    document.getElementById('aiEmptyState').classList.add('hidden');
+
+                    const appBtn = document.getElementById('approveBtn');
+                    appBtn.classList.remove('hidden');
+                    appBtn.innerHTML = '<span class="material-symbols-outlined text-[18px]">download</span> Download Report';
+                    appBtn.className = "px-4 py-2 rounded-lg bg-slate-600 text-white text-sm font-bold hover:bg-slate-700 transition-colors flex items-center gap-2";
+                    appBtn.onclick = () => window.open(`/reports/ticket_${currentTicketId}_report.pdf`, '_blank');
+
+                    document.getElementById('runAIBtn').classList.add('hidden');
+                }
+                else if (currentTicket.ai_priority) {
+                    displayAIResults(currentTicket);
+
+                    const runBtn = document.getElementById('runAIBtn');
+                    runBtn.classList.remove('hidden');
+                    runBtn.innerHTML = '<span class="material-symbols-outlined text-[18px]">refresh</span> Re-Analyze';
+
+                    document.getElementById('approveBtn').classList.remove('hidden');
+                } else {
+                    document.getElementById('aiPanelContainer').classList.add('hidden');
+                    document.getElementById('aiEmptyState').classList.remove('hidden');
+                    document.getElementById('runAIBtn').classList.remove('hidden');
+                    document.getElementById('approveBtn').classList.add('hidden');
+                }
+
+            } catch (error) {
+                console.error('Error loading ticket:', error);
+            }
+        }
+
+        function updateTicketDisplay(ticket) {
+            document.getElementById('ticketTitle').textContent = ticket.title;
+            document.getElementById('ticketDesc').textContent = ticket.description;
+            document.getElementById('ticketId').textContent = '#' + ticket.id;
+            document.getElementById('ticketCategory').textContent = ticket.category || 'Uncategorized';
+
+            const pBadge = document.getElementById('priorityBadge');
+            pBadge.textContent = ticket.priority;
+            pBadge.className = `inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset ${getPriorityClass(ticket.priority)}`;
+
+            const sBadge = document.getElementById('statusBadge');
+            sBadge.textContent = ticket.status.replace('_', ' ');
+            sBadge.className = `px-2 py-1 rounded text-xs font-medium ${getStatusClass(ticket.status)}`;
+        }
+
+        function getPriorityClass(prio) {
+            if (prio === 'High') return 'bg-red-500/10 text-red-500 ring-red-500/20';
+            if (prio === 'Medium') return 'bg-yellow-500/10 text-yellow-500 ring-yellow-500/20';
+            return 'bg-green-500/10 text-green-500 ring-green-500/20';
+        }
+
+        function getStatusClass(status) {
+            if (status === 'New') return 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300';
+            if (status === 'Closed') return 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300';
+            return 'bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-300';
+        }
+
+        function displayAIResults(ticket) {
+            document.getElementById('aiPanelContainer').classList.remove('hidden');
+            document.getElementById('aiEmptyState').classList.add('hidden');
+
+            const analysis = ticket.ai_analysis || {};
+            const triage = analysis.triage || {};
+            const compliance = analysis.compliance || {};
+            const risk = analysis.risk || {};
+
+            // 1. Triage Section
+            let triageHtml = `<div class="mb-2"><span class="font-bold text-slate-300">Reasoning:</span> <span class="text-slate-400">${triage.reasoning || ticket.ai_reasoning || 'No reasoning provided'}</span></div>`;
+            if (triage.llm_used) {
+                triageHtml += `<div class="text-xs text-purple-400 flex items-center gap-1 mt-1"><span class="material-symbols-outlined text-[14px]">smart_toy</span> AI Agent Used</div>`;
+            } else {
+                triageHtml += `<div class="text-xs text-green-400 flex items-center gap-1 mt-1"><span class="material-symbols-outlined text-[14px]">bolt</span> Rule Engine (High Confidence)</div>`;
+            }
+            document.getElementById('triageReason').innerHTML = triageHtml;
+
+            // 2. Compliance Section
+            const complianceContainer = document.getElementById('complianceContent');
+            if (!compliance.messages || compliance.messages.length === 0) {
+                complianceContainer.innerHTML = '<div class="text-green-400 flex items-center gap-2"><span class="material-symbols-outlined">check_circle</span> All Compliance Checks Passed</div>';
+            } else {
+                complianceContainer.innerHTML = compliance.messages.map(msg =>
+                    `<div class="text-red-400 flex items-start gap-2 mb-1"><span class="material-symbols-outlined text-[18px]">error</span> ${msg}</div>`
+                ).join('');
+                if (compliance.recommendation) {
+                    complianceContainer.innerHTML += `<div class="mt-2 text-slate-300 text-sm border-t border-slate-700 pt-2"><strong>Action:</strong> ${compliance.recommendation}</div>`;
+                }
+            }
+
+            // 3. Risk Section
+            const score = risk.risk_score || 0;
+            document.getElementById('riskScore').textContent = score;
+            document.getElementById('riskLabel').textContent = risk.risk_level || 'Low';
+
+            const riskBar = document.getElementById('riskBar');
+            riskBar.style.width = `${score}%`;
+
+            // Color code risk bar
+            if (score < 30) riskBar.className = 'h-full bg-green-500 rounded-full';
+            else if (score < 70) riskBar.className = 'h-full bg-yellow-500 rounded-full';
+            else riskBar.className = 'h-full bg-red-500 rounded-full';
+
+            // Show impact areas if available
+            if (risk.impact_areas && risk.impact_areas.length > 0) {
+                document.getElementById('riskLabel').innerHTML += `<div class="text-xs text-slate-400 font-normal mt-1">Impact: ${risk.impact_areas.join(', ')}</div>`;
+            }
+        }
+
+        async function checkOllamaStatus() {
+            try {
+                const response = await fetch('http://localhost:11434/api/tags', { timeout: 2000 });
+                return response.ok;
+            } catch {
+                return false;
+            }
+        }
+
+        async function runAIAnalysis() {
+            // Show progress overlay
+            const progressDiv = document.getElementById('analysisProgress');
+            const messageEl = document.getElementById('progressMessage');
+            const ollamaStatusEl = document.getElementById('ollamaStatus');
+
+            progressDiv.classList.remove('hidden');
+
+            // Check Ollama status
+            messageEl.textContent = 'Checking AI service...';
+            const ollamaRunning = await checkOllamaStatus();
+
+            if (!ollamaRunning) {
+                ollamaStatusEl.textContent = '⚠️ Ollama not detected - using rule-based classification';
+                ollamaStatusEl.className = 'text-yellow-500 text-xs';
+            } else {
+                ollamaStatusEl.textContent = '✅ Ollama connected - using AI agents';
+                ollamaStatusEl.className = 'text-green-500 text-xs';
+            }
+
+            messageEl.textContent = 'Running analysis...';
+
+            try {
+                const response = await fetch(`/tickets/${currentTicketId}/analyze`, { method: 'POST' });
+
+                if (response.ok) {
+                    messageEl.textContent = 'Processing results...';
+
+                    // Poll for results
+                    // Poll for results (Max 45 seconds)
+                    let attempts = 0;
+                    const maxAttempts = 45;
+                    const pollInterval = setInterval(async () => {
+                        try {
+                            const ticketResponse = await fetch(`/tickets/${currentTicketId}`);
+                            const ticket = await ticketResponse.json();
+
+                            if (ticket.ai_priority) {
+                                clearInterval(pollInterval);
+                                progressDiv.classList.add('hidden');
+                                loadTicket(); // Refresh UI with results
+                            } else if (attempts >= maxAttempts) {
+                                clearInterval(pollInterval);
+                                progressDiv.classList.add('hidden');
+                                alert('Analysis is taking longer than expected. Please check back in a moment or refresh the page.');
+                            }
+                        } catch (e) {
+                            console.error("Polling error", e);
+                        }
+                        attempts++;
+                    }, 1000);
+                } else {
+                    throw new Error("Analysis request failed");
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                progressDiv.classList.add('hidden');
+                alert('Analysis failed. Please check if the backend is running.');
+            }
+        }
+
+        async function approveTicket() {
+            if (!confirm("Approve this ticket and generate report?")) return;
+
+            try {
+                const response = await fetch(`/tickets/${currentTicketId}/approve`, { method: 'POST' });
+                const result = await response.json();
+
+                if (response.ok) {
+                    setTimeout(() => {
+                        loadTicket();
+                        alert('✅ Ticket Closed! PDF Report Generated.');
+                    }, 1000);
+                } else {
+                    throw new Error("Approval failed");
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error closing ticket');
+            }
+        }
+
+        // Theme check
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+</body>
+
+</html>
