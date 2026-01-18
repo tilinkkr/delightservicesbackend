@@ -582,16 +582,17 @@ app.post('/api/checkout', async (req, res) => {
         const deliveryDate = new Date();
         deliveryDate.setDate(deliveryDate.getDate() + Math.floor(Math.random() * 5) + 3); // Random 3-7 days
 
-        const ordersToInsert = orderItems.map(item => ({
+        // Calculate Total Amount
+        const totalAmount = orderItems.reduce((sum, item) => sum + (Number(item.product_price) || 0), 0);
+
+        // Insert Single Order
+        const { error } = await supabase.from('orders').insert({
             user_id: user.id,
-            product_id: item.product_id,
-            product_name: item.product_name,
-            product_price: item.product_price,
+            total_amount: totalAmount,
             status: 'paid',
             delivery_date: deliveryDate
-        }));
+        });
 
-        const { error } = await supabase.from('orders').insert(ordersToInsert);
         if (error) throw error;
 
         // Clear Cart
