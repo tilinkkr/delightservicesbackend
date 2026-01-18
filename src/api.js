@@ -588,7 +588,6 @@ app.post('/api/checkout', async (req, res) => {
             product_name: item.product_name,
             product_price: item.product_price,
             status: 'paid',
-            payment_method: 'Credit Card',
             delivery_date: deliveryDate
         }));
 
