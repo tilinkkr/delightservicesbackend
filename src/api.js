@@ -586,10 +586,12 @@ app.post('/api/checkout', async (req, res) => {
         const totalAmount = orderItems.reduce((sum, item) => sum + (Number(item.product_price) || 0), 0);
 
         // Insert Single Order
+        // NOTE: This requires running scripts/improve_orders_schema.sql in Supabase first!
         const { error } = await supabase.from('orders').insert({
             user_id: user.id,
             total_amount: totalAmount,
-            status: 'pending',
+            status: 'confirmed',
+            payment_status: 'paid',
             delivery_date: deliveryDate
         });
 
