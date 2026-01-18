@@ -23,10 +23,9 @@ app.use((req, res, next) => {
 app.get('/test', (req, res) => res.send('Server is alive'));
 
 // Legacy static files (if needed to coexist)
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-// Assuming 'public' is one level up from src
-app.use(express.static(path.join(__dirname, '../public')));
+// Legacy static files (if needed to coexist)
+// Vercel robust path
+app.use(express.static(path.join(process.cwd(), 'public')));
 
 // Admin API Routes
 app.use('/api/admin', adminRoutes);
