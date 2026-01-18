@@ -446,8 +446,7 @@ app.get('/api/cart', async (req, res) => {
           name,
           price,
           image_url,
-          category,
-          description
+          category
         )
       `)
             .eq('cart_id', cart.id)
