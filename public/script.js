@@ -60,4 +60,32 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.classList.remove('overflow-hidden');
         });
     }
+    // --- Smart Header Logic ---
+    const header = document.querySelector('header');
+    let lastScroll = 0;
+
+    if (header) {
+        // Ensure transition class is present
+        header.classList.add('transition-transform', 'duration-300');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll <= 0) {
+                // At top
+                header.classList.remove('-translate-y-full');
+                return;
+            }
+
+            if (currentScroll > lastScroll && !header.classList.contains('-translate-y-full')) {
+                // Scroll Down -> Hide
+                header.classList.add('transform', '-translate-y-full');
+            } else if (currentScroll < lastScroll && header.classList.contains('-translate-y-full')) {
+                // Scroll Up -> Show
+                header.classList.remove('-translate-y-full');
+            }
+
+            lastScroll = currentScroll;
+        });
+    }
 });

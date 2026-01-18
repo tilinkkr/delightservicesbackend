@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Order Detail | Delight Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="p-8">
+    <div class="max-w-4xl mx-auto">
+        <div class="flex items-center justify-between mb-6">
+            <h1 class="text-2xl font-bold">Order Details</h1>
+            <a href="orders.html" class="text-slate-400 hover:text-white">← Back to Orders</a>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="bg-slate-800 rounded-xl p-6 mb-6 border border-slate-700">
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <p class="text-slate-400 text-sm uppercase font-bold">Order ID</p>
+                    <p id="order-id" class="font-mono text-slate-200">Loading...</p>
+                </div>
+                <div>
+                    <p class="text-slate-400 text-sm uppercase font-bold">Total Amount</p>
+                    <p class="text-emerald-400 font-bold text-xl">₹<span id="order-total">--</span></p>
+                </div>
+                <div>
+                    <p class="text-slate-400 text-sm uppercase font-bold mb-1">Current Status</p>
+                    <span id="order-status" class="px-2 py-1 rounded text-xs font-bold uppercase bg-slate-700">--</span>
+                </div>
+                <div>
+                    <p class="text-slate-400 text-sm uppercase font-bold mb-1">Update Status</p>
+                    <div class="flex gap-2">
+                        <select id="status-select"
+                            class="bg-slate-900 border border-slate-600 rounded p-1 text-sm text-white">
+                            <option value="pending">Pending</option>
+                            <option value="shipped">Shipped</option>
+                            <option value="delivered">Delivered</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                        <button onclick="updateStatus()"
+                            class="px-3 py-1 bg-blue-600 hover:bg-blue-500 rounded text-sm font-medium transition-colors">
+                            Update
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Customer -->
+        <div class="bg-slate-800 rounded-xl p-6 mb-6 border border-slate-700">
+            <h2 class="text-lg font-semibold mb-4 text-slate-200 border-b border-slate-700 pb-2">Customer Information
+            </h2>
+            <div class="flex gap-8">
+                <div>
+                    <p class="text-slate-400 text-xs uppercase">Name</p>
+                    <p id="customer-name" class="font-medium text-lg text-white">--</p>
+                </div>
+                <div>
+                    <p class="text-slate-400 text-xs uppercase">Email / Contact</p>
+                    <p id="customer-email" class="text-slate-300">--</p>
+                    <!-- Note: Email might not be in profiles publicly, but we'll try -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Items -->
+        <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+            <h2 class="text-lg font-semibold mb-4 text-slate-200 border-b border-slate-700 pb-2">Order Items</h2>
+            <table class="w-full text-left">
+                <thead class="text-slate-500 text-sm uppercase bg-slate-900/50">
+                    <tr>
+                        <th class="p-3">Product</th>
+                        <th class="p-3 text-center">Qty</th>
+                        <th class="p-3 text-right">Price</th>
+                        <th class="p-3 text-right">Total</th>
+                    </tr>
+                </thead>
+                <tbody id="items-table" class="divide-y divide-slate-700 text-sm"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script type="module">
+        import { getAdminToken } from './adminAuth.js';
+
+        const params = new URLSearchParams(window.location.search);
+        const orderId = params.get('id');
+        async function loadOrder() {
+            const token = await getAdminToken();
+            if (!token) return;
+
+            try {
+                const res = await fetch(`/api/admin/orders/${orderId}`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+
+                if (!res.ok) throw new Error('Failed to load order');
+
+                const data = await res.json();
+
+                // Update UI
+                document.getElementById('order-id').textContent = data.id;
+                document.getElementById('order-status').textContent = data.status;
+                document.getElementById('order-total').textContent = Number(data.total_amount).toLocaleString();
+                document.getElementById('status-select').value = data.status;
+
+                // Customer Info (Mapping from 'profiles' join)
+                const customerName = data.profiles?.full_name || 'Guest User';
+                document.getElementById('customer-name').textContent = customerName;
+                document.getElementById('customer-email').textContent = 'N/A'; // Email is in auth.users, hard to join freely without admin privilege on auth schema, usually profile has it if synced
+
+                // Items
+                const table = document.getElementById('items-table');
+                table.innerHTML = '';
+                data.order_items.forEach(i => {
+                    const itemTotal = i.quantity * i.price_at_purchase;
+                    table.innerHTML += `
+          <tr class="hover:bg-slate-700/30">
+            <td class="p-3 font-medium text-white">${i.products?.name || 'Unknown Product'}</td>
+            <td class="p-3 text-center text-slate-300">${i.quantity}</td>
+            <td class="p-3 text-right text-slate-300">₹${Number(i.price_at_purchase).toLocaleString()}</td>
+            <td class="p-3 text-right text-emerald-400">₹${Number(itemTotal).toLocaleString()}</td>
+          </tr>
+        `;
+                });
+            } catch (err) {
+                console.error(err);
+                alert('Error loading order details');
+            }
+        }
+
+        window.updateStatus = async () => {
+            const token = await getAdminToken();
+            const status = document.getElementById('status-select').value;
+
+            try {
+                const res = await fetch(`/api/admin/orders/${orderId}/status`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ status })
+                });
+
+                if (!res.ok) throw new Error('Update failed');
+
+                alert('✅ Status updated successfully');
+                loadOrder(); // Reload to refresh UI state
+            } catch (err) {
+                alert('❌ Failed to update status');
+                console.error(err);
+            }
+        };
+
+        loadOrder();
+    </script>
+
+</body>
+
+</html>

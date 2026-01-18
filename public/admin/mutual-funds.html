@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mutual Fund Leads | Delight Services Admin</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-900">
+
+    <!-- Main Layout -->
+    <div class="flex h-screen overflow-hidden w-full">
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+
+            <!-- Header -->
+            <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 sm:px-10">
+                <h1 class="text-xl font-semibold text-gray-800">
+                    Mutual Fund / Wealth Leads
+                </h1>
+
+                <div class="flex items-center gap-4">
+                    <button onclick="fetchLeads()"
+                        class="p-2 text-gray-400 hover:text-emerald-600 transition-colors bg-gray-50 hover:bg-emerald-50 rounded-full">
+                        <span class="material-icons-round">refresh</span>
+                    </button>
+
+                    <div
+                        class="h-8 w-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 font-bold border border-emerald-200">
+                        A
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 p-6 sm:p-10">
+                <div class="max-w-6xl mx-auto">
+
+                    <!-- Leads Table -->
+                    <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+                        <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center bg-gray-50/50">
+                            <h2 class="text-base font-semibold text-gray-800">
+                                Inquiry Management
+                            </h2>
+                            <span class="text-sm text-gray-500" id="leadCountLabel">
+                                Loading...
+                            </span>
+                        </div>
+
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                            Client
+                                        </th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                            Investment
+                                        </th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                            Goal
+                                        </th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                            Date
+                                        </th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                            Status
+                                        </th>
+                                        <th
+                                            class="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                            Action
+                                        </th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="leadsTableBody" class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td colspan="6" class="px-6 py-10 text-center text-gray-500 animate-pulse">
+                                            Loading data...
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast"
+        class="fixed bottom-5 right-5 bg-gray-900 text-white px-6 py-3 rounded-lg shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 z-50">
+        Status updated successfully
+    </div>
+
+    <!-- Script (UNCHANGED LOGIC) -->
+    <script type="module">
+        import { useFetch } from './useFetch.js';
+
+        const API_BASE = '/mutual-fund-leads';
+
+        async function fetchLeads() {
+            const tbody = document.getElementById('leadsTableBody');
+            tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-10 text-center text-gray-500 animate-pulse">Refreshing...</td></tr>`;
+
+            const { data, error } = await useFetch(API_BASE);
+
+            if (error) {
+                tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-8 text-center text-red-500">
+                    Failed to load leads<br>
+                    <span class="text-xs text-gray-400">${error.message}</span>
+                </td></tr>`;
+                return;
+            }
+
+            if (!data || data.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-8 text-center text-gray-500">
+                    No mutual fund inquiries yet.
+                </td></tr>`;
+                document.getElementById('leadCountLabel').innerText = '0 records';
+                return;
+            }
+
+            document.getElementById('leadCountLabel').innerText = `${data.length} records`;
+            renderTable(data);
+        }
+
+        function renderTable(leads) {
+            const tbody = document.getElementById('leadsTableBody');
+            tbody.innerHTML = '';
+
+            leads.forEach(lead => {
+                const initials = lead.full_name
+                    .split(' ')
+                    .map(n => n[0])
+                    .join('')
+                    .substring(0, 2)
+                    .toUpperCase();
+
+                const date = new Date(lead.created_at).toLocaleDateString('en-IN', {
+                    month: 'short',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+
+                const statusColors = {
+                    new: 'bg-blue-100 text-blue-800 border border-blue-200',
+                    contacted: 'bg-yellow-100 text-yellow-800 border border-yellow-200',
+                    converted: 'bg-green-100 text-green-800 border border-green-200',
+                    closed: 'bg-gray-100 text-gray-800 border border-gray-200'
+                };
+
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-gray-50 transition-colors';
+
+                tr.innerHTML = `
+                    <td class="px-6 py-4">
+                        <div class="flex items-center">
+                            <div class="h-10 w-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 font-bold text-xs">
+                                ${initials}
+                            </div>
+                            <div class="ml-4">
+                                <div class="text-sm font-semibold">${lead.full_name}</div>
+                                <div class="text-xs text-gray-500">${lead.mobile}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 text-sm font-medium">
+                        SIP: ₹${parseInt(lead.sip_capacity || 0).toLocaleString('en-IN')}
+                    </td>
+                    <td class="px-6 py-4">
+                        <span class="px-2 py-0.5 rounded-full text-xs bg-gray-100">
+                            ${lead.primary_goal || 'N/A'}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 text-sm text-gray-500">${date}</td>
+                    <td class="px-6 py-4">
+                        <span class="px-2 py-0.5 rounded-full text-xs font-semibold ${statusColors[lead.status] || ''}">
+                            ${lead.status.toUpperCase()}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 text-right">
+                        <button onclick="toggleStatus('${lead.id}', '${lead.status}')"
+                            class="text-emerald-600 bg-emerald-50 hover:bg-emerald-100 px-3 py-1 rounded-md text-xs font-semibold">
+                            Change Status
+                        </button>
+                    </td>
+                `;
+
+                tbody.appendChild(tr);
+            });
+        }
+
+        window.toggleStatus = async (id, currentStatus) => {
+            const nextMap = {
+                new: 'contacted',
+                contacted: 'converted',
+                converted: 'closed',
+                closed: 'new'
+            };
+
+            const nextStatus = nextMap[currentStatus] || 'new';
+
+            const { error } = await useFetch(`${API_BASE}/${id}/status`, {
+                method: 'PATCH',
+                body: JSON.stringify({ status: nextStatus })
+            });
+
+            if (!error) {
+                showToast(`Status updated to ${nextStatus.toUpperCase()}`);
+                fetchLeads();
+            } else {
+                alert('Failed to update status');
+            }
+        };
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => toast.classList.add('translate-y-20', 'opacity-0'), 3000);
+        }
+
+        window.fetchLeads = fetchLeads;
+        fetchLeads();
+    </script>
+
+</body>
+
+</html>

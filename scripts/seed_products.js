@@ -26,7 +26,7 @@ const products = [
         description: 'Exquisite long-lasting woody notes inspired by royal evenings.',
         price: 2499,
         category: 'perfume',
-        image_url: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBlxxTWJdc7Xu2yTThhpyzBw2GzS4tSzTCJWaIGXWlkYT90YeM7Mlt9X3PWnkmT5AawOgWKVGYDxAIvmfYnhtC-M-oIfoALL7ySuM17mMqKG3C-lZafgc_ldMcA3SqLwYrD2WZguMDy1PZiito7EpVJK62wEqX-ojMLgnJ3pnAfxAAzsbEG3P6MVucWtuyaYd3DFZ8wkXsoqEX1nGAnINnuGIc-HxIA_1Kw2nqxLOlVJ4UaVIL5IQ0WLwKKyO6sitd_q85utQFjqg4',
+        image_url: 'https://images.unsplash.com/photo-1541643600914-78b084683601?q=80&w=1200&auto=format&fit=crop',
         stock_status: 'in_stock',
         is_featured: true
     },
@@ -35,7 +35,7 @@ const products = [
         description: '100% Organic ingredients, hand-rolled for purity and prayer.',
         price: 999,
         category: 'incense',
-        image_url: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDSRx448dEHFMfxMchEK2Q0JiUETG3MaBfV7_v4bLlYErDJbcmwqXOJOHuu1ZGZJ0ZQTlOdluLhgF0j3Dilb9ZXVHHCSUgxROoyvyekHnUN6LFs1_ZaFhYDwIJh1ml9-TF4zTRgjY_0KFBMEBj7_ZGhVoOaxgmLogZQH6AxwIU8yvev_3SqrOBhOmHukMKF8k1OviDZ2sYITctzZGwOENIE9yo5NCNDBzX7ilGsMcLBe3MlIaR3-zK9XJOyvMeqv0VRxD_C6RfkqeM',
+        image_url: 'https://images.unsplash.com/photo-1608508436440-d667d4f9f688?q=80&w=1200&auto=format&fit=crop',
         stock_status: 'in_stock',
         is_featured: true
     },
@@ -44,7 +44,7 @@ const products = [
         description: 'Calming evening fragrance harvested from high altitudes.',
         price: 1299,
         category: 'perfume',
-        image_url: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBwPnv5Jur1-LSPZSVHZx5hHo57FNb-SBGgdMvmGeWaG45nR-MsFshZVnTOaQqkdeR1VpQ5Rn1R5-a4iCumzo--vDse_IqrF2SD-KX9u9KZGulgqirZTN_IsXGDCdj-kGM1v-1G1BGchvr2YZ4qRkgr8K4Ufo1b95H2HsrYiCsingraXAejIxYhUhJnsKrbOlI6guHNLoXUxhYCfSuuhxBqH3tUrUWKzcfAc7om0vI5EOuzhSSlHC-gNJRwy6Uj4rIZnuIRt88rgYo',
+        image_url: 'https://images.unsplash.com/photo-1595181273908-11a562479e0a?q=80&w=1200&auto=format&fit=crop',
         stock_status: 'in_stock',
         is_featured: false
     },
@@ -53,7 +53,7 @@ const products = [
         description: 'Pure essential oil extract, distilled using ancient techniques.',
         price: 1499,
         category: 'oil',
-        image_url: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD_lwj2D9nrmLW69PpyXP0MrLQdJK61D-1C8SnfejHKZ3uB3WGiJ2j7Z1XmPsb-_PdviZAgboo4xg7VXqJnLhEBifb7alUpIFOPRpZst1x8MIQYDTRg7K7CjQs223OQF2NzUZW5hSpy6cJYmr_cKthhAfdAhGLTBXASPN1cgOlcKJeBkfxfb_ixFXHMFRSn_PRxyJJV7RGZOOULpmizRjsWyqJtwz238UxZjSSIzDLEMN6ygh3y3UbUH8msAJR1dzfCGJeaRxjeO48',
+        image_url: 'https://images.unsplash.com/photo-1616400619175-5beda3a17896?q=80&w=1200&auto=format&fit=crop',
         stock_status: 'low_stock',
         is_featured: false
     },
@@ -62,7 +62,7 @@ const products = [
         description: 'Earthy and grounding scent perfect for meditation spaces.',
         price: 1199,
         category: 'perfume',
-        image_url: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCk2xwU9zdc0a1pwW5elwr6TQwEzCkHcTe6MmYTcr9g-b8SwU430YtnhY0ZtQmlRTLPQVNkt_egv-i-At2qGrs4ER27TUu7oULj5nYpbuMqVDCjLe-Gr1KKpsPMPpWEBk3F0L1QGDNaRoY9x6VvAwBl6b54uN1fkZCM6MI8poct8vZ9Wgq6m7EwR7l0th-oxTxOJSNMGUow0TzsBHvISiFe1q1Me7cbSgR-bk44EbEv2Frq9Hc4hlt7rGVWvjVuNCz0sqbW4Dp4AIA',
+        image_url: 'https://images.unsplash.com/photo-1585808933614-434076722245?q=80&w=1200&auto=format&fit=crop',
         stock_status: 'in_stock',
         is_featured: false
     },
@@ -71,7 +71,7 @@ const products = [
         description: 'Fresh morning bloom scent with sweet southern undertones.',
         price: 1899,
         category: 'perfume',
-        image_url: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD3c6G4csyZFquIfFKj8bbhrB8LNvssl8dZFwE6PDzioL568ONVS-xlgn_5NQGf0Pu7d6qQMReDgzlcleS3wzxOLpVsLGBX1GLqhiuADKXX1VwbcyIdVpeiF_RQ6wk4SRUGdXmoVkQlyPAAsb4EBXK_k7-Whij0N4Jr9O9CCjkHEMANRZQSx46pRG9eMdhcKXFRr61XU4aI8rEkWfF99P15j41hmpX6BMhB58xMBBVedKYQnaRSUMftH0la5KrrGF06DB55g2BuB_I',
+        image_url: 'https://images.unsplash.com/photo-1629198688000-71f23e745b6e?q=80&w=1200&auto=format&fit=crop',
         stock_status: 'in_stock',
         is_featured: false
     }

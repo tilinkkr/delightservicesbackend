@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Admin - Overview</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+    </style>
+</head>
+
+<body class="text-gray-900 min-h-screen flex">
+
+    <!-- Sidebar Injected Here by JS -->
+
+    <!-- Main Content -->
+    <main class="flex-1 ml-64 p-8 overflow-y-auto h-screen">
+
+        <!-- Top Bar -->
+        <header class="flex justify-between items-center mb-8">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900 tracking-tight">Dashboard Overview</h1>
+                <p class="text-sm text-gray-500 mt-1">Welcome back, Administrator</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="p-2 text-gray-400 hover:text-indigo-600 transition-colors relative">
+                    <span class="material-icons-round">notifications</span>
+                    <span class="absolute top-2 right-2 h-2 w-2 rounded-full bg-red-500 border border-white"></span>
+                </button>
+                <div class="h-8 w-px bg-gray-200"></div>
+                <div class="flex items-center gap-2">
+                    <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+                    <span class="text-xs font-semibold text-gray-500 uppercase tracking-wide">System Online</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- ERROR STATE -->
+        <div id="error-container"
+            class="hidden mb-6 p-4 rounded-lg bg-red-50 border border-red-200 text-red-700 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <span class="material-icons-round">error_outline</span>
+                <div>
+                    <h3 class="font-bold text-sm">Connection Error</h3>
+                    <p id="error-message" class="text-xs">Failed to connect to server</p>
+                </div>
+            </div>
+            <button onclick="window.location.reload()" class="text-sm font-medium hover:underline">Retry</button>
+        </div>
+
+        <!-- DASHBOARD CONTENT -->
+        <div id="dashboard-content" class="space-y-8 animate-fade-in">
+            <!-- KPIs -->
+            <!-- Business Metrics -->
+            <div>
+                <h3 class="text-sm font-bold text-gray-500 uppercase tracking-wider mb-4 px-1">Business Metrics</h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+
+                    <!-- Revenue Card -->
+                    <div
+                        class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all group relative overflow-hidden">
+                        <div
+                            class="absolute right-0 top-0 h-16 w-16 bg-emerald-50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110">
+                        </div>
+                        <div class="relative z-10">
+                            <p class="text-sm font-medium text-gray-500 mb-1">Total Revenue</p>
+                            <div id="skel-revenue" class="h-8 w-32 bg-gray-100 rounded animate-pulse"></div>
+                            <h3 id="val-revenue" class="hidden text-3xl font-bold text-gray-900 tracking-tight">--</h3>
+                            <div class="mt-2 text-xs font-medium text-emerald-600 flex items-center gap-1">
+                                <span class="material-icons-round text-sm">trending_up</span> +12% this month
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Orders Card -->
+                    <div
+                        class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all group relative overflow-hidden">
+                        <div
+                            class="absolute right-0 top-0 h-16 w-16 bg-blue-50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110">
+                        </div>
+                        <div class="relative z-10">
+                            <p class="text-sm font-medium text-gray-500 mb-1">Total Orders</p>
+                            <div id="skel-orders" class="h-8 w-24 bg-gray-100 rounded animate-pulse"></div>
+                            <h3 id="val-orders" class="hidden text-3xl font-bold text-gray-900 tracking-tight">--</h3>
+                            <div class="mt-2 text-xs font-medium text-blue-600 flex items-center gap-1">
+                                <span class="material-icons-round text-sm">local_shipping</span> 5 shipping
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Customers Card -->
+                    <div
+                        class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all group relative overflow-hidden">
+                        <div
+                            class="absolute right-0 top-0 h-16 w-16 bg-purple-50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110">
+                        </div>
+                        <div class="relative z-10">
+                            <p class="text-sm font-medium text-gray-500 mb-1">Active Customers</p>
+                            <div id="skel-customers" class="h-8 w-24 bg-gray-100 rounded animate-pulse"></div>
+                            <h3 id="val-customers" class="hidden text-3xl font-bold text-gray-900 tracking-tight">--
+                            </h3>
+                            <div class="mt-2 text-xs font-medium text-purple-600 flex items-center gap-1">
+                                <span class="material-icons-round text-sm">person_add</span> 3 new today
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Alerts Card -->
+                    <div
+                        class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all group relative overflow-hidden">
+                        <div
+                            class="absolute right-0 top-0 h-16 w-16 bg-amber-50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110">
+                        </div>
+                        <div class="relative z-10">
+                            <p class="text-sm font-medium text-gray-500 mb-1">Action Required</p>
+                            <div id="skel-alerts" class="h-8 w-16 bg-gray-100 rounded animate-pulse"></div>
+                            <h3 id="val-alerts" class="hidden text-3xl font-bold text-gray-900 tracking-tight">--</h3>
+                            <div class="mt-2 text-xs font-medium text-amber-600 flex items-center gap-1">
+                                <span class="material-icons-round text-sm">notifications_active</span> Low stock
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leads & Inquiries -->
+            <div>
+                <h3 class="text-sm font-bold text-gray-500 uppercase tracking-wider mb-4 px-1">Leads & Inquiries</h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+
+                    <!-- Health Leads -->
+                    <div
+                        class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all group relative overflow-hidden">
+                        <div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                            <i class="fa-solid fa-heart-pulse text-6xl text-rose-500"></i>
+                        </div>
+                        <div class="relative z-10">
+                            <div class="mb-4">
+                                <span
+                                    class="material-icons-round text-rose-500 bg-rose-50 p-2 rounded-full">favorite</span>
+                            </div>
+                            <h3 id="val-health" class="text-3xl font-bold text-gray-900 tracking-tight">--</h3>
+                            <p class="text-sm font-medium text-gray-500 mb-3">Health Inquiries</p>
+                            <a href="health-leads.html"
+                                class="inline-flex items-center text-xs font-bold text-rose-600 hover:text-rose-700">
+                                View Details <span class="material-icons-round text-sm ml-1">arrow_forward</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Life Leads -->
+                    <div
+                        class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all group relative overflow-hidden">
+                        <div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                            <i class="fa-solid fa-seedling text-6xl text-amber-500"></i>
+                        </div>
+                        <div class="relative z-10">
+                            <div class="mb-4">
+                                <span
+                                    class="material-icons-round text-amber-500 bg-amber-50 p-2 rounded-full">spa</span>
+                            </div>
+                            <h3 id="val-life" class="text-3xl font-bold text-gray-900 tracking-tight">--</h3>
+                            <p class="text-sm font-medium text-gray-500 mb-3">Life Leads</p>
+                            <a href="life-leads.html"
+                                class="inline-flex items-center text-xs font-bold text-amber-600 hover:text-amber-700">
+                                View Details <span class="material-icons-round text-sm ml-1">arrow_forward</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Motor Leads -->
+                    <div
+                        class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all group relative overflow-hidden">
+                        <div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                            <i class="fa-solid fa-car text-6xl text-indigo-500"></i>
+                        </div>
+                        <div class="relative z-10">
+                            <div class="mb-4">
+                                <span
+                                    class="material-icons-round text-indigo-500 bg-indigo-50 p-2 rounded-full">directions_car</span>
+                            </div>
+                            <h3 id="val-motor" class="text-3xl font-bold text-gray-900 tracking-tight">--</h3>
+                            <p class="text-sm font-medium text-gray-500 mb-3">Motor Leads</p>
+                            <a href="motor-leads.html"
+                                class="inline-flex items-center text-xs font-bold text-indigo-600 hover:text-indigo-700">
+                                View Details <span class="material-icons-round text-sm ml-1">arrow_forward</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Wealth Leads -->
+                    <div
+                        class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all group relative overflow-hidden">
+                        <div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                            <i class="fa-solid fa-chart-line text-6xl text-emerald-500"></i>
+                        </div>
+                        <div class="relative z-10">
+                            <div class="mb-4">
+                                <span
+                                    class="material-icons-round text-emerald-500 bg-emerald-50 p-2 rounded-full">trending_up</span>
+                            </div>
+                            <h3 id="val-wealth" class="text-3xl font-bold text-gray-900 tracking-tight">--</h3>
+                            <p class="text-sm font-medium text-gray-500 mb-3">Wealth (Mutual Funds)</p>
+                            <a href="mutual-funds.html"
+                                class="inline-flex items-center text-xs font-bold text-emerald-600 hover:text-emerald-700">
+                                View Details <span class="material-icons-round text-sm ml-1">arrow_forward</span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- System Alerts Info -->
+            <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+                <h2 class="text-base font-semibold mb-4 flex items-center gap-2 text-gray-900">
+                    <span class="material-icons-round text-blue-500">dns</span> System Health & Alerts
+                </h2>
+                <ul id="alerts-list" class="space-y-3">
+                    <li class="h-4 w-1/2 bg-gray-100 rounded animate-pulse"></li>
+                    <li class="h-4 w-1/3 bg-gray-100 rounded animate-pulse"></li>
+                </ul>
+            </div>
+        </div>
+
+    </main>
+
+    <script type="module">
+        import { useFetch } from './useFetch.js';
+        import { supabase } from './adminAuth.js';
+        import { renderLayout } from './js/layout.js';
+
+        renderLayout('dashboard');
+
+        async function loadDashboard() {
+            // 1. Fetch Data
+            const { data } = await useFetch('/stats'); // Stats has { revenue, orders, lowStock }
+
+            // Parallel Fetch All Leads
+            const [healthRes, lifeRes, motorRes, wealthRes] = await Promise.all([
+                useFetch('/health-leads').catch(() => ({ data: [] })),
+                useFetch('/life-leads').catch(() => ({ data: [] })),
+                useFetch('/motor-leads').catch(() => ({ data: [] })),
+                useFetch('/mutual-fund-leads').catch(() => ({ data: [] }))
+            ]);
+
+            const healthCount = healthRes.data ? healthRes.data.length : 0;
+            const lifeCount = lifeRes.data ? lifeRes.data.length : 0;
+            const motorCount = motorRes.data ? motorRes.data.length : 0;
+            const wealthCount = wealthRes.data ? wealthRes.data.length : 0;
+
+            const revenue = data.revenue || 0;
+            const orders = data.orders || 0;
+            const lowStock = data.lowStock || 0;
+
+            // 2. Render Data
+            const reveal = (id, value) => {
+                const skel = document.getElementById(`skel-${id}`);
+                if (skel) skel.classList.add('hidden');
+                const el = document.getElementById(`val-${id}`);
+                if (el) {
+                    el.textContent = value;
+                    el.classList.remove('hidden');
+                }
+            };
+
+            reveal('revenue', `₹${revenue.toLocaleString()}`);
+            reveal('orders', orders);
+            reveal('customers', '142');
+            reveal('alerts', lowStock);
+
+            // Leads (Direct Text Content, no skeleton logic needed for new added elements if we didn't add skel divs)
+            // But we didn't add skeletons for these new cards, so just separate:
+            document.getElementById('val-health').textContent = healthCount;
+            document.getElementById('val-life').textContent = lifeCount;
+            document.getElementById('val-motor').textContent = motorCount;
+            document.getElementById('val-wealth').textContent = wealthCount;
+
+            // 3. Render Alerts
+            const alertsList = document.getElementById('alerts-list');
+            alertsList.innerHTML = '';
+
+            const addAlert = (count, msg, color) => {
+                if (count > 0) {
+                    alertsList.innerHTML += `
+                        <li class="flex items-center gap-3 text-${color}-700 bg-${color}-50 p-3 rounded-lg border border-${color}-100 text-sm">
+                            <span class="h-2 w-2 rounded-full bg-${color}-500"></span> 
+                            ${count} ${msg}
+                        </li>`;
+                }
+            };
+
+            addAlert(healthCount, 'new health inquiries', 'rose');
+            addAlert(lifeCount, 'new life insurance leads', 'amber');
+            addAlert(motorCount, 'new motor insurance requests', 'indigo');
+            addAlert(wealthCount, 'pending wealth inquiries', 'emerald');
+            addAlert(lowStock, 'products are running low on stock', 'amber');
+
+            if (healthCount + lifeCount + motorCount + wealthCount + lowStock === 0) {
+                alertsList.innerHTML += `
+                    <li class="flex items-center gap-3 text-emerald-700 bg-emerald-50 p-3 rounded-lg border border-emerald-100 text-sm">
+                        <span class="h-2 w-2 rounded-full bg-emerald-500"></span> 
+                        All systems operational. No pending tasks.
+                    </li>`;
+            }
+        }
+
+        loadDashboard();
+    </script>
+</body>
+
+</html>

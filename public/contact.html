@@ -105,10 +105,10 @@
     <div class="relative min-h-screen flex flex-col">
         <!-- Navigation Component -->
         <header class="w-full max-w-7xl mx-auto px-6 py-8 flex items-center justify-between">
-            <div class="flex items-center gap-3">
+            <a href="home.html" class="flex items-center gap-3 cursor-pointer">
                 <img src="delight.png" alt="Logo" class="w-8 h-8 object-contain">
-                <h2 class="text-xl font-bold tracking-tight uppercase">Delight</h2>
-            </div>
+                <h2 class="text-xl font-bold tracking-tight uppercase">Delight Services</h2>
+            </a>
             <nav class="hidden md:flex items-center gap-10">
                 <a class="text-sm font-medium opacity-60 hover:opacity-100 transition-opacity" href="home.html">Home</a>
                 <a class="text-sm font-medium opacity-60 hover:opacity-100 transition-opacity"
@@ -244,8 +244,10 @@
             </div>
         </main>
         <!-- Page Footer -->
-        <footer class="w-full py-8 text-center text-white/30 text-xs tracking-widest uppercase">
-            © 2026 Delight Services — Architecture of the Future
+        <footer
+            class="w-full py-8 flex flex-col items-center gap-4 text-center text-white/30 text-xs tracking-widest uppercase">
+            <img src="delight.png" alt="Logo" class="size-8 object-contain opacity-50">
+            <span>© 2026 Delight Services — Architecture of the Future</span>
         </footer>
     </div>
     <!-- Background Decorative Elements -->

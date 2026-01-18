@@ -177,7 +177,37 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
 
             // Success -> Canonical Redirect
-            window.location.href = 'home.html';
+            // Success -> Check Role & Redirect
+            const { data: profile, error: profileError } = await supabase
+                .from('profiles')
+                .select('*') // Select all to be safe
+                .eq('id', data.user.id)
+                .single();
+
+            if (profileError) {
+                console.error('Profile Fetch Error:', profileError);
+                // Fallback: If email is admin email, allow (Temporary fix for testing if RLS is acting up)
+                if (data.user.email === 'tilinbijoykkr1@gmail.com') {
+                    console.log('Fallback: Recognized Admin Email');
+                    window.location.href = '/admin/dashboard.html';
+                    return;
+                }
+            }
+
+            console.log('Login Profile:', profile);
+
+            // DEBUGGING ALERT (Remove after fix)
+            if (profile) {
+                alert(`Debug: Found Profile. Role: ${profile.role}`);
+            } else {
+                alert(`Debug: No Profile Found! Error: ${profileError?.message}`);
+            }
+
+            if (profile?.role === 'admin') {
+                window.location.href = '/admin/dashboard.html';
+            } else {
+                window.location.href = '/home.html';
+            }
         });
     }
 
@@ -201,18 +231,36 @@ document.addEventListener('DOMContentLoaded', async () => {
             btn.innerHTML = 'Creating account...';
             btn.disabled = true;
 
-            const { data, error } = await supabase.auth.signUp({
-                email,
-                password,
-                options: {
-                    data: { full_name: fullName, phone: phone }
-                }
-            });
+            // Use Backend API for Auto-Confirmed Signup
+            try {
+                const res = await fetch('/api/auth/signup', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password, full_name: fullName, phone })
+                });
 
-            if (error) {
-                console.error('Signup Error:', error);
-                let msg = error.message;
-                if (msg.includes('already registered')) msg += ". Please Log In.";
+                const data = await res.json();
+
+                if (!res.ok) {
+                    throw new Error(data.error || 'Signup failed');
+                }
+
+                // Success! Now Auto-Login since backend creation doesn't return a session
+                const { data: loginData, error: loginError } = await supabase.auth.signInWithPassword({
+                    email,
+                    password
+                });
+
+                if (loginError) {
+                    throw loginError;
+                }
+
+                alert('Account Created! Redirecting...');
+                window.location.href = 'home.html';
+
+            } catch (err) {
+                console.error('Signup Error:', err);
+                const msg = err.message;
 
                 if (errorMsg) {
                     errorMsg.textContent = msg;
@@ -222,18 +270,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
                 btn.innerHTML = originalText;
                 btn.disabled = false;
-                return;
-            }
-
-            // Success
-            // If session exists, they are logged in (Email verification OFF)
-            if (data.session) {
-                alert('Account Created! Redirecting...');
-                window.location.href = 'home.html';
-            } else {
-                // If session is null, they need to verify (Email verification ON)
-                alert('Account created! Please verify your email before logging in.');
-                window.location.href = 'login.html';
             }
         });
     }

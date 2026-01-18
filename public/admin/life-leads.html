@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delight Admin - Life Leads</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="bg-gray-50 font-[Inter]">
+
+    <div class="flex h-screen overflow-hidden">
+
+        <!-- Sidebar -->
+        <aside class="w-64 bg-[#0F172A] text-white flex flex-col fixed h-full z-10 transition-all duration-300"
+            id="sidebar">
+            <div class="h-16 flex items-center px-6 border-b border-gray-700">
+                <i class="fa-solid fa-gem text-blue-500 text-xl mr-3"></i>
+                <span class="font-bold text-lg tracking-wide">Delight Admin</span>
+            </div>
+
+            <nav class="flex-1 py-6 px-3 space-y-1 overflow-y-auto">
+                <a href="dashboard.html"
+                    class="flex items-center px-4 py-3 text-gray-400 hover:bg-gray-800 hover:text-white rounded-lg transition-colors group">
+                    <i class="fa-solid fa-chart-line w-6 text-center group-hover:text-blue-400 transition-colors"></i>
+                    <span class="ml-3 font-medium">Dashboard</span>
+                </a>
+
+                <a href="orders.html"
+                    class="flex items-center px-4 py-3 text-gray-400 hover:bg-gray-800 hover:text-white rounded-lg transition-colors group">
+                    <i
+                        class="fa-solid fa-shopping-cart w-6 text-center group-hover:text-blue-400 transition-colors"></i>
+                    <span class="ml-3 font-medium">Orders</span>
+                </a>
+
+                <a href="products.html"
+                    class="flex items-center px-4 py-3 text-gray-400 hover:bg-gray-800 hover:text-white rounded-lg transition-colors group">
+                    <i class="fa-solid fa-box w-6 text-center group-hover:text-blue-400 transition-colors"></i>
+                    <span class="ml-3 font-medium">Inventory</span>
+                </a>
+
+                <a href="customers.html"
+                    class="flex items-center px-4 py-3 text-gray-400 hover:bg-gray-800 hover:text-white rounded-lg transition-colors group">
+                    <i class="fa-solid fa-users w-6 text-center group-hover:text-blue-400 transition-colors"></i>
+                    <span class="ml-3 font-medium">Customers</span>
+                </a>
+
+                <a href="inbox.html"
+                    class="flex items-center px-4 py-3 text-gray-400 hover:bg-gray-800 hover:text-white rounded-lg transition-colors group">
+                    <i class="fa-solid fa-envelope w-6 text-center group-hover:text-blue-400 transition-colors"></i>
+                    <span class="ml-3 font-medium">Inbox</span>
+                </a>
+
+                <a href="health-leads.html"
+                    class="flex items-center px-4 py-3 text-gray-400 hover:bg-gray-800 hover:text-white rounded-lg transition-colors group">
+                    <i class="fa-solid fa-heart-pulse w-6 text-center group-hover:text-blue-400 transition-colors"></i>
+                    <span class="ml-3 font-medium">Health Leads</span>
+                </a>
+
+                <a href="life-leads.html"
+                    class="flex items-center px-4 py-3 bg-amber-600/90 text-white rounded-lg shadow-lg relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <i class="fa-solid fa-seedling w-6 text-center"></i>
+                    <span class="ml-3 font-medium">Life Leads</span>
+                </a>
+
+                <a href="analytics.html"
+                    class="flex items-center px-4 py-3 text-gray-400 hover:bg-gray-800 hover:text-white rounded-lg transition-colors group">
+                    <i class="fa-solid fa-chart-pie w-6 text-center group-hover:text-blue-400 transition-colors"></i>
+                    <span class="ml-3 font-medium">Analytics</span>
+                </a>
+            </nav>
+
+            <div class="p-4 border-t border-gray-700">
+                <button onclick="window.location.href='index.html'"
+                    class="flex items-center w-full px-4 py-2 text-red-400 hover:bg-red-500/10 rounded-lg transition-colors">
+                    <i class="fa-solid fa-sign-out-alt w-6 text-center"></i>
+                    <span class="ml-3 font-medium">Sign Out</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 ml-64 p-8 overflow-y-auto">
+            <!-- Header -->
+            <header class="flex justify-between items-center mb-8 p-8">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800">Life Insurance Leads</h1>
+                    <p class="text-gray-500 mt-1">Manage Jeevan & Virasat inquiries.</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button onclick="downloadCSV('life')"
+                        class="flex items-center gap-2 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors shadow-sm ml-4">
+                        <i class="fa-solid fa-download"></i>
+                        <span class="hidden sm:inline">Export CSV</span>
+                    </button>
+
+                    <button onclick="loadLifeLeads()" class="p-2 text-gray-400 hover:text-blue-600 transition-colors"
+                        title="Refresh Data">
+                        <i class="fa-solid fa-rotate-right text-lg"></i>
+                    </button>
+
+                    <div
+                        class="flex items-center gap-2 bg-white px-3 py-1.5 rounded-full shadow-sm border border-gray-200">
+                        <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                        <span class="text-xs font-medium text-gray-600">
+                            Sync Active
+                        </span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <section class="flex-1 overflow-y-auto p-6 sm:p-10">
+                <div class="max-w-6xl mx-auto">
+
+                    <!-- Loading State -->
+                    <div id="loadingState" class="hidden mb-6">
+                        <div class="animate-pulse space-y-4">
+                            <div class="h-10 bg-gray-200 rounded w-full"></div>
+                            <div class="h-10 bg-gray-200 rounded w-full"></div>
+                            <div class="h-10 bg-gray-200 rounded w-full"></div>
+                        </div>
+                    </div>
+
+                    <!-- Leads Table -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr
+                                        class="bg-gray-50 text-gray-500 text-xs uppercase tracking-wider border-b border-gray-100">
+                                        <th class="p-4 font-semibold">Date</th>
+                                        <th class="p-4 font-semibold">Applicant</th>
+                                        <th class="p-4 font-semibold">Contact</th>
+                                        <th class="p-4 font-semibold">Assured Sum</th>
+                                        <th class="p-4 font-semibold">Duration</th>
+                                        <th class="p-4 font-semibold">Nominee</th>
+                                        <th class="p-4 font-semibold text-right">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="leadsTableBody" class="divide-y divide-gray-50 text-sm text-gray-700">
+                                    <!-- Rows injected here -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Empty State -->
+                        <div id="emptyState" class="hidden py-14 text-center">
+                            <div
+                                class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fa-solid fa-umbrella text-gray-300 text-2xl"></i>
+                            </div>
+                            <h3 class="text-gray-900 font-medium mb-1">
+                                No Leads Found
+                            </h3>
+                            <p class="text-gray-500 text-sm">
+                                New life insurance inquiries will appear here.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Auth & Logic Script -->
+    <script type="module">
+        import { checkAuth, logout as authLogout, getToken } from './adminAuth.js';
+
+        window.logout = authLogout;
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Auth Check
+            if (!await checkAuth()) return; // Redirects if fail
+
+            loadLifeLeads();
+
+            // Auto Refresh every 15s
+            setInterval(loadLifeLeads, 15000);
+        });
+
+        window.loadLifeLeads = async function () {
+            const tbody = document.getElementById('leadsTableBody');
+            const loading = document.getElementById('loadingState');
+            const empty = document.getElementById('emptyState');
+
+            // Only show full loading state on first load (empty table)
+            if (tbody.children.length === 0) {
+                tbody.innerHTML = '';
+                loading.classList.remove('hidden');
+                empty.classList.add('hidden');
+            }
+
+            try {
+                const token = await getToken(); // AWAIT IS MANDATORY
+                if (!token) throw new Error("No token");
+
+                const res = await fetch('/api/admin/life-leads', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (!res.ok) throw new Error('Fetch failed');
+
+                const leads = await res.json();
+
+                loading.classList.add('hidden');
+
+                if (leads.length === 0) {
+                    empty.classList.remove('hidden');
+                    tbody.innerHTML = '';
+                    return;
+                }
+
+                tbody.innerHTML = '';
+
+                leads.forEach(lead => {
+                    const row = document.createElement('tr');
+                    row.className = "hover:bg-gray-50/50 transition-colors";
+
+                    const riders = lead.riders && lead.riders.length > 0
+                        ? lead.riders.map(r => `<span class="inline-block px-2 py-0.5 bg-yellow-100 text-yellow-800 text-xs rounded-full mr-1">${r}</span>`).join('')
+                        : '<span class="text-gray-400 italic">Standard</span>';
+
+                    let statusColor = lead.status === 'new' ? 'bg-blue-100 text-blue-700' : 'bg-green-100 text-green-700';
+
+                    row.innerHTML = `
+                        <td class="p-4 text-gray-500 whitespace-nowrap">${new Date(lead.created_at).toLocaleDateString()}</td>
+                        <td class="p-4 font-medium text-gray-900">
+                            ${lead.first_name} ${lead.last_name}
+                        </td>
+                        <td class="p-4 text-gray-600 text-xs">
+                            <div class="font-mono">${lead.phone}</div>
+                            <div>${lead.email || '-'}</div>
+                        </td>
+                        <td class="p-4 font-semibold text-gray-800">
+                            ${lead.sum_assured || '-'}
+                        </td>
+                         <td class="p-4 text-gray-600">
+                            ${lead.tenure ? lead.tenure + ' Years' : '-'}
+                        </td>
+                        <td class="p-4 text-gray-600">
+                            ${lead.nominee_name || '-'}
+                        </td>
+                        <td class="p-4 text-right">
+                             <button onclick="toggleStatus('${lead.id}', '${lead.status}')" class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide ${statusColor} hover:opacity-80 transition cursor-pointer">
+                                ${lead.status}
+                             </button>
+                        </td>
+                    `;
+                    tbody.appendChild(row);
+                });
+
+            } catch (err) {
+                console.error(err);
+                loading.classList.add('hidden');
+                tbody.innerHTML = `<tr><td colspan="7" class="p-6 text-center text-red-500">Failed to load data. Please refresh using the sync button.</td></tr>`;
+            }
+        };
+
+        window.toggleStatus = async (id, currentStatus) => {
+            const newStatus = currentStatus === 'new' ? 'contacted' : 'new';
+            const token = await getToken(); // AWAIT IS MANDATORY
+            try {
+                await fetch(`/api/admin/life-leads/${id}/status`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ status: newStatus })
+                });
+                loadLifeLeads(); // Reload
+            } catch (e) {
+                alert('Update failed');
+            }
+        };
+
+        window.downloadCSV = async (type) => {
+            try {
+                const token = await getToken();
+                const res = await fetch(`/api/admin/leads/export?type=${type}`, {
+                    method: 'GET',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (!res.ok) throw new Error('Download failed');
+
+                const blob = await res.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${type}_leads.csv`;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                window.URL.revokeObjectURL(url);
+            } catch (err) {
+                alert('Export failed: ' + err.message);
+            }
+        };
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Management | Delight Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+    </style>
+</head>
+
+<body class="text-gray-900 min-h-screen flex">
+
+    <!-- Sidebar Injected Here -->
+
+    <!-- Main Content -->
+    <main class="flex-1 ml-64 p-8 overflow-y-auto h-screen">
+
+        <header class="flex justify-between items-center mb-8">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900 tracking-tight">Orders</h1>
+                <p class="text-sm text-gray-500 mt-1">Manage customer purchases and shipments</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="loadOrders()"
+                    class="p-2 bg-white border border-gray-200 rounded-lg text-gray-500 hover:text-emerald-600 hover:border-emerald-200 transition-all shadow-sm">
+                    <span class="material-icons-round">refresh</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Orders Table -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                Order ID</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                Customer</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                Total</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                Status</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                Date</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orders-list" class="bg-white divide-y divide-gray-200">
+                        <!-- Skeleton Loading State -->
+                        <tr class="animate-pulse">
+                            <td class="px-6 py-4">
+                                <div class="h-4 bg-gray-200 rounded w-20"></div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="h-4 bg-gray-200 rounded w-32"></div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="h-4 bg-gray-200 rounded w-16"></div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="h-6 bg-gray-200 rounded-full w-20"></div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="h-4 bg-gray-200 rounded w-24"></div>
+                            </td>
+                            <td class="px-6 py-4"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Empty/Error State Container -->
+            <div id="table-message" class="hidden p-10 text-center border-t border-gray-100"></div>
+        </div>
+        </div>
+
+    </main>
+
+    <script type="module">
+        import { useFetch } from './useFetch.js';
+        import { renderLayout } from './js/layout.js';
+
+        renderLayout('orders');
+
+        window.loadOrders = async function () {
+            const list = document.getElementById('orders-list');
+            const msg = document.getElementById('table-message');
+
+            // Reset Rendering
+            list.innerHTML = `
+                <tr class="animate-pulse">
+                    <td class="px-6 py-4"><div class="h-4 bg-gray-200 rounded w-20"></div></td>
+                    <td class="px-6 py-4"><div class="h-4 bg-gray-200 rounded w-32"></div></td>
+                    <td class="px-6 py-4"><div class="h-4 bg-gray-200 rounded w-16"></div></td>
+                    <td class="px-6 py-4"><div class="h-6 bg-gray-200 rounded-full w-20"></div></td>
+                    <td class="px-6 py-4"><div class="h-4 bg-gray-200 rounded w-24"></div></td>
+                    <td class="px-6 py-4"></td>
+                </tr>`;
+            msg.classList.add('hidden');
+
+            // Fetch
+            const { data: orders, error } = await useFetch('/orders');
+
+            // Handle Error
+            if (error) {
+                list.innerHTML = '';
+                msg.innerHTML = `
+                    <div class="inline-flex items-center justify-center h-12 w-12 rounded-full bg-red-100 text-red-600 mb-4">
+                        <span class="material-icons-round">error_outline</span>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900">Failed to load orders</h3>
+                    <p class="text-sm text-gray-500 mt-1 mb-4">${error}</p>
+                    <button onclick="loadOrders()" class="px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors">
+                        Retry
+                    </button>
+                `;
+                msg.classList.remove('hidden');
+                return;
+            }
+
+            // Handle Empty
+            if (!orders || orders.length === 0) {
+                list.innerHTML = '';
+                msg.innerHTML = `
+                    <div class="inline-flex items-center justify-center h-12 w-12 rounded-full bg-gray-100 text-gray-500 mb-4">
+                        <span class="material-icons-round">shopping_bag</span>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900">No orders yet</h3>
+                    <p class="text-sm text-gray-500 mt-1">When customers place orders, they will appear here.</p>
+                `;
+                msg.classList.remove('hidden');
+                return;
+            }
+
+            // Render Rows
+            list.innerHTML = '';
+            orders.forEach(order => {
+                const dateStr = new Date(order.created_at).toLocaleDateString('en-US', {
+                    month: 'short', day: 'numeric', year: 'numeric'
+                });
+
+                // Status Logic
+                let statusClass = 'bg-gray-100 text-gray-800';
+                if (order.status === 'delivered') statusClass = 'bg-green-100 text-green-800 border border-green-200';
+                if (order.status === 'pending') statusClass = 'bg-amber-100 text-amber-800 border border-amber-200';
+                if (order.status === 'shipped') statusClass = 'bg-blue-100 text-blue-800 border border-blue-200';
+                if (order.status === 'paid') statusClass = 'bg-purple-100 text-purple-800 border border-purple-200';
+
+                const customerName = order.profiles ? order.profiles.full_name : 'Guest User';
+
+                const row = `
+                    <tr class="hover:bg-gray-50 transition-colors">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-500">
+                            #${order.id.slice(0, 8)}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm font-medium text-gray-900">${customerName}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm font-semibold text-gray-900">₹${Number(order.total_amount).toLocaleString()}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="px-2.5 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${statusClass}">
+                                ${order.status.toUpperCase()}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            ${dateStr}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                            <a href="order-details.html?id=${order.id}" class="text-blue-600 hover:text-blue-900 border border-blue-200 bg-blue-50 px-3 py-1 rounded-md text-xs font-bold uppercase transition-colors hover:bg-blue-100">View</a>
+                        </td>
+                    </tr>
+                `;
+                list.innerHTML += row;
+            });
+        };
+
+        // Init
+        loadOrders();
+    </script>
+</body>
+
+</html>

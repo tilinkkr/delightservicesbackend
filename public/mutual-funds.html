@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>The Strategy Engine | Delight Services</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;family=Rozha+One&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#16c582",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#0a1f18", "surface-dark": "#112620",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"],
+                        "body": ["Manrope", "sans-serif"],
+                        "serif": ["Rozha One", "serif"],
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.375rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                    backgroundImage: {
+                        'ribbon-gradient': 'linear-gradient(135deg, rgba(10,31,24,0.95) 0%, rgba(22,197,130,0.1) 50%, rgba(10,31,24,0.95) 100%)',
+                        'grain': "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E\")"
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
+                        'slide-in': 'slideIn 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        slideIn: {
+                            '0%': { opacity: '0', transform: 'translateX(-20px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' },
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+
+        .tabular-nums {
+            font-variant-numeric: tabular-nums;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #11211b;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #293832;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #16c582;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white antialiased selection:bg-primary selection:text-white">
+    <div class="fixed inset-0 pointer-events-none z-0 bg-grain opacity-40 mix-blend-overlay"></div>
+    <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden z-10">
+        <header
+            class="sticky top-0 z-50 w-full backdrop-blur-md border-b border-[#293832] bg-[#0a1f18]/80 transition-all duration-300">
+            <div class="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
+                <a href="home.html" class="flex items-center gap-3 text-white group">
+                    <img src="delight.png" alt="Delight Logo"
+                        class="h-10 w-auto group-hover:scale-105 transition-transform">
+                    <span class="text-white text-2xl font-serif font-bold tracking-tight">Delight Services</span>
+                </a>
+                <a href="index1.html" class="text-sm text-gray-400 hover:text-white transition-colors">Back to
+                    Services</a>
+            </div>
+        </header>
+        <main class="flex-grow">
+            <section class="relative flex min-h-[85vh] items-center justify-center overflow-hidden pt-10">
+                <div class="absolute inset-0 z-0">
+                    <div class="absolute inset-0 bg-ribbon-gradient z-10 transition-colors duration-1000 ease-in-out">
+                    </div>
+                    <img alt="Abstract flowing digital market ribbons in dark navy and emerald green"
+                        class="h-full w-full object-cover opacity-40 transform scale-105 transition-transform duration-[20s] ease-linear"
+                        data-alt="Abstract flowing digital market ribbons in dark navy and emerald green"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFquD6gLJ0Ezll_hBIMhSvSb3P4SlaYZ0pLcq2C6eiLCzyG7oF-cE6gULxTF97gFFhWsMMBTDZtS6_UF-b4Bf3u7r-ggXp5M1rJxthwC-awZCmhYHXpoTlQzND7stE_0TputN8Y0HWaFOMWpGdXHCwcu6cBIuGZ-pVmkfHsBb3QUeCkk8FybxstOQG_boImpmgNf6yplrz4i3ipU4u3G6Oyi-v-zf01iWcYdzFYjiKuKesnJiaNn50j3de_dboU-LxoeUD69F2uDE" />
+                </div>
+                <div class="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 flex flex-col items-start w-full">
+                    <div class="max-w-4xl animate-fade-in-up">
+                        <div class="mb-6 flex items-center gap-2 text-primary">
+                            <span class="h-px w-8 bg-primary"></span>
+                            <span class="text-xs font-bold uppercase tracking-widest">The Strategy Engine v3.0</span>
+                        </div>
+                        <h1
+                            class="font-display text-5xl font-medium tracking-tighter text-white sm:text-7xl lg:text-8xl">
+                            Wealth Creation. <br />
+                            <span
+                                class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-200">Redefined.</span>
+                        </h1>
+                        <p class="mt-8 max-w-2xl text-lg text-gray-400 font-light leading-relaxed">
+                            Elite wealth management for the modern Indian investor. Precision-engineered for <span
+                                class="text-white font-medium">Systematic Investment Planning (SIP)</span>, <span
+                                class="text-white font-medium">Lump Sum Wealth Management</span>, and long-term <span
+                                class="text-white font-medium">Diversified Portfolio Growth</span>.
+                        </p>
+                        <div class="mt-10 flex flex-wrap gap-4">
+                            <a class="flex items-center justify-center rounded-lg bg-primary px-8 py-4 text-base font-bold text-[#111815] transition-transform hover:scale-105 shadow-[0_0_20px_rgba(22,197,130,0.3)]"
+                                href="#contact">
+                                Start Your SIP
+                            </a>
+                            <a class="flex items-center justify-center rounded-lg border border-[#293832] px-8 py-4 text-base font-medium text-white transition-colors hover:bg-[#293832]/50 hover:border-primary/50"
+                                href="#strategy">
+                                View Allocation
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-gray-500">
+                    <span class="material-symbols-outlined text-3xl">keyboard_arrow_down</span>
+                </div>
+            </section>
+            <section class="bg-background-dark py-24 border-t border-[#293832]" id="philosophy">
+                <div class="mx-auto max-w-7xl px-6 lg:px-8">
+                    <div class="grid grid-cols-1 gap-12 lg:grid-cols-2">
+                        <div class="animate-slide-in">
+                            <h2 class="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+                                We don't predict the market. <br />
+                                <span class="text-gray-500">We engineer returns.</span>
+                            </h2>
+                        </div>
+                        <div class="space-y-6 text-lg text-gray-400 font-light leading-relaxed">
+                            <p>
+                                Traditional wealth management relies on forecasting—a game of chance. At Delight
+                                Services, we rely on <span class="text-white font-medium">mathematical alignment</span>.
+                                Our Strategy Engine continuously recalibrates your portfolio against market volatility,
+                                ensuring that risk is not just managed, but utilized as a tool for compounding.
+                            </p>
+                            <p>
+                                Designed for the Indian HNI, our approach integrates structural alpha from Mid-caps with
+                                the fortress-like stability of Large-caps, all governed by strict stop-loss protocols.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="bg-[#0b1a15] py-24 relative overflow-hidden" id="strategy">
+                <div
+                    class="absolute top-0 right-0 -mr-20 -mt-20 h-[600px] w-[600px] rounded-full bg-primary/5 blur-[120px] animate-pulse">
+                </div>
+                <div class="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
+                    <div
+                        class="mb-12 border-b border-[#293832] pb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
+                        <div class="flex flex-col gap-2">
+                            <h2 class="text-2xl font-bold tracking-tight text-white">Tactical Alignment</h2>
+                            <p class="text-sm text-[#9db8ae]">A precise breakdown of our SEBI-aligned risk profiling and
+                                allocation methodology.</p>
+                        </div>
+                        <div class="text-xs text-primary font-mono tracking-widest uppercase">
+                            Portfolio Rebalancing: Auto
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+                        <div
+                            class="group relative overflow-hidden rounded-xl border border-[#293832] bg-surface-dark p-8 transition-all duration-500 hover:border-primary/50 hover:bg-[#152e26] hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(22,197,130,0.1)]">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            </div>
+                            <div class="relative z-10">
+                                <div
+                                    class="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-[#293832] text-white group-hover:bg-primary group-hover:text-[#111815] transition-colors">
+                                    <span class="material-symbols-outlined">shield</span>
+                                </div>
+                                <h3
+                                    class="text-sm font-bold uppercase tracking-wider text-gray-300 group-hover:text-white transition-colors">
+                                    Equity &amp; Blue-Chip Core</h3>
+                                <div class="mt-4 flex items-baseline gap-2">
+                                    <span class="text-5xl font-light text-white tabular-nums tracking-tight">60</span>
+                                    <span class="text-xl text-primary">%</span>
+                                </div>
+                                <div
+                                    class="mt-4 border-t border-[#293832] pt-4 group-hover:border-primary/30 transition-colors">
+                                    <p class="text-sm text-[#0bda46] flex items-center gap-1">
+                                        <span class="material-symbols-outlined text-base">trending_up</span>
+                                        +Large-Cap Stability
+                                    </p>
+                                    <p class="mt-2 text-xs text-gray-500 group-hover:text-gray-400">Focused on
+                                        established market leaders to minimize volatility.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group relative overflow-hidden rounded-xl border border-[#293832] bg-surface-dark p-8 transition-all duration-500 hover:border-primary/50 hover:bg-[#152e26] hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(22,197,130,0.1)]"
+                            style="transition-delay: 100ms;">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            </div>
+                            <div class="relative z-10">
+                                <div
+                                    class="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-[#293832] text-white group-hover:bg-primary group-hover:text-[#111815] transition-colors">
+                                    <span class="material-symbols-outlined">rocket_launch</span>
+                                </div>
+                                <h3
+                                    class="text-sm font-bold uppercase tracking-wider text-gray-300 group-hover:text-white transition-colors">
+                                    Mid-Cap Growth Alpha</h3>
+                                <div class="mt-4 flex items-baseline gap-2">
+                                    <span class="text-5xl font-light text-white tabular-nums tracking-tight">25</span>
+                                    <span class="text-xl text-primary">%</span>
+                                </div>
+                                <div
+                                    class="mt-4 border-t border-[#293832] pt-4 group-hover:border-primary/30 transition-colors">
+                                    <p class="text-sm text-[#0bda46] flex items-center gap-1">
+                                        <span class="material-symbols-outlined text-base">bolt</span>
+                                        +Emerging Opportunities
+                                    </p>
+                                    <p class="mt-2 text-xs text-gray-500 group-hover:text-gray-400">Capturing
+                                        high-growth potential in developing Indian sectors.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group relative overflow-hidden rounded-xl border border-[#293832] bg-surface-dark p-8 transition-all duration-500 hover:border-primary/50 hover:bg-[#152e26] hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(22,197,130,0.1)]"
+                            style="transition-delay: 200ms;">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            </div>
+                            <div class="relative z-10">
+                                <div
+                                    class="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-[#293832] text-white group-hover:bg-primary group-hover:text-[#111815] transition-colors">
+                                    <span class="material-symbols-outlined">lock</span>
+                                </div>
+                                <h3
+                                    class="text-sm font-bold uppercase tracking-wider text-gray-300 group-hover:text-white transition-colors">
+                                    Debt &amp; Mutual Fund Shield</h3>
+                                <div class="mt-4 flex items-baseline gap-2">
+                                    <span class="text-5xl font-light text-white tabular-nums tracking-tight">15</span>
+                                    <span class="text-xl text-primary">%</span>
+                                </div>
+                                <div
+                                    class="mt-4 border-t border-[#293832] pt-4 group-hover:border-primary/30 transition-colors">
+                                    <p class="text-sm text-[#fa5838] flex items-center gap-1">
+                                        <span class="material-symbols-outlined text-base">account_balance</span>
+                                        Asset Allocation
+                                    </p>
+                                    <p class="mt-2 text-xs text-gray-500 group-hover:text-gray-400">Risk management
+                                        layer with liquid funds and fixed instruments.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="bg-background-dark py-24" id="contact">
+                <div class="mx-auto max-w-7xl px-6 lg:px-8">
+                    <div class="rounded-2xl bg-[#0e211b] border border-[#293832] overflow-hidden lg:flex shadow-2xl">
+                        <div class="p-10 lg:w-1/2 lg:p-16 flex flex-col justify-center relative">
+                            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-transparent">
+                            </div>
+                            <h2 class="text-3xl font-bold tracking-tight text-white">Start a Conversation</h2>
+                            <p class="mt-4 text-lg text-gray-400">
+                                No sales pitches. Just a direct line to a Senior Strategist to discuss if our engine
+                                aligns with your horizon.
+                            </p>
+                            <ul class="mt-8 space-y-4">
+                                <li class="flex items-center gap-3 text-gray-300">
+                                    <span class="material-symbols-outlined text-primary">check_circle</span>
+                                    <span>Complimentary Portfolio Audit</span>
+                                </li>
+                                <li class="flex items-center gap-3 text-gray-300">
+                                    <span class="material-symbols-outlined text-primary">check_circle</span>
+                                    <span>Direct Access to Fund Managers</span>
+                                </li>
+                                <li class="flex items-center gap-3 text-gray-300">
+                                    <span class="material-symbols-outlined text-primary">check_circle</span>
+                                    <span>Transparent Fee Structure</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bg-[#112620] p-10 lg:w-1/2 lg:p-16 border-l border-[#293832]">
+                            <form id="mutualFundForm" class="space-y-6">
+                                <div>
+                                    <label class="block text-sm font-medium leading-6 text-white" for="name">Full
+                                        Name</label>
+                                    <div class="mt-2">
+                                        <input required autocomplete="name"
+                                            class="block w-full rounded-lg border-0 bg-[#0a1814] py-3 px-4 text-white shadow-sm ring-1 ring-inset ring-[#293832] placeholder:text-gray-600 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 transition-all"
+                                            id="name" name="name" placeholder="Aditya Roy" type="text" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium leading-6 text-white" for="mobile">Mobile
+                                        Number</label>
+                                    <div class="mt-2 relative rounded-md shadow-sm">
+                                        <div
+                                            class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                            <span class="text-gray-500 sm:text-sm">+91</span>
+                                        </div>
+                                        <input required autocomplete="tel"
+                                            class="block w-full rounded-lg border-0 bg-[#0a1814] py-3 pl-12 pr-4 text-white shadow-sm ring-1 ring-inset ring-[#293832] placeholder:text-gray-600 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 transition-all tabular-nums"
+                                            id="mobile" name="mobile" placeholder="98765 43210" type="tel" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium leading-6 text-white" for="sip">Monthly SIP
+                                        Capacity</label>
+                                    <div class="mt-2 relative rounded-md shadow-sm">
+                                        <div
+                                            class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                            <span class="text-gray-500 sm:text-sm">₹</span>
+                                        </div>
+                                        <input
+                                            class="block w-full rounded-lg border-0 bg-[#0a1814] py-3 pl-8 pr-4 text-white shadow-sm ring-1 ring-inset ring-[#293832] placeholder:text-gray-600 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 transition-all tabular-nums"
+                                            id="sip" name="sip" placeholder="25,000" type="number" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium leading-6 text-white" for="goal">Primary
+                                        Goal</label>
+                                    <div class="mt-2">
+                                        <select
+                                            class="block w-full rounded-lg border-0 bg-[#0a1814] py-3 px-4 text-white shadow-sm ring-1 ring-inset ring-[#293832] focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 [&>option]:bg-[#112620]"
+                                            id="goal" name="goal">
+                                            <option disabled="" selected="">Select your objective</option>
+                                            <option value="wealth">Wealth Growth</option>
+                                            <option value="retirement">Retirement Planning</option>
+                                            <option value="education">Child Education</option>
+                                            <option value="tax">Tax Saving (80C)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button
+                                        class="flex w-full justify-center rounded-lg bg-primary px-3 py-3 text-sm font-bold leading-6 text-[#111815] shadow-sm hover:bg-[#12a36b] hover:shadow-[0_0_15px_rgba(22,197,130,0.4)] transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                                        type="submit" id="submitBtn">
+                                        Request Access
+                                    </button>
+                                </div>
+                                <p class="text-xs text-gray-500 text-center">
+                                    Your data is secure and will never be shared.
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer aria-labelledby="footer-heading" class="bg-[#08120f] border-t border-[#1f2b26]">
+            <h2 class="sr-only" id="footer-heading">Footer</h2>
+            <div class="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-12">
+                <div class="xl:grid xl:grid-cols-3 xl:gap-8">
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-2 text-white">
+                            <span class="material-symbols-outlined text-primary">finance_chip</span>
+                            <span class="text-lg font-bold">Delight Services</span>
+                        </div>
+                        <p class="text-sm leading-6 text-gray-400">
+                            Engineering wealth through precision and discipline.
+                        </p>
+                        <div class="flex space-x-6">
+                            <a class="text-gray-500 hover:text-primary transition-colors" href="#">
+                                <span class="sr-only">LinkedIn</span>
+                                <svg aria-hidden="true" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path clip-rule="evenodd"
+                                        d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                                        fill-rule="evenodd"></path>
+                                </svg>
+                            </a>
+                            <a class="text-gray-500 hover:text-primary transition-colors" href="#">
+                                <span class="sr-only">Twitter</span>
+                                <svg aria-hidden="true" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84">
+                                    </path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
+                        <div class="md:grid md:grid-cols-2 md:gap-8">
+                            <div>
+                                <h3 class="text-sm font-semibold leading-6 text-white">Company</h3>
+                                <ul class="mt-6 space-y-4" role="list">
+                                    <li><a class="text-sm leading-6 text-gray-400 hover:text-white transition-colors"
+                                            href="#">Philosophy</a></li>
+                                    <li><a class="text-sm leading-6 text-gray-400 hover:text-white transition-colors"
+                                            href="#">Performance</a></li>
+                                    <li><a class="text-sm leading-6 text-gray-400 hover:text-white transition-colors"
+                                            href="#">Team</a></li>
+                                </ul>
+                            </div>
+                            <div class="mt-10 md:mt-0">
+                                <h3 class="text-sm font-semibold leading-6 text-white">Legal</h3>
+                                <ul class="mt-6 space-y-4" role="list">
+                                    <li><a class="text-sm leading-6 text-gray-400 hover:text-white transition-colors"
+                                            href="#">Privacy Policy</a></li>
+                                    <li><a class="text-sm leading-6 text-gray-400 hover:text-white transition-colors"
+                                            href="#">Terms of Service</a></li>
+                                    <li><a class="text-sm leading-6 text-gray-400 hover:text-white transition-colors"
+                                            href="#">Risk Disclosure</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="md:grid md:grid-cols-1">
+                            <div>
+                                <h3 class="text-sm font-semibold leading-6 text-white">Regulatory Info</h3>
+                                <div class="mt-6 space-y-2 text-xs text-gray-500 leading-relaxed">
+                                    <p>SEBI Registration No: <span
+                                            class="text-gray-300 tabular-nums">INA00000XXXX</span>
+                                    </p>
+                                    <p>Registered Office: 12th Floor, The Capital, Bandra Kurla Complex, Mumbai -
+                                        400051.</p>
+                                    <p class="mt-4">
+                                        Investment in securities market are subject to market risks. Read all the
+                                        related
+                                        documents carefully before investing. Registration granted by SEBI, membership
+                                        of
+                                        BASL and certification from NISM in no way guarantee performance of the
+                                        intermediary or provide any assurance of returns to investors.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-16 border-t border-[#1f2b26] pt-8 sm:mt-20 lg:mt-12 flex justify-between items-center">
+                    <p class="text-xs leading-5 text-gray-500">© 2024 Delight Services Wealth Management. All rights
+                        reserved.</p>
+                    <div class="text-gray-600">
+                        <span class="material-symbols-outlined text-sm" title="Secure SSL">lock</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script>
+        document.getElementById('mutualFundForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const btn = document.getElementById('submitBtn');
+            const originalText = btn.innerText;
+            btn.innerText = 'Processing...';
+            btn.disabled = true;
+
+            const payload = {
+                full_name: document.getElementById('name').value,
+                mobile: document.getElementById('mobile').value,
+                sip_capacity: document.getElementById('sip').value,
+                primary_goal: document.getElementById('goal').value,
+            };
+
+            try {
+                const res = await fetch('/api/mutual-fund-leads', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    window.location.href = 'greetings.html';
+                } else {
+                    alert('Error: ' + (data.error || 'Submission failed'));
+                    btn.innerText = originalText;
+                    btn.disabled = false;
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Connection failed. Please try again.');
+                btn.innerText = originalText;
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+
+</html>

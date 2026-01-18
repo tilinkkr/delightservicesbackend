@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Customers | Delight Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="p-8">
+    <div class="max-w-7xl mx-auto">
+        <header class="flex justify-between items-center mb-8">
+            <h1 class="text-2xl font-bold">VIP Customers</h1>
+            <a href="dashboard.html" class="text-slate-400 hover:text-white">← Dashboard</a>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="customers-grid">
+            <div class="col-span-3 text-center text-slate-500 py-12">Loading...</div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="customer-modal"
+        class="fixed inset-0 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center z-50">
+        <div
+            class="bg-slate-800 border border-slate-700 rounded-xl p-8 w-full max-w-2xl shadow-2xl transform transition-all">
+            <div class="flex justify-between items-start mb-6">
+                <div>
+                    <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                        <span id="cust-name"></span>
+                        <span id="vip-badge"
+                            class="hidden px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-yellow-500/20 text-yellow-500">VIP</span>
+                    </h2>
+                    <p class="text-slate-400 text-sm" id="cust-email"></p>
+                </div>
+                <button onclick="closeModal()"
+                    class="text-slate-400 hover:text-white text-2xl leading-none">&times;</button>
+            </div>
+
+            <div class="flex items-center gap-6 mb-8 border-b border-slate-700 pb-6">
+                <div class="bg-slate-900 px-4 py-2 rounded-lg">
+                    <span class="text-xs text-slate-500 uppercase font-bold block">Lifetime Spend</span>
+                    <span class="text-xl font-mono text-emerald-400">₹<span id="cust-spend">0</span></span>
+                </div>
+                <button onclick="toggleVIP()" id="vip-btn"
+                    class="bg-yellow-600/20 text-yellow-400 border border-yellow-600/50 px-4 py-2 rounded hover:bg-yellow-600 hover:text-white transition-all text-sm font-semibold">
+                    Toggle VIP Status
+                </button>
+            </div>
+
+            <h3 class="font-semibold text-slate-300 mb-3 text-sm uppercase tracking-wide">Recent Orders</h3>
+            <ul id="cust-orders" class="space-y-2 max-h-48 overflow-y-auto pr-2 custom-scrollbar"></ul>
+        </div>
+    </div>
+
+    <script type="module">
+        import { getAdminToken } from './adminAuth.js';
+
+        let selectedCustomerId = null;
+        const API_URL = '/api/admin';
+
+        async function loadCustomers() {
+            const token = await getAdminToken();
+            if (!token) return;
+
+            try {
+                const res = await fetch(`${API_URL}/customers`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                const customers = await res.json();
+
+                const grid = document.getElementById('customers-grid');
+                grid.innerHTML = '';
+
+                if (customers.length === 0) {
+                    grid.innerHTML = '<div class="col-span-3 text-center text-slate-500 py-12">No customers found.</div>';
+                    return;
+                }
+
+                customers.forEach(c => {
+                    grid.innerHTML += `
+          <div onclick="openCustomer('${c.id}')" class="cursor-pointer bg-slate-800 border border-slate-700 p-5 rounded-xl hover:border-blue-500 hover:bg-slate-750 transition-all group">
+            <div class="flex justify-between items-start">
+                <div class="h-10 w-10 rounded-full bg-slate-700 flex items-center justify-center font-bold text-slate-300 group-hover:bg-blue-600 group-hover:text-white transition-colors mb-4">
+                    ${c.full_name ? c.full_name.charAt(0) : 'U'}
+                </div>
+                ${c.is_vip ? '<span class="px-2 py-1 rounded text-[10px] font-bold uppercase bg-yellow-500/10 text-yellow-500">VIP</span>' : ''}
+            </div>
+            <h3 class="font-semibold text-lg text-white group-hover:text-blue-400 transition-colors">${c.full_name || 'Unnamed'}</h3>
+            <p class="text-slate-500 text-sm truncate">${c.email || 'No Email'}</p>
+          </div>
+        `;
+                });
+            } catch (err) {
+                console.error(err);
+                alert('Error loading customers');
+            }
+        }
+
+        window.openCustomer = async (id) => {
+            selectedCustomerId = id;
+            const token = await getAdminToken();
+
+            try {
+                const res = await fetch(`${API_URL}/customers/${id}`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                const data = await res.json();
+
+                document.getElementById('cust-name').textContent = data.full_name || 'Unnamed';
+                document.getElementById('cust-email').textContent = data.email || 'N/A'; // Email might be missing if stored only in Auth, but we handle gracefully
+                document.getElementById('cust-spend').textContent = Number(data.total_spent).toLocaleString();
+
+                const isVip = data.is_vip;
+                const badge = document.getElementById('vip-badge');
+                if (isVip) badge.classList.remove('hidden'); else badge.classList.add('hidden');
+
+                const orders = document.getElementById('cust-orders');
+                orders.innerHTML = '';
+                if (data.orders && data.orders.length > 0) {
+                    data.orders.forEach(o => {
+                        orders.innerHTML += `
+               <li class="flex justify-between items-center bg-slate-900/50 p-3 rounded border border-slate-700/50">
+                    <span class="font-mono text-slate-400 text-xs">#${o.id.slice(0, 8)}...</span>
+                    <span class="text-sm font-semibold text-white">₹${o.total_amount}</span>   
+                    <span class="text-[10px] uppercase font-bold text-slate-500">${o.status}</span>
+               </li>`;
+                    });
+                } else {
+                    orders.innerHTML = '<li class="text-slate-500 italic text-sm text-center py-4">No orders placed yet.</li>';
+                }
+
+                document.getElementById('customer-modal').classList.remove('hidden');
+            } catch (err) {
+                console.error(err);
+                alert('Failed to load details');
+            }
+        };
+
+        window.toggleVIP = async () => {
+            const token = await getAdminToken();
+            try {
+                await fetch(`${API_URL}/customers/${selectedCustomerId}/vip`, {
+                    method: 'PATCH',
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                alert('VIP status updated');
+                closeModal();
+                loadCustomers();
+            } catch (err) {
+                alert('Failed to update');
+            }
+        };
+
+        window.closeModal = () => {
+            document.getElementById('customer-modal').classList.add('hidden');
+        };
+
+        loadCustomers();
+    </script>
+
+</body>
+
+</html>

@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url';
 import { createClient } from '@supabase/supabase-js';
 import dotenv from 'dotenv';
 import fetch from 'node-fetch'; // Required for Ollama calls
+import adminRoutes from './src/routes/adminRoutes.js'; // Import Admin Routes
 
 dotenv.config();
 
@@ -18,6 +19,9 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Mount Admin Routes
+app.use('/api/admin', adminRoutes);
 
 // Supabase Client
 // Supabase Client (Using Service Role for Server-Side Access)
@@ -88,8 +92,8 @@ app.get('/api/products', async (req, res) => {
     try {
         const { data, error } = await supabase
             .from('products')
-            .select('*');
-        // .order('created_at', { ascending: true }); // Removed to prevent crash if column missing
+            .select('*')
+            .order('created_at', { ascending: true });
 
         console.log(`API Debug: Found ${data?.length} products`);
 
@@ -134,11 +138,135 @@ app.post('/api/inquiry', async (req, res) => {
             message
         });
 
-        if (error) throw error;
+        if (error) {
+            console.error('Inquiry Insert Error:', error);
+            throw error;
+        }
         res.status(201).json({ ok: true, message: 'Inquiry submitted successfully' });
     } catch (err) {
         console.error('Inquiry API Error:', err);
         res.status(500).json({ error: 'Failed to submit inquiry' });
+    }
+});
+
+// POST /api/health-leads
+app.post('/api/health-leads', async (req, res) => {
+    try {
+        const { full_name, mobile, dob, city, coverage_type, conditions } = req.body;
+
+        // Validation
+        if (!full_name || !mobile || !city) {
+            return res.status(400).json({ error: 'Name, Mobile, and City are required' });
+        }
+
+        const { error } = await supabase.from('health_leads').insert({
+            full_name,
+            mobile,
+            dob,
+            city,
+            coverage_type,
+            conditions: conditions || [] // Ensure array
+        });
+
+        if (error) {
+            console.error('Health Lead Insert Error:', error);
+            throw error;
+        }
+
+        res.status(201).json({ ok: true, message: 'Health Details Submitted' });
+    } catch (err) {
+        console.error('Health Lead API Error:', err);
+        res.status(500).json({ error: 'Failed to submit details' });
+    }
+});
+
+// POST /api/life-leads
+app.post('/api/life-leads', async (req, res) => {
+    try {
+        const { first_name, last_name, nominee_name, phone, email, sum_assured, tenure, riders } = req.body;
+
+        if (!first_name || !last_name || !phone) {
+            return res.status(400).json({ error: 'Name and Phone are required' });
+        }
+
+        const { error } = await supabase.from('life_leads').insert({
+            first_name,
+            last_name,
+            nominee_name,
+            phone,
+            email,
+            sum_assured,
+            tenure,
+            riders: riders || []
+        });
+
+        if (error) {
+            console.error('Life Lead Insert Error:', error);
+            throw error;
+        }
+
+        res.status(201).json({ ok: true, message: 'Life Logic Submitted' });
+    } catch (err) {
+        console.error('Life Lead API Error:', err);
+        res.status(500).json({ error: 'Failed to submit details' });
+    }
+});
+
+// POST /api/motor-leads
+app.post('/api/motor-leads', async (req, res) => {
+    try {
+        const { full_name, mobile, vehicle_reg, policy_type } = req.body;
+
+        if (!full_name || !mobile) {
+            return res.status(400).json({ error: 'Name and Mobile are required' });
+        }
+
+        const { error } = await supabase.from('motor_leads').insert({
+            full_name,
+            mobile,
+            vehicle_reg,
+            policy_type,
+            status: 'new'
+        });
+
+        if (error) {
+            console.error('Motor Lead Insert Error:', error);
+            throw error;
+        }
+
+        res.status(201).json({ ok: true, message: 'Motor Lead Submitted' });
+    } catch (err) {
+        console.error('Motor Lead API Error:', err);
+        res.status(500).json({ error: 'Failed to submit details' });
+    }
+});
+
+// POST /api/mutual-fund-leads
+app.post('/api/mutual-fund-leads', async (req, res) => {
+    try {
+        const { full_name, mobile, sip_capacity, primary_goal } = req.body;
+
+        if (!full_name || !mobile) {
+            return res.status(400).json({ error: 'Name and Mobile are required' });
+        }
+
+        const { error } = await supabase.from('mutual_fund_leads').insert({
+            full_name,
+            mobile,
+            sip_capacity,
+            primary_goal,
+            status: 'new'
+        });
+
+        if (error) {
+            console.error('Mutual Fund Lead Insert Error:', error);
+            throw error;
+        }
+
+        res.status(201).json({ ok: true, message: 'Mutual Fund Inquiry Submitted' });
+    } catch (err) {
+        console.error('Mutual Fund Lead API Error:', err);
+        res.status(500).json({ error: 'Failed to submit details' });
     }
 });
 
@@ -605,6 +733,52 @@ app.post('/api/chat', async (req, res) => {
 });
 
 // START SERVER
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+// ==========================================
+// AUTH ENDPOINT (Auto-Confirm Signup)
+// ==========================================
+app.post('/api/auth/signup', async (req, res) => {
+    try {
+        const { email, password, full_name, phone } = req.body;
+
+        if (!email || !password) {
+            return res.status(400).json({ error: 'Email and password are required' });
+        }
+
+        console.log(`[AUTH] Creating auto-confirmed user: ${email}`);
+
+        const { data, error } = await supabase.auth.admin.createUser({
+            email,
+            password,
+            email_confirm: true, // Auto-confirm email
+            user_metadata: { full_name, phone }
+        });
+
+        if (error) {
+            console.error('[AUTH] Signup Error:', error);
+            // Translate common Supabase errors
+            if (error.message.includes('already registered')) {
+                return res.status(400).json({ error: 'User already exists. Please login.' });
+            }
+            throw error;
+        }
+
+        // Also create a profile entry ensuring it exists (Supabase triggers usually do this, but safe to double check)
+        // We defer to triggers for now to avoid race conditions, or we can insert if needed.
+        // Assuming triggers handle profile creation.
+
+        res.status(201).json({ ok: true, message: 'User created and verified.', user: data.user });
+
+    } catch (err) {
+        console.error('[AUTH] Critical Signup Error:', err);
+        res.status(500).json({ error: err.message || 'Signup failed' });
+    }
 });
+
+// START SERVER
+if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
+    app.listen(port, () => {
+        console.log(`Server running at http://localhost:${port}`);
+    });
+}
+
+export default app;

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Delight Services - Professional Indian Motor Insurance</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f5c26b",
+                        "background-light": "#f8f7f6",
+                        "background-dark": "#221b10",
+                        "carbon": "#1f2933",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "sans": ["Manrope", "sans-serif"],
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        @keyframes drive-road {
+            0% {
+                background-position: 50% 0;
+            }
+
+            100% {
+                background-position: 50% 100px;
+            }
+        }
+
+        @keyframes pass-lights {
+            0% {
+                transform: translateY(-100vh);
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            80% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+
+        .animate-road {
+            animation: drive-road 0.2s linear infinite;
+        }
+
+        .animate-lights-left {
+            animation: pass-lights 2s linear infinite;
+        }
+
+        .animate-lights-right {
+            animation: pass-lights 2s linear infinite;
+            animation-delay: 1s;
+        }
+
+        .perspective-container {
+            perspective: 200px;
+            transform-style: preserve-3d;
+        }
+
+        .road-plane {
+            transform: rotateX(20deg) scale(1.5);
+            transform-origin: 50% 100%;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            background: #1f2933;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #393328;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body class="bg-carbon text-white font-sans overflow-x-hidden selection:bg-primary selection:text-carbon">
+    <nav class="fixed top-0 left-0 w-full z-50 border-b border-white/10 backdrop-blur-md bg-carbon/80">
+        <div class="px-6 md:px-10 py-5 flex items-center justify-between max-w-7xl mx-auto">
+            <a href="home.html" class="flex items-center gap-3 text-white group">
+                <img src="delight.png" alt="Delight Logo"
+                    class="h-10 w-auto group-hover:scale-105 transition-transform">
+                <span class="text-xl font-serif font-bold tracking-tight leading-none text-white">Delight
+                    Services</span>
+            </a>
+            <a href="index1.html" class="text-sm text-gray-400 hover:text-white transition-colors">Back to Services</a>
+        </div>
+    </nav>
+    <div class="fixed bottom-8 left-8 z-40 hidden md:flex flex-col gap-2">
+        <div class="text-[10px] uppercase tracking-widest text-gray-500">Protection Level</div>
+        <div class="text-xl font-bold font-display tabular-nums text-white flex items-center gap-2">
+            <span class="material-symbols-outlined text-green-500">verified_user</span>
+            ACTIVE
+        </div>
+    </div>
+    <div class="fixed bottom-8 right-8 z-40 hidden md:block">
+        <button onclick="document.getElementById('quoteFormSection').scrollIntoView({behavior: 'smooth'})"
+            class="flex items-center gap-2 bg-primary hover:bg-white text-carbon px-6 py-3 rounded-full font-bold shadow-[0_0_20px_rgba(245,194,107,0.4)] transition-all transform hover:scale-105 font-display">
+            <span class="material-symbols-outlined">currency_rupee</span>
+            <span>Get Quick Quote</span>
+        </button>
+    </div>
+    <div class="fixed inset-0 z-0 bg-carbon overflow-hidden flex justify-center perspective-container">
+        <div class="w-full max-w-3xl h-full relative road-plane">
+            <div class="absolute inset-0 bg-gradient-to-b from-[#0f1419] to-[#1f2933]"></div>
+            <div class="absolute inset-0 flex justify-center opacity-50">
+                <div
+                    class="w-2 h-full bg-[linear-gradient(to_bottom,transparent_50%,#f5c26b_50%)] bg-[length:10px_100px] animate-road">
+                </div>
+            </div>
+            <div class="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-primary/5 to-transparent animate-pulse">
+            </div>
+            <div class="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-primary/5 to-transparent animate-pulse">
+            </div>
+        </div>
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute top-0 left-[10%] w-1 h-20 bg-white/10 blur-md animate-lights-left"></div>
+            <div class="absolute top-0 right-[10%] w-1 h-20 bg-white/10 blur-md animate-lights-right"></div>
+        </div>
+    </div>
+    <div class="fixed inset-0 z-20 pointer-events-none flex items-center justify-center top-[10%] md:top-0">
+        <div class="relative w-64 md:w-80 aspect-[9/16] flex items-center justify-center">
+            <div class="absolute inset-0 bg-primary/20 blur-3xl rounded-full scale-75 animate-pulse"></div>
+            <div class="relative w-full h-full flex flex-col items-center justify-center">
+                <img alt="Luxury Sports Car"
+                    class="object-cover h-[380px] w-auto rounded-xl shadow-2xl mask-image-gradient"
+                    data-alt="Rear view of a luxury sports car driving on a dark road"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpu-N9-b17pC_p6WDQ8Pf8OGBoCuyy0DP0V9SFOuE4Mw6D9X5D5UQaO5vFeRDiQMxRIcdWwcSxZgvqNq-YVf5f0MxBnLCwjPOqWMaRE2R8_PJ_V8fh6fqiRUachU3zIifTB1wN3jPmufVxsW-paf6qB9HdDASxSmLhlo57cy28BExUEcnj6c3Y_a7fpnYe1hr2JsJTGIE6hkJaWtbxk-sRVogNZD1YXpDm5B9QxQr_0U5u_FsNFnFRH2_GyrosYxNuKjABGFSv_oo"
+                    style="mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent); -webkit-mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);" />
+                <div class="absolute bottom-[20%] flex gap-24 opacity-80">
+                    <div class="w-8 h-3 bg-red-600 blur-sm rounded-full shadow-[0_0_20px_red]"></div>
+                    <div class="w-8 h-3 bg-red-600 blur-sm rounded-full shadow-[0_0_20px_red]"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relative z-30 w-full">
+        <section class="min-h-screen flex flex-col items-center pt-32 md:pt-44 px-6 relative">
+            <div class="text-center max-w-4xl mx-auto space-y-8">
+                <h1 class="text-5xl md:text-7xl font-bold font-display text-white tracking-tighter leading-[1.1]">
+                    PROTECTION THAT <br />
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-white">MOVES WITH
+                        YOU</span>
+                </h1>
+                <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
+                    Comprehensive coverage for your vehicle, built for the unique rhythms of Indian roads. Experience
+                    seamless claims and instant support.
+                </p>
+                <div class="pt-12 animate-bounce">
+                    <span class="material-symbols-outlined text-white/30 text-4xl">keyboard_double_arrow_down</span>
+                </div>
+            </div>
+        </section>
+        <section class="min-h-screen flex items-center justify-center px-6 py-20 relative">
+            <div class="absolute inset-0 pointer-events-none flex flex-col justify-between py-20 opacity-20">
+                <div class="w-full h-px bg-gradient-to-r from-transparent via-primary to-transparent"></div>
+                <div class="w-full h-px bg-gradient-to-r from-transparent via-primary to-transparent"></div>
+                <div class="w-full h-px bg-gradient-to-r from-transparent via-primary to-transparent"></div>
+            </div>
+            <div class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-96">
+                <div class="flex flex-col justify-center gap-6 text-left md:text-right">
+                    <div
+                        class="p-8 rounded-2xl bg-carbon/80 backdrop-blur-md border border-white/10 shadow-xl hover:border-primary/50 transition-colors group">
+                        <div class="flex items-center justify-start md:justify-end gap-3 mb-3">
+                            <h2
+                                class="text-2xl font-bold font-display text-white group-hover:text-primary transition-colors">
+                                PAN-INDIA SUPPORT</h2>
+                            <span class="material-symbols-outlined text-primary text-3xl">map</span>
+                        </div>
+                        <p class="text-gray-300 leading-relaxed font-sans">
+                            <strong>24x7 Roadside Assistance.</strong> Whether you're on a highway in Maharashtra or a
+                            hill station in Himachal, help is just a tap away.
+                        </p>
+                    </div>
+                    <div
+                        class="hidden md:block p-4 rounded-xl bg-carbon/60 backdrop-blur border border-white/5 self-end w-3/4">
+                        <div class="flex items-center gap-3 text-primary mb-1">
+                            <span class="material-symbols-outlined text-lg">location_on</span>
+                            <span class="font-bold">Live Tracking</span>
+                        </div>
+                        <p class="text-xs text-gray-500">Track your recovery vehicle in real-time.</p>
+                    </div>
+                </div>
+                <div class="flex flex-col justify-center gap-6">
+                    <div class="p-5 rounded-xl bg-carbon/60 backdrop-blur border border-white/5 w-full md:w-5/6">
+                        <div class="flex items-center gap-3 text-primary mb-2">
+                            <span class="material-symbols-outlined text-2xl">gavel</span>
+                            <span class="font-bold text-lg font-display">Direct Claim Settlement</span>
+                        </div>
+                        <p class="text-sm text-gray-400">No third-party agents. We settle claims directly for faster
+                            processing.</p>
+                    </div>
+                    <div
+                        class="p-5 rounded-xl bg-carbon/60 backdrop-blur border border-white/5 w-full md:w-5/6 translate-x-4 md:translate-x-8">
+                        <div class="flex items-center gap-3 text-primary mb-2">
+                            <span class="material-symbols-outlined text-2xl">sync</span>
+                            <span class="font-bold text-lg font-display">Instant Renewal</span>
+                        </div>
+                        <p class="text-sm text-gray-400">Paperless renewal in 60 seconds with zero inspection needed for
+                            existing policies.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="min-h-screen flex items-center justify-center px-6 py-20 relative">
+            <div class="w-full max-w-6xl flex flex-col md:flex-row justify-between items-center gap-12 md:gap-0">
+                <div class="w-full md:w-1/3 flex flex-col gap-4 order-2 md:order-1">
+                    <div
+                        class="bg-carbon/90 border border-white/10 p-5 rounded-xl transform -rotate-1 hover:rotate-0 transition-transform duration-500 shadow-2xl">
+                        <div class="h-40 w-full bg-cover bg-center rounded-lg mb-4 grayscale hover:grayscale-0 transition-all"
+                            data-alt="Smooth highway imagery representing Zero-Dep cover"
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBQdLo6ffWQqb90UF4cxa8aTmegJZhvRdcK7RFu89q6Fa5zlQK4K0Z6fP9eb9U6b7FAIlg4yv45orwkzWhEFuO6w8A-APHzHyrnRHPfNnb8xO_hsa50iAH77cz-cBb4sZVLtLZd8_7Qf4sSEy-g1zwrGo4vOiCu40PaU55V-cmUI0dQh_zO_gFocSKlPcA5GwC3HLIYzg14NIBZ97qpMTtVNAbsFDbDSto2lGM2xUPcKpCwmGXPmFOC1Eo2oPth1qCx5ulH6Mdsykc');">
+                        </div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="material-symbols-outlined text-primary">price_check</span>
+                            <h3 class="text-xl font-bold font-display text-white">Zero-Depreciation</h3>
+                        </div>
+                        <p class="text-sm text-gray-400 leading-relaxed">
+                            Get 100% reimbursement on parts replaced without deduction for depreciation. Ideal for new
+                            cars on Indian roads.
+                        </p>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/3 text-center order-1 md:order-2 mb-16 md:mb-0">
+                    <h2
+                        class="text-4xl md:text-6xl font-black font-display text-white uppercase leading-tight mb-4 drop-shadow-xl">
+                        MASTER <br /> <span class="text-primary">EVERY JOURNEY</span>
+                    </h2>
+                    <p
+                        class="text-sm font-medium text-white/70 bg-black/50 backdrop-blur-md inline-block px-5 py-2 rounded-full border border-white/10">
+                        Trusted by 2 Million+ Indian Car Owners
+                    </p>
+                </div>
+                <div class="w-full md:w-1/3 flex flex-col gap-4 items-end order-3">
+                    <div
+                        class="bg-carbon/90 border border-white/10 p-5 rounded-xl transform rotate-1 hover:rotate-0 transition-transform duration-500 shadow-2xl w-full">
+                        <div class="h-40 w-full bg-cover bg-center rounded-lg mb-4 grayscale hover:grayscale-0 transition-all"
+                            data-alt="Bustling Indian street representing network coverage"
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBgfA5XMEVRFcF6hTgRJPLVX1gmu_ogZE9OIXtHD93QHUFTdM3d8XeBAqQLNye1KgKbg4gP0yP8gUNpkVOYeakrq25kIsb6EEw5ren27A4tPfncHttvcsBQyMqRrzSq_BRz8uGrYJXZydWCFp26e6UZHQs8x-_Dn4C0KXn4LOpoMKH3U1WsOMVvF6uv1qoYT9D8hLCGqyXj-7rTy-deYWiK8a41YY7EAZPpqZ_UeLu-mefU54lGh1EObD3Mzih9H0u4hv1LsVtMab8');">
+                        </div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="material-symbols-outlined text-primary">handyman</span>
+                            <h3 class="text-xl font-bold font-display text-white">Cashless Network</h3>
+                        </div>
+                        <p class="text-sm text-gray-400 leading-relaxed">
+                            Access over 5,000+ network garages across India. Drive through any bustling street with
+                            complete peace of mind.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section
+            class="min-h-screen flex items-center justify-center px-6 py-20 relative bg-[#181511] z-50 shadow-[0_-50px_100px_rgba(0,0,0,1)]"
+            id="quoteFormSection">
+            <div class="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent">
+            </div>
+            <div class="w-full max-w-6xl flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+                <div class="flex-1 text-center lg:text-left space-y-8">
+                    <div>
+                        <h2 class="text-5xl md:text-6xl font-black font-display text-white tracking-tight mb-4">
+                            ARRIVE IN <span class="text-primary">STYLE</span>
+                        </h2>
+                        <p class="text-xl text-gray-400 font-light max-w-md mx-auto lg:mx-0">
+                            Park here. Secure your drive with India's most trusted motor insurance.
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-white/5 p-4 rounded-lg border border-white/10 flex items-center gap-3">
+                            <span class="material-symbols-outlined text-primary">verified</span>
+                            <div class="text-left">
+                                <div class="text-white font-bold text-sm">98% Claim Settlement</div>
+                                <div class="text-gray-500 text-xs">FY 2023-24</div>
+                            </div>
+                        </div>
+                        <div class="bg-white/5 p-4 rounded-lg border border-white/10 flex items-center gap-3">
+                            <span class="material-symbols-outlined text-primary">support_agent</span>
+                            <div class="text-left">
+                                <div class="text-white font-bold text-sm">Dedicated Manager</div>
+                                <div class="text-gray-500 text-xs">For every policy</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-1 w-full max-w-md">
+                    <div
+                        class="bg-[#221b10] border border-[#393328] rounded-2xl p-8 shadow-2xl relative overflow-hidden">
+                        <div class="absolute -top-20 -right-20 w-40 h-40 bg-primary/20 blur-3xl rounded-full"></div>
+                        <form id="motorLeadForm" class="space-y-5 relative z-10">
+                            <h3 class="text-xl font-bold font-display text-white mb-6 border-b border-white/10 pb-4">
+                                Get Your Quote</h3>
+                            <div class="space-y-1">
+                                <label class="text-xs font-bold text-gray-500 uppercase tracking-wider"
+                                    for="fullName">Full Name</label>
+                                <input required
+                                    class="w-full bg-[#181511] border border-[#393328] rounded-lg px-4 py-3 text-white placeholder-gray-600 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                                    id="fullName" placeholder="e.g. Rahul Sharma" type="text" />
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-xs font-bold text-gray-500 uppercase tracking-wider"
+                                    for="mobile">Mobile Number</label>
+                                <div class="flex">
+                                    <span
+                                        class="bg-[#393328] text-gray-400 px-3 py-3 rounded-l-lg border-y border-l border-[#393328] font-mono text-sm flex items-center">+91</span>
+                                    <input required
+                                        class="flex-1 bg-[#181511] border border-[#393328] rounded-r-lg px-4 py-3 text-white placeholder-gray-600 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                                        id="mobile" placeholder="98765 43210" type="tel" />
+                                </div>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-xs font-bold text-gray-500 uppercase tracking-wider"
+                                    for="vehicleReg">Vehicle Registration</label>
+                                <input required
+                                    class="w-full bg-[#181511] border border-[#393328] rounded-lg px-4 py-3 text-white placeholder-gray-600 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all uppercase"
+                                    id="vehicleReg" placeholder="MH 02 AB 1234" type="text" />
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-xs font-bold text-gray-500 uppercase tracking-wider">Policy
+                                    Type</label>
+                                <div class="grid grid-cols-2 gap-3 mt-1">
+                                    <label class="cursor-pointer">
+                                        <input checked="" class="peer sr-only" name="policy_type" type="radio"
+                                            value="Comprehensive" />
+                                        <div
+                                            class="rounded-lg border border-[#393328] bg-[#181511] p-3 text-center text-sm font-medium text-gray-400 hover:bg-[#2a241a] peer-checked:border-primary peer-checked:text-primary transition-all">
+                                            Comprehensive
+                                        </div>
+                                    </label>
+                                    <label class="cursor-pointer">
+                                        <input class="peer sr-only" name="policy_type" type="radio"
+                                            value="Third Party" />
+                                        <div
+                                            class="rounded-lg border border-[#393328] bg-[#181511] p-3 text-center text-sm font-medium text-gray-400 hover:bg-[#2a241a] peer-checked:border-primary peer-checked:text-primary transition-all">
+                                            Third Party
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            <button id="submitBtn"
+                                class="w-full bg-primary hover:bg-[#f3b54b] text-carbon font-bold text-lg py-4 rounded-lg mt-6 shadow-lg transform hover:translate-y-[-2px] transition-all flex items-center justify-center gap-2 font-display"
+                                type="submit">
+                                <span>Get My Plans</span>
+                                <span class="material-symbols-outlined">arrow_forward</span>
+                            </button>
+                            <!-- Loading -->
+                            <div id="loading" class="hidden text-center py-2">
+                                <span
+                                    class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary"></span>
+                                <p class="text-gray-400 text-xs mt-2">Checking fast lanes...</p>
+                            </div>
+                            <p class="text-center text-[10px] text-gray-600 pt-2">
+                                By proceeding, you agree to Delight Services Terms &amp; Conditions.
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer class="bg-black py-10 border-t border-white/10 relative z-50">
+            <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex flex-col gap-1">
+                    <div class="text-gray-400 text-sm font-bold">Delight Insurance Services Ltd.</div>
+                    <div class="text-gray-600 text-xs">
+                        IRDAI Reg. No. 123 | CIN: U66000MH2024PLC123456 <br />
+                        Registered Office: Mumbai, India.
+                    </div>
+                </div>
+                <div class="flex gap-6">
+                    <a class="text-gray-500 hover:text-white transition-colors flex flex-col items-center gap-1 text-xs"
+                        href="#">
+                        <span class="material-symbols-outlined text-xl">policy</span>
+                        <span>Policy</span>
+                    </a>
+                    <a class="text-gray-500 hover:text-white transition-colors flex flex-col items-center gap-1 text-xs"
+                        href="#">
+                        <span class="material-symbols-outlined text-xl">help</span>
+                        <span>Support</span>
+                    </a>
+                    <a class="text-gray-500 hover:text-white transition-colors flex flex-col items-center gap-1 text-xs"
+                        href="#">
+                        <span class="material-symbols-outlined text-xl">call</span>
+                        <span>Call Us</span>
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Logic -->
+    <script>
+        document.getElementById('motorLeadForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const btn = document.getElementById('submitBtn');
+            const loading = document.getElementById('loading');
+
+            btn.classList.add('hidden');
+            loading.classList.remove('hidden');
+
+            const payload = {
+                full_name: document.getElementById('fullName').value,
+                mobile: document.getElementById('mobile').value,
+                vehicle_reg: document.getElementById('vehicleReg').value,
+                policy_type: document.querySelector('input[name="policy_type"]:checked').value
+            };
+
+            try {
+                const res = await fetch('/api/motor-leads', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    window.location.href = 'greetings.html';
+                } else {
+                    alert('Error: ' + (data.error || 'Submission failed'));
+                    btn.classList.remove('hidden');
+                    loading.classList.add('hidden');
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Connection failed. Please try again.');
+                btn.classList.remove('hidden');
+                loading.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+
+</html>

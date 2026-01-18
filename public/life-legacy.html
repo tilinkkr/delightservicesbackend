@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Delight Services - Life &amp; Legacy (Jeevan &amp; Virasat)</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f2a60d",
+                        "background-light": "#f8f7f5",
+                        "background-dark": "#221c10",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px" },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
+                        'slide-in-right': 'slideInRight 1s ease-out forwards',
+                        'slide-in-left': 'slideInLeft 1s ease-out forwards',
+                        'pulse-glow': 'pulseGlow 3s infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        slideInLeft: {
+                            '0%': { opacity: '0', transform: 'translateX(-30px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' },
+                        },
+                        slideInRight: {
+                            '0%': { opacity: '0', transform: 'translateX(30px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { borderColor: 'rgba(57, 51, 40, 1)', boxShadow: '0 0 0 0 rgba(242, 166, 13, 0)' },
+                            '50%': { borderColor: 'rgba(242, 166, 13, 0.6)', boxShadow: '0 0 25px 0 rgba(242, 166, 13, 0.15)' },
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #221c10;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #393328;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f2a60d;
+        }
+
+        .hw-accelerate {
+            will-change: transform, opacity;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display overflow-x-hidden min-h-screen flex flex-col">
+    <header class="sticky top-0 z-50 w-full border-b border-[#393328] bg-background-dark/95 backdrop-blur-sm px-6 py-4">
+        <div class="max-w-[1280px] mx-auto flex items-center justify-between">
+            <a href="home.html" class="flex items-center gap-3 text-white group">
+                <img src="delight.png" alt="Delight Logo"
+                    class="h-10 w-auto group-hover:scale-105 transition-transform">
+                <span class="text-white text-2xl font-serif font-bold tracking-tight">Delight Services</span>
+            </a>
+            <a href="index1.html" class="text-sm text-gray-400 hover:text-white transition-colors">Back to Services</a>
+        </div>
+    </header>
+    <main class="flex-grow flex flex-col items-center w-full">
+        <section
+            class="w-full relative min-h-[700px] flex items-end pb-20 md:pb-32 px-6 md:px-20 overflow-hidden group">
+            <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-[20s] ease-in-out group-hover:scale-105"
+                data-alt="Silhouette of a multi-generational family walking together on a hill during a golden sunset"
+                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDRN5YcIxx0sGIS9XSdQt1phxvBtuQBZXGFSq1_RrJGMt9dV9x7YoDzWZuYKsOnq10ev-dkNvNizgwPA6TIuKCziLbt5nGASXGAHMZNgi9fIjQ3Qv-cy4JvRPBfoQwmt4LUkDiotWkj0b2hTKXQTKzj4aYosEPVWU_aiuX81R1gtGcVoFrAGgo5C7NRCAKoJGvWS5c0kWFcqqqRcbMEY289tqK1GwQZrR17HdlL5yxDUMMDSmaO05yBu27wS8t-R7kXc1LHzauKrQY");'>
+            </div>
+            <div class="absolute inset-0 z-10 bg-gradient-to-t from-[#181611] via-[#181611]/80 to-[#181611]/30"></div>
+            <div
+                class="relative z-20 max-w-[1280px] w-full mx-auto flex flex-col gap-6 animate-fade-in-up hw-accelerate">
+                <h1
+                    class="text-white text-5xl md:text-7xl font-black leading-[1.1] tracking-tight max-w-4xl drop-shadow-lg">
+                    Write the Story<br /> <span class="text-primary">That Never Ends.</span>
+                </h1>
+                <p class="text-gray-200 text-lg md:text-xl max-w-2xl font-light leading-relaxed drop-shadow-md">
+                    Preserve your wealth and values across generations with Delight Services' 'Jeevan &amp; Virasat'
+                    planning. Your history is our most sacred trust.
+                </p>
+                <div class="pt-4">
+                    <button onclick="document.getElementById('consultation-form').scrollIntoView({behavior: 'smooth'})"
+                        class="flex items-center justify-center rounded-xl bg-primary hover:bg-yellow-400 text-background-dark text-base md:text-lg font-bold h-14 px-8 transition-all shadow-lg hover:shadow-primary/20">
+                        Begin Your Chapter
+                    </button>
+                </div>
+            </div>
+        </section>
+        <section class="w-full bg-background-dark py-20 px-6 md:px-20 border-b border-[#393328]">
+            <div class="max-w-[1280px] mx-auto flex flex-col gap-12">
+                <div class="text-center space-y-4">
+                    <h2 class="text-white text-3xl md:text-4xl font-bold tracking-tight">The Pillars of Trust</h2>
+                    <p class="text-gray-400 max-w-2xl mx-auto">Our approach is built on three fundamental pillars
+                        designed
+                        to secure your future and your family's history in India.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-fr">
+                    <div
+                        class="group flex flex-col gap-6 rounded-2xl border border-[#393328] bg-[#2a2419] p-8 transition-all hover:border-primary/50 hover:bg-[#322b1f]">
+                        <div
+                            class="size-14 rounded-full bg-[#393328] flex items-center justify-center group-hover:bg-primary transition-colors">
+                            <span
+                                class="material-symbols-outlined text-primary group-hover:text-background-dark text-3xl">shield_lock</span>
+                        </div>
+                        <div class="space-y-2">
+                            <h3 class="text-white text-xl font-bold">Protection</h3>
+                            <p class="text-[#bab09c] leading-relaxed">Unwavering security for your assets against
+                                unforeseen circumstances. We build fortresses around what you value most.</p>
+                        </div>
+                    </div>
+                    <div
+                        class="group flex flex-col gap-6 rounded-2xl border border-[#393328] bg-[#2a2419] p-8 transition-all hover:border-primary/50 hover:bg-[#322b1f]">
+                        <div
+                            class="size-14 rounded-full bg-[#393328] flex items-center justify-center group-hover:bg-primary transition-colors">
+                            <span
+                                class="material-symbols-outlined text-primary group-hover:text-background-dark text-3xl">architecture</span>
+                        </div>
+                        <div class="space-y-2">
+                            <h3 class="text-white text-xl font-bold">Planning</h3>
+                            <p class="text-[#bab09c] leading-relaxed">Strategic blueprints for seamless generational
+                                wealth transfer. We ensure your intent is preserved in every detail.</p>
+                        </div>
+                    </div>
+                    <div
+                        class="group flex flex-col gap-6 rounded-2xl border border-[#393328] bg-[#2a2419] p-8 transition-all hover:border-primary/50 hover:bg-[#322b1f]">
+                        <div
+                            class="size-14 rounded-full bg-[#393328] flex items-center justify-center group-hover:bg-primary transition-colors">
+                            <span
+                                class="material-symbols-outlined text-primary group-hover:text-background-dark text-3xl">volunteer_activism</span>
+                        </div>
+                        <div class="space-y-2">
+                            <h3 class="text-white text-xl font-bold">Assurance</h3>
+                            <p class="text-[#bab09c] leading-relaxed">Guaranteed peace of mind for those you love, in
+                                perpetuity. Your legacy is monitored and nurtured by our experts.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="w-full bg-[#1c170d] py-24 px-6 md:px-20 overflow-hidden">
+            <div class="max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+                <div class="flex flex-col gap-10">
+                    <div class="space-y-4">
+                        <span class="text-primary font-bold tracking-wider text-sm uppercase">Process</span>
+                        <h2 class="text-white text-4xl font-bold leading-tight">The Advisor Journey</h2>
+                        <p class="text-gray-400 text-lg">We don't just sell insurance; we craft a narrative for your
+                            wealth. Here is how we begin.</p>
+                    </div>
+                    <div class="relative pl-8 border-l border-[#393328] space-y-12">
+                        <div class="relative opacity-0 animate-slide-in-left hw-accelerate"
+                            style="animation-delay: 200ms;">
+                            <div
+                                class="absolute -left-[39px] top-1 size-5 rounded-full border-4 border-[#1c170d] bg-primary">
+                            </div>
+                            <h3 class="text-white text-xl font-bold mb-2 flex items-center gap-3">
+                                <span class="material-symbols-outlined text-primary">lightbulb</span> Discovery
+                            </h3>
+                            <p class="text-[#bab09c]">We begin by understanding your world—your values, your family
+                                dynamics, and your long-term aspirations. This is a deep-dive conversation.</p>
+                        </div>
+                        <div class="relative opacity-0 animate-slide-in-left hw-accelerate"
+                            style="animation-delay: 400ms;">
+                            <div
+                                class="absolute -left-[39px] top-1 size-5 rounded-full border-4 border-[#1c170d] bg-[#393328]">
+                            </div>
+                            <h3 class="text-white text-xl font-bold mb-2 flex items-center gap-3">
+                                <span class="material-symbols-outlined text-gray-400">chess</span> Strategy
+                            </h3>
+                            <p class="text-[#bab09c]">Our experts craft a bespoke legacy plan. We identify tax-efficient
+                                vehicles and structure trusts that align perfectly with your multi-generational goals.
+                            </p>
+                        </div>
+                        <div class="relative opacity-0 animate-slide-in-left hw-accelerate"
+                            style="animation-delay: 600ms;">
+                            <div
+                                class="absolute -left-[39px] top-1 size-5 rounded-full border-4 border-[#1c170d] bg-[#393328]">
+                            </div>
+                            <h3 class="text-white text-xl font-bold mb-2 flex items-center gap-3">
+                                <span class="material-symbols-outlined text-gray-400">rocket_launch</span> Execution
+                            </h3>
+                            <p class="text-[#bab09c]">We implement the plan with precision, coordinating with your legal
+                                and financial teams to ensure every detail is secured for the future.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full bg-[#241f16] p-8 md:p-10 rounded-2xl border border-[#393328] shadow-2xl animate-pulse-glow hw-accelerate"
+                    id="consultation-form">
+                    <div class="mb-8">
+                        <h3 class="text-white text-2xl font-bold">Private Consultation</h3>
+                        <p class="text-gray-400 text-sm mt-2">Request an invitation to speak with a Senior Legacy
+                            Advisor.
+                        </p>
+                    </div>
+                    <form class="flex flex-col gap-6" id="lifeLeadForm">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div class="flex flex-col gap-2">
+                                <label class="text-xs font-bold text-gray-400 uppercase tracking-wider"
+                                    for="firstName">First Name</label>
+                                <input required
+                                    class="w-full bg-[#181611] border border-[#393328] text-white rounded-lg p-4 text-base focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors placeholder-gray-600"
+                                    id="firstName" placeholder="e.g. Rahul" type="text" />
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <label class="text-xs font-bold text-gray-400 uppercase tracking-wider"
+                                    for="lastName">Last Name</label>
+                                <input required
+                                    class="w-full bg-[#181611] border border-[#393328] text-white rounded-lg p-4 text-base focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors placeholder-gray-600"
+                                    id="lastName" placeholder="e.g. Verma" type="text" />
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div class="flex flex-col gap-2">
+                                <label class="text-xs font-bold text-gray-400 uppercase tracking-wider"
+                                    for="nomineeName">Nominee Name</label>
+                                <input required
+                                    class="w-full bg-[#181611] border border-[#393328] text-white rounded-lg p-4 text-base focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors placeholder-gray-600"
+                                    id="nomineeName" placeholder="e.g. Priya Verma" type="text" />
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <label class="text-xs font-bold text-gray-400 uppercase tracking-wider"
+                                    for="phone">Phone Number</label>
+                                <input required
+                                    class="w-full bg-[#181611] border border-[#393328] text-white rounded-lg p-4 text-base focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors placeholder-gray-600"
+                                    id="phone" placeholder="+91 98000 00000" type="tel" />
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label class="text-xs font-bold text-gray-400 uppercase tracking-wider" for="email">Email
+                                Address</label>
+                            <input required
+                                class="w-full bg-[#181611] border border-[#393328] text-white rounded-lg p-4 text-base focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors placeholder-gray-600"
+                                id="email" placeholder="rahul.verma@example.com" type="email" />
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div class="flex flex-col gap-2">
+                                <label class="text-xs font-bold text-gray-400 uppercase tracking-wider"
+                                    for="sumAssured">Sum Assured (₹)</label>
+                                <div class="relative">
+                                    <select
+                                        class="w-full bg-[#181611] border border-[#393328] text-white rounded-lg p-4 text-base appearance-none focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+                                        id="sumAssured">
+                                        <option disabled="" selected="" value="">Select amount</option>
+                                        <option value="5cr">₹5 Crores</option>
+                                        <option value="10cr">₹10 Crores</option>
+                                        <option value="25cr">₹25 Crores</option>
+                                        <option value="50cr">₹50 Crores</option>
+                                        <option value="100cr+">₹100 Crores+</option>
+                                    </select>
+                                    <span
+                                        class="material-symbols-outlined absolute right-4 top-4 text-gray-400 pointer-events-none">expand_more</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <label class="text-xs font-bold text-gray-400 uppercase tracking-wider"
+                                    for="tenure">Policy Tenure (Years)</label>
+                                <input required
+                                    class="w-full bg-[#181611] border border-[#393328] text-white rounded-lg p-4 text-base focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors placeholder-gray-600"
+                                    id="tenure" max="99" min="5" placeholder="e.g. 20" type="number" />
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-3">
+                            <label class="text-xs font-bold text-gray-400 uppercase tracking-wider">Preferred
+                                Riders</label>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <label
+                                    class="flex items-center gap-3 p-3 rounded-lg border border-[#393328] bg-[#181611] cursor-pointer hover:border-primary/50 transition-colors">
+                                    <input
+                                        class="size-5 rounded border-gray-600 bg-transparent text-primary focus:ring-primary/50 rider-check"
+                                        type="checkbox" value="Critical Illness" />
+                                    <span class="text-gray-300 text-sm">Critical Illness</span>
+                                </label>
+                                <label
+                                    class="flex items-center gap-3 p-3 rounded-lg border border-[#393328] bg-[#181611] cursor-pointer hover:border-primary/50 transition-colors">
+                                    <input
+                                        class="size-5 rounded border-gray-600 bg-transparent text-primary focus:ring-primary/50 rider-check"
+                                        type="checkbox" value="Accidental Death" />
+                                    <span class="text-gray-300 text-sm">Accidental Death</span>
+                                </label>
+                                <label
+                                    class="flex items-center gap-3 p-3 rounded-lg border border-[#393328] bg-[#181611] cursor-pointer hover:border-primary/50 transition-colors">
+                                    <input
+                                        class="size-5 rounded border-gray-600 bg-transparent text-primary focus:ring-primary/50 rider-check"
+                                        type="checkbox" value="Waiver of Premium" />
+                                    <span class="text-gray-300 text-sm">Waiver of Premium</span>
+                                </label>
+                                <label
+                                    class="flex items-center gap-3 p-3 rounded-lg border border-[#393328] bg-[#181611] cursor-pointer hover:border-primary/50 transition-colors">
+                                    <input
+                                        class="size-5 rounded border-gray-600 bg-transparent text-primary focus:ring-primary/50 rider-check"
+                                        type="checkbox" value="Return of Premium" />
+                                    <span class="text-gray-300 text-sm">Return of Premium</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <button id="submitBtn"
+                                class="w-full flex items-center justify-center gap-2 rounded-xl bg-primary hover:bg-yellow-400 text-background-dark text-lg font-bold h-14 px-8 transition-all"
+                                type="submit">
+                                Request Private Consultation
+                                <span class="material-symbols-outlined text-base">arrow_forward</span>
+                            </button>
+                            <!-- Loading State -->
+                            <div id="loading" class="hidden text-center py-2">
+                                <span
+                                    class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary"></span>
+                                <p class="text-gray-400 text-xs mt-2">Securing your request...</p>
+                            </div>
+                            <p class="text-center text-xs text-gray-500 mt-4">Your information is kept strictly
+                                confidential
+                                under our Privacy Covenant.</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="w-full bg-background-dark border-t border-[#393328] pt-16 pb-8 px-6 md:px-20">
+        <div class="max-w-[1280px] mx-auto flex flex-col gap-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+                <div class="flex flex-col gap-4">
+                    <div class="flex items-center gap-2 text-white mb-2">
+                        <span class="material-symbols-outlined text-primary">verified_user</span>
+                        <span class="font-bold text-lg">Delight Services</span>
+                    </div>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        Securing legacies since 1984. We are dedicated to the preservation of wealth, values, and family
+                        unity across generations.
+                    </p>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <h4 class="text-white font-bold">Services</h4>
+                    <a class="text-gray-400 hover:text-primary text-sm transition-colors" href="#">Life Insurance</a>
+                    <a class="text-gray-400 hover:text-primary text-sm transition-colors" href="#">Estate Planning</a>
+                    <a class="text-gray-400 hover:text-primary text-sm transition-colors" href="#">Trust
+                        Administration</a>
+                    <a class="text-gray-400 hover:text-primary text-sm transition-colors" href="#">Philanthropy</a>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <h4 class="text-white font-bold">Company</h4>
+                    <a class="text-gray-400 hover:text-primary text-sm transition-colors" href="#">Our Philosophy</a>
+                    <a class="text-gray-400 hover:text-primary text-sm transition-colors" href="#">Leadership</a>
+                    <a class="text-gray-400 hover:text-primary text-sm transition-colors" href="#">Careers</a>
+                    <a class="text-gray-400 hover:text-primary text-sm transition-colors" href="#">Press Room</a>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <h4 class="text-white font-bold">Contact</h4>
+                    <p class="text-gray-400 text-sm">100 Legacy Towers, Bandra West,<br />Mumbai, MH 400050</p>
+                    <a class="text-primary hover:underline text-sm font-medium" href="tel:+918005550199">+91 (800)
+                        555-0199</a>
+                    <div class="flex gap-4 mt-2">
+                        <a class="text-gray-400 hover:text-white transition-colors" href="#"><span
+                                class="material-symbols-outlined">mail</span></a>
+                        <a class="text-gray-400 hover:text-white transition-colors" href="#"><span
+                                class="material-symbols-outlined">location_on</span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-[#393328] pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-600 text-xs text-center md:text-left">
+                    © 2023 Delight Services. All rights reserved. <br class="md:hidden" />
+                    <a class="hover:text-gray-400" href="#">Privacy Policy</a> • <a class="hover:text-gray-400"
+                        href="#">Terms of Service</a>
+                </p>
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[#393328]" title="Secured SSL">lock</span>
+                    <span class="text-[#393328] text-xs font-bold uppercase tracking-widest">IRDAI Reg. No. 123</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('lifeLeadForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const btn = document.getElementById('submitBtn');
+            const loading = document.getElementById('loading');
+
+            btn.classList.add('hidden');
+            loading.classList.remove('hidden');
+
+            const payload = {
+                first_name: document.getElementById('firstName').value,
+                last_name: document.getElementById('lastName').value,
+                nominee_name: document.getElementById('nomineeName').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                sum_assured: document.getElementById('sumAssured').value,
+                tenure: parseInt(document.getElementById('tenure').value),
+                riders: Array.from(document.querySelectorAll('.rider-check:checked')).map(cb => cb.value)
+            };
+
+            try {
+                const res = await fetch('/api/life-leads', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    window.location.href = 'greetings.html';
+                } else {
+                    alert('Error: ' + (data.error || 'Submission failed'));
+                    btn.classList.remove('hidden');
+                    loading.classList.add('hidden');
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Connection failed. Please try again.');
+                btn.classList.remove('hidden');
+                loading.classList.add('hidden');
+            }
+        });
+    </script>
+
+</body>
+
+</html>

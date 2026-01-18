@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delight Admin - Health Leads</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+
+    <!-- Main Layout -->
+    <div class="flex h-screen overflow-hidden w-full">
+
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col overflow-hidden">
+
+            <!-- Header -->
+            <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 sm:px-10">
+                <div>
+                    <h1 class="text-xl font-semibold text-gray-800">
+                        Health Insurance Leads
+                    </h1>
+                    <p class="text-xs text-gray-500">
+                        Manage inbound health insurance inquiries
+                    </p>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <button onclick="downloadCSV('health')"
+                        class="flex items-center gap-2 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors shadow-sm ml-4">
+                        <i class="fa-solid fa-download"></i>
+                        <span class="hidden sm:inline">Export CSV</span>
+                    </button>
+
+                    <button onclick="loadHealthLeads()" class="p-2 text-gray-400 hover:text-blue-600 transition-colors"
+                        title="Refresh Data">
+                        <i class="fa-solid fa-rotate-right text-lg"></i>
+                    </button>
+
+                    <div
+                        class="flex items-center gap-2 bg-white px-3 py-1.5 rounded-full shadow-sm border border-gray-200">
+                        <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                        <span class="text-xs font-medium text-gray-600">
+                            Sync Active
+                        </span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <section class="flex-1 overflow-y-auto p-6 sm:p-10">
+                <div class="max-w-6xl mx-auto">
+
+                    <!-- Loading State -->
+                    <div id="loadingState" class="hidden mb-6">
+                        <div class="animate-pulse space-y-4">
+                            <div class="h-10 bg-gray-200 rounded w-full"></div>
+                            <div class="h-10 bg-gray-200 rounded w-full"></div>
+                            <div class="h-10 bg-gray-200 rounded w-full"></div>
+                        </div>
+                    </div>
+
+                    <!-- Leads Table -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr
+                                        class="bg-gray-50 text-gray-500 text-xs uppercase tracking-wider border-b border-gray-100">
+                                        <th class="p-4 font-semibold">Date</th>
+                                        <th class="p-4 font-semibold">Applicant</th>
+                                        <th class="p-4 font-semibold">Mobile</th>
+                                        <th class="p-4 font-semibold">Plan Type</th>
+                                        <th class="p-4 font-semibold">City</th>
+                                        <th class="p-4 font-semibold">Health Issues</th>
+                                        <th class="p-4 font-semibold text-right">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="leadsTableBody" class="divide-y divide-gray-50 text-sm text-gray-700">
+                                    <!-- Rows injected here -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Empty State -->
+                        <div id="emptyState" class="hidden py-14 text-center">
+                            <div
+                                class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fa-solid fa-clipboard-check text-gray-300 text-2xl"></i>
+                            </div>
+                            <h3 class="text-gray-900 font-medium mb-1">
+                                No Leads Found
+                            </h3>
+                            <p class="text-gray-500 text-sm">
+                                New health inquiries will appear here.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Auth & Logic Script (UNCHANGED) -->
+    <script type="module">
+        import { checkAuth, logout as authLogout, getToken } from './adminAuth.js';
+
+        window.logout = authLogout;
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (!await checkAuth()) return;
+
+            loadHealthLeads();
+            setInterval(loadHealthLeads, 15000);
+        });
+
+        window.loadHealthLeads = async function () {
+            const tbody = document.getElementById('leadsTableBody');
+            const loading = document.getElementById('loadingState');
+            const empty = document.getElementById('emptyState');
+
+            if (tbody.children.length === 0) {
+                tbody.innerHTML = '';
+                loading.classList.remove('hidden');
+                empty.classList.add('hidden');
+            }
+
+            try {
+                const token = await getToken();
+                const res = await fetch('/api/admin/health-leads', {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+
+                if (!res.ok) throw new Error('Fetch failed');
+
+                const leads = await res.json();
+                loading.classList.add('hidden');
+
+                if (leads.length === 0) {
+                    empty.classList.remove('hidden');
+                    return;
+                }
+
+                tbody.innerHTML = '';
+
+                leads.forEach(lead => {
+                    const row = document.createElement('tr');
+                    row.className = "hover:bg-gray-50 transition-colors";
+
+                    const conditions = lead.conditions && lead.conditions.length > 0
+                        ? lead.conditions.map(c =>
+                            `<span class="inline-block px-2 py-0.5 bg-red-100 text-red-700 text-xs rounded-full mr-1">${c}</span>`
+                        ).join('')
+                        : '<span class="text-gray-400 italic">None</span>';
+
+                    const statusColor =
+                        lead.status === 'new'
+                            ? 'bg-blue-100 text-blue-700'
+                            : 'bg-green-100 text-green-700';
+
+                    row.innerHTML = `
+                        <td class="p-4 text-gray-500 whitespace-nowrap">
+                            ${new Date(lead.created_at).toLocaleDateString()}
+                        </td>
+                        <td class="p-4 font-medium text-gray-900">
+                            ${lead.full_name}
+                            <div class="text-xs text-gray-400">DOB: ${lead.dob || 'N/A'}</div>
+                        </td>
+                        <td class="p-4 text-gray-600 font-mono">
+                            ${lead.mobile}
+                        </td>
+                        <td class="p-4">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                                ${lead.coverage_type}
+                            </span>
+                        </td>
+                        <td class="p-4 text-gray-600">
+                            ${lead.city}
+                        </td>
+                        <td class="p-4">
+                            ${conditions}
+                        </td>
+                        <td class="p-4 text-right">
+                            <button onclick="toggleStatus('${lead.id}', '${lead.status}')"
+                                class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide ${statusColor} hover:opacity-80 transition">
+                                ${lead.status}
+                            </button>
+                        </td>
+                    `;
+
+                    tbody.appendChild(row);
+                });
+
+            } catch (err) {
+                console.error(err);
+                loading.classList.add('hidden');
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7"
+                            class="p-6 text-center text-red-500">
+                            Failed to load data. Please refresh.
+                        </td>
+                    </tr>
+                `;
+            }
+        };
+
+        window.toggleStatus = async (id, currentStatus) => {
+            const newStatus = currentStatus === 'new' ? 'contacted' : 'new';
+            const token = await getToken();
+
+            try {
+                await fetch(`/api/admin/health-leads/${id}/status`, {
+                    method: 'PATCH',
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ status: newStatus })
+                });
+
+                loadHealthLeads();
+            } catch {
+                alert('Update failed');
+            }
+        };
+
+        window.downloadCSV = async (type) => {
+            try {
+                const token = await getToken();
+                const res = await fetch(`/api/admin/leads/export?type=${type}`, {
+                    method: 'GET',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (!res.ok) throw new Error('Download failed');
+
+                const blob = await res.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${type}_leads.csv`;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                window.URL.revokeObjectURL(url);
+            } catch (err) {
+                alert('Export failed: ' + err.message);
+            }
+        };
+
+    </script>
+
+</body>
+
+</html>
