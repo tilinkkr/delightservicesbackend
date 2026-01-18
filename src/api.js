@@ -589,7 +589,7 @@ app.post('/api/checkout', async (req, res) => {
         const { error } = await supabase.from('orders').insert({
             user_id: user.id,
             total_amount: totalAmount,
-            status: 'paid',
+            status: 'pending',
             delivery_date: deliveryDate
         });
 
