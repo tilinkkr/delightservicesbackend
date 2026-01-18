@@ -446,7 +446,6 @@ app.get('/api/cart', async (req, res) => {
           name,
           price,
           image_url,
-          primary_image_url,
           category,
           description
         )
