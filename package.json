@@ -1,0 +1,17 @@
+{
+    "name": "delight-root-proxy",
+    "version": "1.0.0",
+    "description": "Proxy to backend for Render deployment",
+    "scripts": {
+        "install": "cd backend && npm install",
+        "build": "echo 'No build step required for root'",
+        "start": "cd backend && npm start"
+    },
+    "engines": {
+        "node": ">=18.0.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/tilinkkr/delightservicesbackend.git"
+    }
+}
