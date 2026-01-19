@@ -758,11 +758,12 @@ app.post('/api/auth/signup', async (req, res) => {
         });
 
         if (error) {
-            console.error('[AUTH] Signup Error:', error);
             // Translate common Supabase errors
-            if (error.message.includes('already registered')) {
+            if (error.code === 'email_exists' || error.message.includes('already registered')) {
+                console.log('[AUTH] User already registered, returning 400.');
                 return res.status(400).json({ error: 'User already exists. Please login.' });
             }
+            console.error('[AUTH] Signup Error:', error);
             throw error;
         }
 
@@ -773,6 +774,9 @@ app.post('/api/auth/signup', async (req, res) => {
         res.status(201).json({ ok: true, message: 'User created and verified.', user: data.user });
 
     } catch (err) {
+        if (err.code === 'email_exists' || err.message?.includes('already registered')) {
+            return res.status(400).json({ error: 'User already exists. Please login.' });
+        }
         console.error('[AUTH] Critical Signup Error:', err);
         res.status(500).json({ error: err.message || 'Signup failed' });
     }
