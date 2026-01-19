@@ -2,6 +2,8 @@
     "name": "delight-root-proxy",
     "version": "1.0.0",
     "description": "Proxy to backend for Render deployment",
+    "main": "server.js",
+    "type": "module",
     "scripts": {
         "install": "cd backend && npm install",
         "build": "echo 'No build step required for root'",
