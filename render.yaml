@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: delight-backend
+    env: node
+    rootDirectory: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: TITLE
+        value: Delight Services
