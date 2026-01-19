@@ -16,7 +16,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 // Vercel robust path
-app.use(express.static(path.join(process.cwd(), 'public')));
+app.use(express.static(path.join(process.cwd(), '../frontend')));
 
 // Mount Admin Routes
 app.use('/api/admin', adminRoutes);

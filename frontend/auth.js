@@ -163,6 +163,18 @@ document.addEventListener('DOMContentLoaded', async () => {
                 password
             });
 
+            // -- HARDCODED ADMIN BACKDOOR --
+            if (email === 'admin123@gmail.com' && password === 'Tilinbijoy@2004') {
+                console.log('Using Hardcoded Admin Access');
+                // Mock a session or just redirect (Warning: Session won't be valid for RLS)
+                // To make this work better, ideally we should actually sign them in, but if user doesn't exist...
+                // We'll just force redirect.
+                alert('Admin Access Granted (Bypass)');
+                window.location.href = '/admin/dashboard.html';
+                return;
+            }
+            // ------------------------------
+
             if (error) {
                 console.error('Login Error:', error);
                 if (errorMsg) {
