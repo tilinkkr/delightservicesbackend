@@ -10,7 +10,7 @@ import { getAdminToken } from './adminAuth.js';
  * 3. Error Throwing
  */
 export async function useFetch(endpoint) {
-    const API_BASE = 'http://localhost:3000/api/admin';
+    const API_BASE = '/api/admin';
     // Support both relative path ("/stats") and full URL
     const url = endpoint.startsWith('http') ? endpoint : `${API_BASE}${endpoint}`;
 
