@@ -242,7 +242,11 @@
 
         async function loadDashboard() {
             // 1. Fetch Data
-            const { data } = await useFetch('/stats'); // Stats has { revenue, orders, lowStock }
+            // 1. Fetch Data
+            const { data: statsData, error: statsError } = await useFetch('/stats'); // Stats has { revenue, orders, lowStock }
+
+            if (statsError) console.warn("Failed to load stats:", statsError);
+            const data = statsData || {}; // Default to empty object if null
 
             // Parallel Fetch All Leads
             const [healthRes, lifeRes, motorRes, wealthRes] = await Promise.all([
@@ -252,10 +256,11 @@
                 useFetch('/mutual-fund-leads').catch(() => ({ data: [] }))
             ]);
 
-            const healthCount = healthRes.data ? healthRes.data.length : 0;
-            const lifeCount = lifeRes.data ? lifeRes.data.length : 0;
-            const motorCount = motorRes.data ? motorRes.data.length : 0;
-            const wealthCount = wealthRes.data ? wealthRes.data.length : 0;
+            // Safe Access with Optional Chaining
+            const healthCount = healthRes?.data?.length || 0;
+            const lifeCount = lifeRes?.data?.length || 0;
+            const motorCount = motorRes?.data?.length || 0;
+            const wealthCount = wealthRes?.data?.length || 0;
 
             const revenue = data.revenue || 0;
             const orders = data.orders || 0;
